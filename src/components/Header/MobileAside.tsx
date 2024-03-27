@@ -1,7 +1,6 @@
 import { IoCloseOutline } from 'react-icons/io5';
-import Link from 'next/link';
-import { navbarList } from './Navbar';
 import LoginButton from './LoginButton';
+import Menu from './Menu';
 
 type Props = {
   isOpenMenu: boolean;
@@ -19,18 +18,10 @@ export default function MobileAside({ isOpenMenu, onClick }: Props) {
       >
         <IoCloseOutline className="w-10 h-10" />
       </button>
-      <ul className="p-8 space-y-6">
-        {navbarList.map(({ title, path }) => (
-          <li
-            key={crypto.randomUUID()}
-            className="pb-1 text-lg text-gray-400 font-bold border-b border-gray-200 transition-all hover:-translate-y-1 hover:text-gray-700"
-          >
-            <Link href={path} onClick={onClick}>
-              {title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <Menu
+        className={{ ul: 'p-8 space-y-6', li: 'pb-1 border-b border-gray-200' }}
+        onClick={onClick}
+      />
       <LoginButton onClick={onClick} />
     </div>
   );
