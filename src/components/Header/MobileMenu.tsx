@@ -2,6 +2,7 @@
 
 import { IoMenu } from 'react-icons/io5';
 import { useState } from 'react';
+import MobileAside from './MobileAside';
 
 export default function MobileMenu() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -16,6 +17,7 @@ export default function MobileMenu() {
       >
         <IoMenu />
       </button>
+      <MobileAside isOpenMenu={isOpenMenu} onClick={handleClick} />
     </div>
   );
 }
