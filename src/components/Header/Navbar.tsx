@@ -1,4 +1,5 @@
 import DesktopMenu from './DesktopMenu';
+import MobileMenu from './MobileMenu';
 
 type NavbarList = {
   title: string;
@@ -15,6 +16,7 @@ export default function Navbar() {
   return (
     <nav>
       <DesktopMenu />
+      <MobileMenu />
     </nav>
   );
 }
