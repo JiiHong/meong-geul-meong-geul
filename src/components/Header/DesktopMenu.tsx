@@ -3,7 +3,7 @@ import { navbarList } from './Navbar';
 
 export default function DesktopMenu() {
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-6 lg:hidden">
       <ul className="flex items-center gap-4">
         {navbarList.map(({ title, path }) => (
           <li
