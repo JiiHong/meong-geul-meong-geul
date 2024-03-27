@@ -1,6 +1,7 @@
 import { IoCloseOutline } from 'react-icons/io5';
 import Link from 'next/link';
 import { navbarList } from './Navbar';
+import LoginButton from './LoginButton';
 
 type Props = {
   isOpenMenu: boolean;
@@ -30,14 +31,7 @@ export default function MobileAside({ isOpenMenu, onClick }: Props) {
           </li>
         ))}
       </ul>
-      <button
-        className="py-2 text-base text-white font-bold rounded-3xl bg-gray-800 transition-all hover:-translate-y-1 hover:bg-gray-900 hover:brightness-120 self-center"
-        onClick={onClick}
-      >
-        <Link href="/login" className="px-4 py-3">
-          로그인
-        </Link>
-      </button>
+      <LoginButton onClick={onClick} />
     </div>
   );
 }

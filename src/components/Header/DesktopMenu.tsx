@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { navbarList } from './Navbar';
+import LoginButton from './LoginButton';
 
 export default function DesktopMenu() {
   return (
@@ -16,11 +17,7 @@ export default function DesktopMenu() {
           </li>
         ))}
       </ul>
-      <button className="py-2 text-lg text-white font-bold rounded-3xl bg-gray-800 transition-all hover:-translate-y-1 hover:bg-gray-900 hover:brightness-120">
-        <Link href="/login" className="px-4 py-3">
-          로그인
-        </Link>
-      </button>
+      <LoginButton />
     </div>
   );
 }
