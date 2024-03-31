@@ -1,7 +1,7 @@
 'use client';
 
+import GoogleLoginButton from '@/components/Header/GoogleLoginButton';
 import { useRouter } from 'next/navigation';
-import { FcGoogle } from 'react-icons/fc';
 import { IoCloseOutline } from 'react-icons/io5';
 
 export default function LoginModalPage() {
@@ -16,12 +16,7 @@ export default function LoginModalPage() {
           <IoCloseOutline className="w-10 h-10" />
         </button>
         <div className="flex justify-center items-center grow">
-          <button className="flex justify-center items-center gap-2 px-14 py-2 border border-gray-300 rounded-full md:px-10 hover:border-blue-100 hover:bg-blue-50">
-            <FcGoogle className="text-2xl md:text-lg" />
-            <p className="text-lg text-gray-700 md:text-xs">
-              Google 계정으로 로그인
-            </p>
-          </button>
+          <GoogleLoginButton />
         </div>
       </div>
     </div>
