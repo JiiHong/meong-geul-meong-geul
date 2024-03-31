@@ -1,3 +1,5 @@
+import LoginModal from '@/components/Header/LoingModal';
+
 export default function LoginPage() {
-  return <div>로그인</div>;
+  return <LoginModal />;
 }
