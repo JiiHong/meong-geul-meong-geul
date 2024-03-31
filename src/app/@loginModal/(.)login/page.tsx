@@ -1,5 +1,5 @@
 import LoginModal from '@/components/Header/LoingModal';
 
-export default function LoginPage() {
+export default function LoginModalPage() {
   return <LoginModal />;
 }
