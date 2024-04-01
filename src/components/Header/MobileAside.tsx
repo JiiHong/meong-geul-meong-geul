@@ -1,4 +1,3 @@
-import LoginButton from './LoginButton';
 import Menu from './Menu';
 import CloseButton from './CloseButton';
 
@@ -17,7 +16,6 @@ export default function MobileAside({ isOpenMenu, onClick }: Props) {
         className={{ ul: 'p-8 space-y-6', li: 'pb-1 border-b border-gray-200' }}
         onClick={onClick}
       />
-      <LoginButton onClick={onClick} />
     </div>
   );
 }

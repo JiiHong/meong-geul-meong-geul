@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { navbarList } from './Navbar';
 import { usePathname } from 'next/navigation';
+import LoginButton from './LoginButton';
 
 type Props = {
   onClick?: () => void;
@@ -24,6 +25,9 @@ export default function Menu({ onClick, className }: Props) {
           </Link>
         </li>
       ))}
+      <li>
+        <LoginButton onClick={onClick} />
+      </li>
     </ul>
   );
 }
