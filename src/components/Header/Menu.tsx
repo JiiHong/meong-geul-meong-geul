@@ -7,7 +7,7 @@ import LoginButton from './LoginButton';
 
 type Props = {
   onClick?: () => void;
-  className: { ul: string; li?: string };
+  className: { ul: string; li?: string; buttonStyle?: string };
 };
 
 export default function Menu({ onClick, className }: Props) {
@@ -25,7 +25,7 @@ export default function Menu({ onClick, className }: Props) {
           </Link>
         </li>
       ))}
-      <li>
+      <li className={className.buttonStyle}>
         <LoginButton onClick={onClick} />
       </li>
     </ul>

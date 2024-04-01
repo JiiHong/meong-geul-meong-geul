@@ -13,7 +13,11 @@ export default function MobileAside({ isOpenMenu, onClick }: Props) {
     >
       <CloseButton onClick={onClick} />
       <Menu
-        className={{ ul: 'p-8 space-y-6', li: 'pb-1 border-b border-gray-200' }}
+        className={{
+          ul: 'flex flex-col p-8 space-y-6',
+          li: 'pb-1 border-b border-gray-200',
+          buttonStyle: 'self-center',
+        }}
         onClick={onClick}
       />
     </div>
