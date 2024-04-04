@@ -21,11 +21,8 @@ export async function logout() {
   return signOut(auth).catch(console.error);
 }
 
-export function onUserStateChange(callback: (user: User) => void) {
+export function onUserStateChange(callback: (user: User | null) => void) {
   onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      return callback(user);
-    }
-    return null;
+    callback(user);
   });
 }
