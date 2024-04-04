@@ -12,14 +12,14 @@ export default function UserImage() {
   const handleClick = () => setIsActive((active) => !active);
 
   return (
-    <div className="relative">
+    <div className="relative p-[0.125rem] bg-pofile-border rounded-full">
       {user && (
         <Image
           src={user.photoURL}
           alt={user.displayName}
-          width={40}
-          height={40}
-          className="rounded-full cursor-pointer"
+          width={45}
+          height={45}
+          className="rounded-full cursor-pointer p-[0.15rem] bg-white"
           onClick={handleClick}
         />
       )}
