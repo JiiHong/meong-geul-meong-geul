@@ -1,9 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { navbarList } from './Navbar';
 import { usePathname } from 'next/navigation';
+import { useUserContext } from '@/context/UserContext';
+import { navbarList } from './Navbar';
 import LoginButton from './LoginButton';
+import UserImage from './UserImage';
 
 type Props = {
   onClick?: () => void;
@@ -12,6 +14,7 @@ type Props = {
 
 export default function Menu({ onClick, className }: Props) {
   const pathname = usePathname();
+  const { user } = useUserContext();
 
   return (
     <ul className={className.ul}>
@@ -26,7 +29,8 @@ export default function Menu({ onClick, className }: Props) {
         </li>
       ))}
       <li className={className.buttonStyle}>
-        <LoginButton onClick={onClick} />
+        {!user && <LoginButton onClick={onClick} />}
+        {user && <UserImage />}
       </li>
     </ul>
   );
