@@ -18,7 +18,13 @@ export async function login() {
 }
 
 export async function logout() {
-  return signOut(auth).catch(console.error);
+  return signOut(auth)
+    .then(() =>
+      fetch('/api/auth/logout', {
+        method: 'POST',
+      }),
+    )
+    .catch(console.error);
 }
 
 export function onUserStateChange(
