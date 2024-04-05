@@ -6,6 +6,7 @@ import { useUserContext } from '@/context/UserContext';
 import { navbarList } from './Navbar';
 import LoginButton from './LoginButton';
 import UserImage from './UserImage';
+import { ClipLoader } from 'react-spinners';
 
 type Props = {
   onClick?: () => void;
@@ -14,7 +15,7 @@ type Props = {
 
 export default function Menu({ onClick, className }: Props) {
   const pathname = usePathname();
-  const { user } = useUserContext();
+  const { loginState } = useUserContext();
 
   return (
     <ul className={className.ul}>
@@ -29,8 +30,9 @@ export default function Menu({ onClick, className }: Props) {
         </li>
       ))}
       <li className={className.buttonStyle}>
-        {!user && <LoginButton onClick={onClick} />}
-        {user && <UserImage />}
+        {loginState === 'loading' && <ClipLoader color="#F9C175" size={25} />}
+        {loginState === 'logout' && <LoginButton onClick={onClick} />}
+        {loginState === 'login' && <UserImage />}
       </li>
     </ul>
   );
