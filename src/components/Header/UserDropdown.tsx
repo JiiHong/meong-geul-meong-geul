@@ -15,7 +15,7 @@ export default function UserDropdown({ isActive }: Props) {
     ${isActive ? 'flex flex-col items-center gap-4 ' : 'hidden'}`}
     >
       <li className="hover:bg-gray-400">마이페이지</li>
-      <li className="hover:bg-gray-400" onClick={handleClick}>
+      <li className="hover:bg-gray-400 cursor-pointer" onClick={handleClick}>
         로그아웃
       </li>
     </ul>
