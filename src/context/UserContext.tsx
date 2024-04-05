@@ -1,11 +1,11 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect } from 'react';
-import { User } from 'firebase/auth';
 import { onUserStateChange } from '@/service/firebase/firebase-auth';
+import { DecodedIdToken } from 'firebase-admin/auth';
 
 type ContextProps = {
-  user: User | null;
+  user: DecodedIdToken | null;
 };
 type Props = {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ type Props = {
 const UserContext = createContext<ContextProps>({ user: null });
 
 export function UserContextProvider({ children }: Props) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<DecodedIdToken | null>(null);
 
   useEffect(() => onUserStateChange(setUser), []);
 

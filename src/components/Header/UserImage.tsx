@@ -15,8 +15,8 @@ export default function UserImage() {
     <div className="relative p-[0.125rem] bg-pofile-border rounded-full">
       {user && (
         <Image
-          src={user.photoURL}
-          alt={user.displayName}
+          src={user.picture!}
+          alt={user.name}
           width={45}
           height={45}
           className="rounded-full cursor-pointer p-[0.15rem] bg-white"
