@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 import { useUserContext } from '@/context/UserContext';
 import Modal from './Modal';
 import { setCookie } from '@/service/firebase/firebase-auth';
+import { sendUser } from '@/service/firebase/firebase-firestore';
 
 type Params = { slug: string };
 
@@ -20,11 +21,15 @@ export default function SignupModal() {
 
   const handleSumbit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCookie(token);
-    setUser({ id, uid, name, createdAt: Date.now() });
-    setLoginState('login');
-    setToken('');
-    window.history.go(-2);
+    const user = { id, uid, name, createdAt: Date.now() };
+    sendUser(id, user) //
+      .then(() => {
+        setCookie(token);
+        setUser(user);
+        setLoginState('login');
+        setToken('');
+        window.history.go(-2);
+      });
   };
 
   return (

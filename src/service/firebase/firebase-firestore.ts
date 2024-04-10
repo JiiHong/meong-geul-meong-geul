@@ -1,4 +1,10 @@
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  doc,
+  setDoc,
+} from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
 
@@ -20,4 +26,8 @@ export async function fetchUser(uid: string) {
   const user = users.find((user) => user.uid === uid);
 
   return user ? user : null;
+}
+
+export async function sendUser(id: string, user: User) {
+  return setDoc(doc(db, 'users', id), user);
 }
