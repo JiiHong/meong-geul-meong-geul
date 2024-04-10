@@ -18,10 +18,15 @@ export default function SignupModal() {
   const id = uuid();
   const [name, setName] = useState('');
   const [isDuplicate, setIsDuplicate] = useState(false);
+  const [isValid, setIsValid] = useState(true);
   const { setUser, setLoginState, token, setToken } = useUserContext();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setName(e.target.value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    if (value.includes(' ')) return;
+    setName(value);
+  };
 
   const handleSumbit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,6 +34,12 @@ export default function SignupModal() {
       if (user) {
         setIsDuplicate(true);
         setTimeout(() => setIsDuplicate(false), 2000);
+        return;
+      }
+
+      const isValid = name.match(/^[가-힣a-zA-Z]+$/g);
+      if (!isValid || name.length < 2) {
+        setIsValid(false);
         return;
       }
 
@@ -50,13 +61,21 @@ export default function SignupModal() {
         className="grow flex flex-col justify-center gap-28 w-4/6"
         onSubmit={handleSumbit}
       >
-        <div className="">
+        <div>
           <input
             type="text"
+            value={name}
             placeholder="닉네임"
-            className="w-full px-4 py-2 text-lg border rounded-lg"
+            minLength={2}
+            maxLength={8}
+            className="w-full px-4 py-2 mb-2 text-lg border rounded-lg"
             onChange={handleChange}
           />
+          <p
+            className={`text-xs ${isValid ? 'text-blue-800' : 'text-red-500'}`}
+          >
+            * 특수 문자, 숫자, 띄어쓰기 제외 / 2~8 자리 문자.
+          </p>
           {isDuplicate && (
             <p className="text-xs text-red-500">
               * 이미 존재하는 닉네임입니다. 다른 닉네임을 입력해주세요.
