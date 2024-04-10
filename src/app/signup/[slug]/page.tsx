@@ -1,3 +1,7 @@
+'use client';
+
+import { redirect } from 'next/navigation';
+
 export default function SignupPage() {
-  return <div>회원가입</div>;
+  return redirect('/');
 }
