@@ -29,6 +29,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.11.30"],\
           ["@types/react", "npm:18.2.70"],\
           ["@types/react-dom", "npm:18.2.22"],\
+          ["@types/uuid", "npm:9.0.8"],\
           ["@typescript-eslint/eslint-plugin", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:7.4.0"],\
           ["@typescript-eslint/parser", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:7.4.0"],\
           ["autoprefixer", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:10.4.19"],\
@@ -49,7 +50,8 @@ const RAW_RUNTIME_STATE =
           ["react-icons", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:5.0.1"],\
           ["react-spinners", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:0.13.8"],\
           ["tailwindcss", "npm:3.4.1"],\
-          ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"]\
+          ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"],\
+          ["uuid", "npm:9.0.1"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -2022,6 +2024,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/@types-tough-cookie-npm-4.0.5-8c5e2162e1-10c0.zip/node_modules/@types/tough-cookie/",\
         "packageDependencies": [\
           ["@types/tough-cookie", "npm:4.0.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/uuid", [\
+      ["npm:9.0.8", {\
+        "packageLocation": "../../../.yarn/berry/cache/@types-uuid-npm-9.0.8-3eeeaa5abb-10c0.zip/node_modules/@types/uuid/",\
+        "packageDependencies": [\
+          ["@types/uuid", "npm:9.0.8"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5650,6 +5661,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.11.30"],\
           ["@types/react", "npm:18.2.70"],\
           ["@types/react-dom", "npm:18.2.22"],\
+          ["@types/uuid", "npm:9.0.8"],\
           ["@typescript-eslint/eslint-plugin", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:7.4.0"],\
           ["@typescript-eslint/parser", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:7.4.0"],\
           ["autoprefixer", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:10.4.19"],\
@@ -5670,7 +5682,8 @@ const RAW_RUNTIME_STATE =
           ["react-icons", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:5.0.1"],\
           ["react-spinners", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:0.13.8"],\
           ["tailwindcss", "npm:3.4.1"],\
-          ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"]\
+          ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"],\
+          ["uuid", "npm:9.0.1"]\
         ],\
         "linkType": "SOFT"\
       }]\
