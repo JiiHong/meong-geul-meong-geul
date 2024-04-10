@@ -6,7 +6,15 @@ import { login } from '@/service/firebase/firebase-auth';
 
 export default function GoogleLoginButton() {
   const router = useRouter();
-  const handleClick = () => login().then(() => router.back());
+
+  const handleClick = () => {
+    login().then((result) => {
+      if (result) {
+        return router.push(`/signup/${result.uid}`);
+      }
+      router.back();
+    });
+  };
 
   return (
     <button
