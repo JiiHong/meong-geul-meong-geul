@@ -25,7 +25,7 @@ export async function login() {
       const token = await user.getIdToken();
 
       if (!userInfo) {
-        return { uid };
+        return { uid, token };
       }
 
       setCookie(token);

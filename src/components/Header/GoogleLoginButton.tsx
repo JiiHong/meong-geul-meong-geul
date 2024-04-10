@@ -3,13 +3,16 @@
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/navigation';
 import { login } from '@/service/firebase/firebase-auth';
+import { useUserContext } from '@/context/UserContext';
 
 export default function GoogleLoginButton() {
   const router = useRouter();
+  const { setToken } = useUserContext();
 
   const handleClick = () => {
     login().then((result) => {
       if (result) {
+        setToken(result.token);
         return router.push(`/signup/${result.uid}`);
       }
       router.back();

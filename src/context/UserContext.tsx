@@ -18,6 +18,8 @@ type ContextProps = {
   setUser: Dispatch<SetStateAction<User | null>>;
   loginState: LoginState;
   setLoginState: Dispatch<SetStateAction<LoginState>>;
+  token: string;
+  setToken: Dispatch<SetStateAction<string>>;
 };
 
 type Props = {
@@ -29,16 +31,21 @@ const UserContext = createContext<ContextProps>({
   setUser: () => {},
   loginState: 'loading',
   setLoginState: () => {},
+  token: '',
+  setToken: () => {},
 });
 
 export function UserContextProvider({ children }: Props) {
   const [user, setUser] = useState<User | null>(null);
   const [loginState, setLoginState] = useState<LoginState>('loading');
+  const [token, setToken] = useState('');
 
   useEffect(() => onUserStateChange(setUser, setLoginState), []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, loginState, setLoginState }}>
+    <UserContext.Provider
+      value={{ user, setUser, loginState, setLoginState, token, setToken }}
+    >
       {children}
     </UserContext.Provider>
   );
