@@ -1,15 +1,14 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import CloseButton from '@/components/Header/CloseButton';
 
 type Props = {
   children: React.ReactNode;
+  backCount: number;
 };
 
-export default function Modal({ children }: Props) {
-  const router = useRouter();
-  const handleClick = () => router.back();
+export default function Modal({ children, backCount }: Props) {
+  const handleClick = () => window.history.go(-backCount);
 
   return (
     <div className="absolute top-0 left-0 flex justify-center items-center w-screen h-screen bg-[#00000066]">

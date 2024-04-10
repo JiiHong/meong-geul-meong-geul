@@ -56,7 +56,7 @@ export default function SignupModal() {
   };
 
   return (
-    <Modal>
+    <Modal backCount={2}>
       <form
         className="grow flex flex-col justify-center gap-28 w-4/6"
         onSubmit={handleSumbit}
