@@ -1,4 +1,4 @@
-import GoogleLoginButton from '@/components/Header/GoogleLoginButton';
+import GoogleLoginButton from '@/components/AuthModal/GoogleLoginButton';
 import Modal from './Modal';
 
 export default function LoginModal() {
