@@ -1,5 +1,6 @@
 import { defaultUserImage } from '@/constants/image';
 import { Board } from '@/types/board';
+import { formateAgo } from '@/utils/day';
 import Image from 'next/image';
 import Link from 'next/link';
 import { IoIosHeartEmpty } from 'react-icons/io';
@@ -36,7 +37,7 @@ export default function BoardCard({ board }: Props) {
             />
             <span className="font-semibold">{name}</span>
           </div>
-          <span className="text-xs text-gray-300">{createdAt}</span>
+          <span className="text-xs text-gray-300">{formateAgo(createdAt)}</span>
         </div>
         <div className="flex flex-col gap-1.5 h-full">
           <p className="px-2 mt-2 text-sm font-semibold">{title}</p>
