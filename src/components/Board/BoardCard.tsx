@@ -1,10 +1,9 @@
-import { defaultUserImage } from '@/constants/image';
-import { Board } from '@/types/board';
-import { formateAgo } from '@/utils/day';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import { IoIosHeartEmpty } from 'react-icons/io';
 import { LiaCommentDotsSolid } from 'react-icons/lia';
+import { Board } from '@/types/board';
+import BoardCardHeader from './BoardCardHeader';
 
 type Props = {
   board: Board;
@@ -26,22 +25,15 @@ export default function BoardCard({ board }: Props) {
   return (
     <article className="w-full h-full">
       <Link href={`/board/info/${id}`} className="block w-full h-full py-4">
-        <div className="flex justify-between items-center px-2">
-          <div className="flex items-center gap-1 shrink-0">
-            <Image
-              src={userImage ?? defaultUserImage}
-              alt={title}
-              width={25}
-              height={30}
-              className="rounded-full"
-            />
-            <span className="font-semibold">{name}</span>
-          </div>
-          <span className="text-xs text-gray-300">{formateAgo(createdAt)}</span>
-        </div>
+        <BoardCardHeader
+          name={name}
+          title={title}
+          createdAt={createdAt}
+          userImage={userImage}
+        />
         <div className="flex flex-col gap-1.5 h-full">
           <p className="px-2 mt-2 text-sm font-semibold">{title}</p>
-          <div className="relative w-full h-2/3 z-0">
+          <div className="relative w-full h-2/3">
             {contentImage ? (
               <Image
                 src={contentImage}
