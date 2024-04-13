@@ -24,8 +24,8 @@ export default function BoardCard({ board }: Props) {
   } = board;
 
   return (
-    <Link href={`/board/info/${id}`} className="block w-full h-full py-4">
-      <article className="w-full h-full">
+    <article className="w-full h-full">
+      <Link href={`/board/info/${id}`} className="block w-full h-full py-4">
         <div className="flex justify-between items-center px-2">
           <div className="flex items-center gap-1 shrink-0">
             <Image
@@ -41,7 +41,7 @@ export default function BoardCard({ board }: Props) {
         </div>
         <div className="flex flex-col gap-1.5 h-full">
           <p className="px-2 mt-2 text-sm font-semibold">{title}</p>
-          <div className="relative w-full h-2/3">
+          <div className="relative w-full h-2/3 z-0">
             {contentImage ? (
               <Image
                 src={contentImage}
@@ -64,7 +64,7 @@ export default function BoardCard({ board }: Props) {
             </div>
           </div>
         </div>
-      </article>
-    </Link>
+      </Link>
+    </article>
   );
 }
