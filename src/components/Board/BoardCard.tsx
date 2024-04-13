@@ -24,7 +24,10 @@ export default function BoardCard({ board }: Props) {
 
   return (
     <article className="w-full h-full">
-      <Link href={`/board/info/${id}`} className="block w-full h-full py-4">
+      <Link
+        href={`/board/info/${id}`}
+        className="flex flex-col w-full h-full py-3"
+      >
         <BoardCardHeader
           name={name}
           title={title}
@@ -33,7 +36,7 @@ export default function BoardCard({ board }: Props) {
         />
         <div className="flex flex-col gap-1.5 h-full">
           <p className="px-2 mt-2 text-sm font-semibold">{title}</p>
-          <div className="relative w-full h-2/3">
+          <div className="relative w-full h-full mb-4">
             {contentImage ? (
               <Image
                 src={contentImage}
@@ -45,15 +48,15 @@ export default function BoardCard({ board }: Props) {
               <p className="px-2 h-full text-xs break-words">{content}</p>
             )}
           </div>
-          <div className="flex items-center gap-3 px-2">
-            <div className="flex items-center gap-0.5">
-              <IoIosHeartEmpty className="text-lg text-red-500 hover:scale-110" />
-              <span className="text-xs">{likeCount}</span>
-            </div>
-            <div className="flex items-center gap-0.5">
-              <LiaCommentDotsSolid className="text-lg" />
-              <span className="text-xs">{commentCount}</span>
-            </div>
+        </div>
+        <div className="flex items-center gap-3 px-2">
+          <div className="flex items-center gap-0.5">
+            <IoIosHeartEmpty className="text-lg text-red-500 hover:scale-110" />
+            <span className="text-xs">{likeCount}</span>
+          </div>
+          <div className="flex items-center gap-0.5">
+            <LiaCommentDotsSolid className="text-lg" />
+            <span className="text-xs">{commentCount}</span>
           </div>
         </div>
       </Link>
