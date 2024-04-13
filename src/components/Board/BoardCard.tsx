@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import { IoIosHeartEmpty } from 'react-icons/io';
-import { LiaCommentDotsSolid } from 'react-icons/lia';
 import { Board } from '@/types/board';
 import BoardCardHeader from './BoardCardHeader';
 import BoardCardContent from './BoardCardContent';
+import BoardCardFooter from './BoardCardFooter';
 
 type Props = {
   board: Board;
@@ -39,16 +38,7 @@ export default function BoardCard({ board }: Props) {
           content={content}
           contentImage={contentImage}
         />
-        <div className="flex items-center gap-3 px-2">
-          <div className="flex items-center gap-0.5">
-            <IoIosHeartEmpty className="text-lg text-red-500 hover:scale-110" />
-            <span className="text-xs">{likeCount}</span>
-          </div>
-          <div className="flex items-center gap-0.5">
-            <LiaCommentDotsSolid className="text-lg" />
-            <span className="text-xs">{commentCount}</span>
-          </div>
-        </div>
+        <BoardCardFooter likeCount={likeCount} commentCount={commentCount} />
       </Link>
     </article>
   );
