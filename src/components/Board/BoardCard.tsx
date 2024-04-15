@@ -24,7 +24,7 @@ export default function BoardCard({ board }: Props) {
   return (
     <article className="w-full h-full">
       <Link
-        href={`/board/info/${id}`}
+        href={`/board/free/${id}`}
         className="flex flex-col w-full h-full py-3"
       >
         <BoardCardHeader
