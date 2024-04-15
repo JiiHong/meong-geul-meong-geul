@@ -1,3 +1,4 @@
+import WriteButton from '@/components/Board/WriteButton';
 import boards from '../../../../public/board.json';
 import BoardCard from '@/components/Board/BoardCard';
 
@@ -14,6 +15,7 @@ export default function FreeBoardPage() {
           </li>
         ))}
       </ul>
+      <WriteButton />
     </section>
   );
 }
