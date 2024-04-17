@@ -11,21 +11,15 @@ const DEFAULT_DATA = {
 
 export default function WriteForm() {
   const [board, setBoard] = useState<WriteFormState>(DEFAULT_DATA);
-  const [fileName, setFileName] = useState('');
+  const [file, setFile] = useState<File | null>(null);
 
-  const handleTextChange = (
+  const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const name = e.target.name;
-    const value = e.target.value;
+    const { name, value } = e.target;
+    const { files } = e.target as HTMLInputElement;
+    if (name === 'file') return setFile(files && (files[0] as File));
     setBoard({ ...board, [name]: value });
-  };
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    const file = files && files[0];
-    const name = file ? file.name : '';
-    setFileName(name);
   };
 
   return (
@@ -37,7 +31,7 @@ export default function WriteForm() {
         maxLength={29}
         required
         placeholder="제목"
-        onChange={handleTextChange}
+        onChange={handleChange}
         className="px-4 py-2 text-3xl border-b outline-none md:px-2 md:py-1 md:text-2xl"
       />
 
@@ -47,7 +41,7 @@ export default function WriteForm() {
         value={board.content}
         required
         placeholder="내용"
-        onChange={handleTextChange}
+        onChange={handleChange}
         className="px-4 py-2 text-lg border outline-none rounded-lg md:px-2 md:py-1 md:text-base"
       />
       <div className="flex items-center gap-2 border rounded-lg">
@@ -63,9 +57,9 @@ export default function WriteForm() {
           id="file"
           accept="image/*"
           className="hidden"
-          onChange={handleFileChange}
+          onChange={handleChange}
         />
-        <p className="text-sm text-gray-700">{fileName}</p>
+        <p className="text-sm text-gray-700">{file && file.name}</p>
       </div>
       <div className="self-end flex gap-1 text-lg [&_button]:px-6 [&_button]:py-2 [&_button]:rounded-lg md:[&_button]:px-4 md:[&_button]:py-1 md:[&_button]:text-base">
         <button className="border">취소</button>
