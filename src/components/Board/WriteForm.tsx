@@ -44,10 +44,10 @@ export default function WriteForm() {
         onChange={handleChange}
         className="px-4 py-2 text-lg border outline-none rounded-lg md:px-2 md:py-1 md:text-base"
       />
-      <div className="flex items-center gap-2 border rounded-lg">
+      <div className="flex items-center gap-2 border rounded-lg overflow-hidden">
         <label
           htmlFor="file"
-          className="px-3 py-1 text-2xl text-white rounded-sm bg-gray-600 cursor-pointer"
+          className="px-3 py-1 text-2xl text-white  bg-gray-600 cursor-pointer"
         >
           <MdOutlineAddPhotoAlternate />
         </label>
