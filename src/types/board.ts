@@ -11,3 +11,5 @@ export type Board = {
   userImage?: string;
   contentImage?: string;
 };
+
+export type WriteFormState = Pick<Board, 'title' | 'content'>;

@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useState } from 'react';
 import { MdOutlineAddPhotoAlternate } from 'react-icons/md';
-import { Board } from '@/types/board';
+import { WriteFormState } from '@/types/board';
 
 const DEFAULT_DATA = {
   title: '',
@@ -10,8 +10,7 @@ const DEFAULT_DATA = {
 };
 
 export default function WriteForm() {
-  const [board, setBoard] =
-    useState<Pick<Board, 'title' | 'content'>>(DEFAULT_DATA);
+  const [board, setBoard] = useState<WriteFormState>(DEFAULT_DATA);
   const [fileName, setFileName] = useState('');
 
   const handleTextChange = (
