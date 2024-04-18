@@ -3,6 +3,7 @@
 import { ChangeEvent, useState } from 'react';
 import { WriteFormState } from '@/types/board';
 import CustomFileInput from './CustomFileInput';
+import WriteFormButton from './WriteFormButton';
 
 const DEFAULT_DATA = {
   title: '',
@@ -44,10 +45,7 @@ export default function WriteForm() {
         className="px-4 py-2 text-lg border outline-none rounded-lg md:px-2 md:py-1 md:text-base"
       />
       <CustomFileInput onChange={handleChange} file={file} />
-      <div className="self-end flex gap-1 text-lg [&_button]:px-6 [&_button]:py-2 [&_button]:rounded-lg md:[&_button]:px-4 md:[&_button]:py-1 md:[&_button]:text-base">
-        <button className="border">취소</button>
-        <button className="text-white border bg-amber-500">등록</button>
-      </div>
+      <WriteFormButton />
     </form>
   );
 }
