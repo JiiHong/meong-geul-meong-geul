@@ -13,3 +13,5 @@ export type Board = {
 };
 
 export type WriteFormState = Pick<Board, 'title' | 'content'>;
+
+export type BoardCategory = 'info' | 'question' | 'free';
