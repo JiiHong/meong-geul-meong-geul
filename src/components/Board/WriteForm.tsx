@@ -1,18 +1,27 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
-import { WriteFormState } from '@/types/board';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { v4 as uuid } from 'uuid';
+import { BoardCategory, WriteFormState } from '@/types/board';
 import CustomFileInput from './CustomFileInput';
 import WriteFormButton from './WriteFormButton';
+import { uploadPost } from '@/service/firebase/firebase-firestore';
+import { useUserContext } from '@/context/UserContext';
+import dayjs from 'dayjs';
 
 const DEFAULT_DATA = {
   title: '',
   content: '',
 };
 
+type Params = { category: BoardCategory };
+
 export default function WriteForm() {
   const [board, setBoard] = useState<WriteFormState>(DEFAULT_DATA);
   const [file, setFile] = useState<File | null>(null);
+  const { user } = useUserContext();
+  const { category } = useParams<Params>();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -23,8 +32,30 @@ export default function WriteForm() {
     setBoard({ ...board, [name]: value });
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (user) {
+      const id = uuid();
+      const { uid, name } = user;
+      const newPost = {
+        ...board,
+        id,
+        uid,
+        name,
+        likeCount: 0,
+        commentCount: 0,
+        viewCount: 0,
+        createdAt: dayjs().format(),
+      };
+      uploadPost(id, category, newPost);
+    }
+  };
+
   return (
-    <form className="flex flex-col gap-4 h-full px-24 py-12 mt-8 rounded-3xl bg-white md:px-8 md:py-6">
+    <form
+      className="flex flex-col gap-4 h-full px-24 py-12 mt-8 rounded-3xl bg-white md:px-8 md:py-6"
+      onSubmit={handleSubmit}
+    >
       <input
         type="text"
         name="title"

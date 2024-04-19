@@ -7,6 +7,7 @@ import {
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
+import { Board, BoardCategory } from '@/types/board';
 
 const db = getFirestore(app);
 
@@ -35,4 +36,12 @@ export async function fetchUserFromName(name: string) {
 
 export async function sendUser(id: string, user: User) {
   return setDoc(doc(db, 'users', id), user);
+}
+
+export async function uploadPost(
+  id: string,
+  category: BoardCategory,
+  post: Board,
+) {
+  return setDoc(doc(db, `${category}Boards`, id), post);
 }
