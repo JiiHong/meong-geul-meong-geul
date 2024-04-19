@@ -21,18 +21,18 @@ export async function fetchUsers(): Promise<User[]> {
   return [];
 }
 
-export async function fetchUser(uid: string) {
+export async function fetchUserFromUid(uid: string) {
   const users = await fetchUsers();
   const user = users.find((user) => user.uid === uid);
 
   return user ? user : null;
 }
 
-export async function sendUser(id: string, user: User) {
-  return setDoc(doc(db, 'users', id), user);
-}
-
 export async function fetchUserFromName(name: string) {
   const users = await fetchUsers();
   return users.find((user) => user.name === name);
+}
+
+export async function sendUser(id: string, user: User) {
+  return setDoc(doc(db, 'users', id), user);
 }
