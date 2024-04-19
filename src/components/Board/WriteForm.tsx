@@ -9,6 +9,7 @@ import WriteFormButton from './WriteFormButton';
 import { uploadPost } from '@/service/firebase/firebase-firestore';
 import { useUserContext } from '@/context/UserContext';
 import dayjs from 'dayjs';
+import { uploadBoardImage } from '@/service/firebase/firebase-storage';
 
 const DEFAULT_DATA = {
   title: '',
@@ -34,21 +35,27 @@ export default function WriteForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (user) {
-      const id = uuid();
-      const { uid, name } = user;
-      const newPost = {
-        ...board,
-        id,
-        uid,
-        name,
-        likeCount: 0,
-        commentCount: 0,
-        viewCount: 0,
-        createdAt: dayjs().format(),
-      };
-      uploadPost(id, category, newPost);
+    if (!user) return;
+
+    const id = uuid();
+    const { uid, name } = user;
+    const newPost = {
+      ...board,
+      id,
+      uid,
+      name,
+      likeCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+      createdAt: dayjs().format(),
+    };
+
+    if (file) {
+      return uploadBoardImage(file, category).then((contentImage) =>
+        uploadPost(id, category, { ...newPost, contentImage }),
+      );
     }
+    uploadPost(id, category, newPost);
   };
 
   return (
