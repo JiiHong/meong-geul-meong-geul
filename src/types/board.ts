@@ -7,7 +7,7 @@ export type Board = {
   likeCount: number;
   commentCount: number;
   viewCount: number;
-  createdAt: number;
+  createdAt: string;
   userImage?: string;
   contentImage?: string;
 };
