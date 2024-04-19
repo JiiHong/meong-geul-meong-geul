@@ -1,7 +1,7 @@
 'use client';
 
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { v4 as uuid } from 'uuid';
 import { BoardCategory, WriteFormState } from '@/types/board';
 import CustomFileInput from './CustomFileInput';
@@ -23,6 +23,7 @@ export default function WriteForm() {
   const [file, setFile] = useState<File | null>(null);
   const { user } = useUserContext();
   const { category } = useParams<Params>();
+  const router = useRouter();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -51,11 +52,14 @@ export default function WriteForm() {
     };
 
     if (file) {
-      return uploadBoardImage(file, category).then((contentImage) =>
-        uploadPost(id, category, { ...newPost, contentImage }),
-      );
+      return uploadBoardImage(file, category) //
+        .then((contentImage) =>
+          uploadPost(id, category, { ...newPost, contentImage }),
+        )
+        .then(() => router.replace(`/board/${category}`));
     }
-    uploadPost(id, category, newPost);
+    uploadPost(id, category, newPost) //
+      .then(() => router.replace(`/board/${category}`));
   };
 
   return (
