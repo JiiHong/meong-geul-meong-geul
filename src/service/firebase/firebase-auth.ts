@@ -7,7 +7,7 @@ import {
 } from 'firebase/auth';
 import { app } from './firebase-config';
 import { LoginState } from '@/context/UserContext';
-import { fetchUser } from './firebase-firestore';
+import { fetchUserFromUid } from './firebase-firestore';
 import { Dispatch, SetStateAction } from 'react';
 import { User } from '@/types/user';
 
@@ -21,7 +21,7 @@ export async function login() {
     .then(async (result) => {
       const user = result.user;
       const uid = user.uid;
-      const userInfo = await fetchUser(uid);
+      const userInfo = await fetchUserFromUid(uid);
       const token = await user.getIdToken();
 
       if (!userInfo) {
@@ -54,7 +54,7 @@ export function onUserStateChange(
       return;
     }
 
-    const userInfo = await fetchUser(user.uid);
+    const userInfo = await fetchUserFromUid(user.uid);
 
     if (user && !userInfo) setLoginState('logout');
 
