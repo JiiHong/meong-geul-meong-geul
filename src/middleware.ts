@@ -4,12 +4,23 @@ import type { NextRequest } from 'next/server';
 export async function middleware(request: NextRequest) {
   const session = request.cookies.get('session');
   const pathname = request.nextUrl.pathname;
+
   if (
     session &&
     (pathname.startsWith('/login') || pathname.startsWith('/signup'))
   ) {
     return NextResponse.redirect(new URL('/', request.url));
   }
+
+  if (!session && pathname.startsWith('/write')) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  // const responseAPI = await fetch(`${request.nextUrl.origin}/api/auth/login`, {
+  //   headers: {
+  //     Cookie: `session=${session?.value}`,
+  //   },
+  // });
 }
 
 export const config = {
