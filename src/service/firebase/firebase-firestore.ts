@@ -4,6 +4,8 @@ import {
   getFirestore,
   doc,
   setDoc,
+  query,
+  orderBy,
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
@@ -44,4 +46,19 @@ export async function uploadPost(
   post: Board,
 ) {
   return setDoc(doc(db, `${category}Boards`, id), post);
+}
+
+export async function fetchPosts(category: string) {
+  const q = query(
+    collection(db, `${category}Boards`),
+    orderBy('createdAt', 'desc'),
+  );
+  const querySnapshot = await getDocs(q);
+  if (!querySnapshot.empty) {
+    const docs = querySnapshot.docs;
+    const posts = docs.map((doc) => doc.data() as Board);
+
+    return posts;
+  }
+  return [];
 }
