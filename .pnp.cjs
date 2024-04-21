@@ -26,6 +26,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@tanstack/react-query", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:5.29.2"],\
           ["@types/node", "npm:20.11.30"],\
           ["@types/react", "npm:18.2.70"],\
           ["@types/react-dom", "npm:18.2.22"],\
@@ -1776,6 +1777,38 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@swc/helpers", "npm:0.5.2"],\
           ["tslib", "npm:2.6.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tanstack/query-core", [\
+      ["npm:5.29.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/@tanstack-query-core-npm-5.29.0-908241c55d-10c0.zip/node_modules/@tanstack/query-core/",\
+        "packageDependencies": [\
+          ["@tanstack/query-core", "npm:5.29.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tanstack/react-query", [\
+      ["npm:5.29.2", {\
+        "packageLocation": "../../../.yarn/berry/cache/@tanstack-react-query-npm-5.29.2-0e7760f3f4-10c0.zip/node_modules/@tanstack/react-query/",\
+        "packageDependencies": [\
+          ["@tanstack/react-query", "npm:5.29.2"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:5.29.2", {\
+        "packageLocation": "./.yarn/__virtual__/@tanstack-react-query-virtual-0e84eb7f59/4/.yarn/berry/cache/@tanstack-react-query-npm-5.29.2-0e7760f3f4-10c0.zip/node_modules/@tanstack/react-query/",\
+        "packageDependencies": [\
+          ["@tanstack/react-query", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:5.29.2"],\
+          ["@tanstack/query-core", "npm:5.29.0"],\
+          ["@types/react", "npm:18.2.70"],\
+          ["react", "npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5668,6 +5701,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["meong-geul-meong-geul", "workspace:."],\
+          ["@tanstack/react-query", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:5.29.2"],\
           ["@types/node", "npm:20.11.30"],\
           ["@types/react", "npm:18.2.70"],\
           ["@types/react-dom", "npm:18.2.22"],\
