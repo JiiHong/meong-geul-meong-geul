@@ -20,7 +20,9 @@ export default function BoardCardContent({
             sizes="(max-width: 639px) 45vw, (max-width: 767) 25vw, 20vw"
           />
         ) : (
-          <p className="px-2 h-full text-xs break-words">{content}</p>
+          <p className="px-2 h-full text-xs break-all line-clamp-[9]">
+            {content}
+          </p>
         )}
       </div>
     </div>
