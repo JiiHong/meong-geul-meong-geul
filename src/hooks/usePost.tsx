@@ -21,8 +21,10 @@ export default function usePost(category: BoardCategory) {
   });
 
   const uploadPost = useMutation({
-    mutationFn: ({ id, newPost, contentImage }: MutationType) =>
-      sendPost(id, category, { ...newPost, contentImage }),
+    mutationFn: ({ id, newPost, contentImage }: MutationType) => {
+      const prop = contentImage ? { ...newPost, contentImage } : { ...newPost };
+      return sendPost(id, category, prop);
+    },
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ['board', category] }),
   });
