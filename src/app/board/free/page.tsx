@@ -7,6 +7,7 @@ import { headers } from 'next/headers';
 import WriteButton from '@/components/Board/WriteButton';
 import { fetchPosts } from '@/service/firebase/firebase-firestore';
 import Posts from '@/components/Board/Posts';
+import BoardTitle from '@/components/Board/BoardTitle';
 
 export default async function FreeBoardPage() {
   const headersList = headers();
@@ -22,6 +23,7 @@ export default async function FreeBoardPage() {
   return (
     <section>
       <HydrationBoundary state={dehydrate(queryClient)}>
+        <BoardTitle text="자유게시판" />
         <Posts />
       </HydrationBoundary>
       <WriteButton />
