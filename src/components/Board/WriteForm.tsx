@@ -3,13 +3,14 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { v4 as uuid } from 'uuid';
-import { BoardCategory, WriteFormState } from '@/types/board';
+import { Board, BoardCategory, WriteFormState } from '@/types/board';
 import CustomFileInput from './CustomFileInput';
 import WriteFormButton from './WriteFormButton';
 import { uploadPost } from '@/service/firebase/firebase-firestore';
 import { useUserContext } from '@/context/UserContext';
 import dayjs from 'dayjs';
 import { uploadBoardImage } from '@/service/firebase/firebase-storage';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const DEFAULT_DATA = {
   title: '',
@@ -24,6 +25,21 @@ export default function WriteForm() {
   const { user } = useUserContext();
   const { category } = useParams<Params>();
   const router = useRouter();
+
+  const queryClient = useQueryClient();
+  const sendPost = useMutation({
+    mutationFn: ({
+      id,
+      newPost,
+      contentImage,
+    }: {
+      id: string;
+      newPost: Board;
+      contentImage: string;
+    }) => uploadPost(id, category, { ...newPost, contentImage }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['board', category] }),
+  });
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -53,9 +69,7 @@ export default function WriteForm() {
 
     if (file) {
       return uploadBoardImage(file, category) //
-        .then((contentImage) =>
-          uploadPost(id, category, { ...newPost, contentImage }),
-        )
+        .then((contentImage) => sendPost.mutate({ id, newPost, contentImage }))
         .then(() => router.replace(`/board/${category}`));
     }
     uploadPost(id, category, newPost) //
