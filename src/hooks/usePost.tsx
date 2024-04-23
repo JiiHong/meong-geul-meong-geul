@@ -17,6 +17,7 @@ export default function usePost(category: BoardCategory) {
   const postQuery = useQuery({
     queryKey: ['board', category],
     queryFn: () => fetchPosts(category),
+    staleTime: 1000 * 60 * 3,
   });
 
   const uploadPost = useMutation({
