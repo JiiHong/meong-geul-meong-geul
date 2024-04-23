@@ -1,18 +1,17 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import { fetchPosts } from '@/service/firebase/firebase-firestore';
 import BoardCard from '@/components/Board/BoardCard';
 import { usePathname } from 'next/navigation';
+import usePost from '@/hooks/usePost';
+import { BoardCategory } from '@/types/board';
 
 export default function Posts() {
   const path = usePathname();
-  const category = path.split('/')[2];
+  const category = path.split('/')[2] as BoardCategory;
 
-  const { data: boards } = useQuery({
-    queryKey: ['board', category],
-    queryFn: () => fetchPosts(category),
-  });
+  const {
+    postQuery: { data: boards },
+  } = usePost(category);
 
   return (
     <ul className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 py-8">

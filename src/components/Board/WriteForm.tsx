@@ -6,11 +6,10 @@ import { v4 as uuid } from 'uuid';
 import { Board, BoardCategory, WriteFormState } from '@/types/board';
 import CustomFileInput from './CustomFileInput';
 import WriteFormButton from './WriteFormButton';
-import { uploadPost } from '@/service/firebase/firebase-firestore';
 import { useUserContext } from '@/context/UserContext';
 import dayjs from 'dayjs';
 import { uploadBoardImage } from '@/service/firebase/firebase-storage';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import usePost from '@/hooks/usePost';
 
 const DEFAULT_DATA = {
   title: '',
@@ -26,27 +25,24 @@ export default function WriteForm() {
   const { category } = useParams<Params>();
   const router = useRouter();
 
-  const queryClient = useQueryClient();
-  const sendPost = useMutation({
-    mutationFn: ({
-      id,
-      newPost,
-      contentImage,
-    }: {
-      id: string;
-      newPost: Board;
-      contentImage: string;
-    }) => uploadPost(id, category, { ...newPost, contentImage }),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['board', category] }),
-  });
+  const { uploadPost } = usePost(category);
+
+  const uploadPostMutate = (
+    id: string,
+    newPost: Board,
+    contentImage?: string,
+  ) =>
+    uploadPost.mutate(
+      { id, newPost, contentImage },
+      { onSuccess: () => router.replace(`/board/${category}`) },
+    );
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     const { files } = e.target as HTMLInputElement;
-    if (name === 'file') return setFile(files && (files[0] as File));
+    if (name === 'file') return setFile(files && files[0]);
     setBoard({ ...board, [name]: value });
   };
 
@@ -69,11 +65,9 @@ export default function WriteForm() {
 
     if (file) {
       return uploadBoardImage(file, category) //
-        .then((contentImage) => sendPost.mutate({ id, newPost, contentImage }))
-        .then(() => router.replace(`/board/${category}`));
+        .then((contentImage) => uploadPostMutate(id, newPost, contentImage));
     }
-    uploadPost(id, category, newPost) //
-      .then(() => router.replace(`/board/${category}`));
+    return uploadPostMutate(id, newPost);
   };
 
   return (
