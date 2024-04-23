@@ -5,6 +5,6 @@ import 'dayjs/locale/ko';
 locale('ko');
 extend(relaviteTime);
 
-export function formateAgo(timestamp: number) {
-  return dayjs(timestamp).fromNow();
+export function formateAgo(time: string) {
+  return dayjs(time).fromNow();
 }
