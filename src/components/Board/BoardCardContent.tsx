@@ -18,6 +18,7 @@ export default function BoardCardContent({
             alt={title}
             fill
             sizes="(max-width: 639px) 45vw, (max-width: 767) 25vw, 20vw"
+            className="object-contain"
           />
         ) : (
           <p className="px-2 h-full text-xs break-all line-clamp-[9]">
