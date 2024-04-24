@@ -1,7 +1,7 @@
 'use client';
 
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { v4 as uuid } from 'uuid';
 import { Board, BoardCategory, WriteFormState } from '@/types/board';
 import CustomFileInput from './CustomFileInput';
@@ -16,13 +16,14 @@ const DEFAULT_DATA = {
   content: '',
 };
 
-type Params = { category: BoardCategory };
+type Props = {
+  category: BoardCategory;
+};
 
-export default function WriteForm() {
+export default function WriteForm({ category }: Props) {
   const [board, setBoard] = useState<WriteFormState>(DEFAULT_DATA);
   const [file, setFile] = useState<File | null>(null);
   const { user } = useUserContext();
-  const { category } = useParams<Params>();
   const router = useRouter();
 
   const { uploadPost } = usePost(category);
