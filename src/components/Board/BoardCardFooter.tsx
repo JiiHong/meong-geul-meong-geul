@@ -1,6 +1,6 @@
-import { LiaCommentDotsSolid } from 'react-icons/lia';
 import { Board } from '@/types/board';
 import IconHeart from '../ui/IconHeart';
+import IconComment from '../ui/IconComment';
 
 type Props = Pick<Board, 'likeCount' | 'commentCount'>;
 
@@ -12,7 +12,7 @@ export default function BoardCardFooter({ likeCount, commentCount }: Props) {
         <span className="text-xs">{likeCount}</span>
       </div>
       <div className="flex items-center gap-0.5">
-        <LiaCommentDotsSolid className="text-lg" />
+        <IconComment />
         <span className="text-xs">{commentCount}</span>
       </div>
     </div>
