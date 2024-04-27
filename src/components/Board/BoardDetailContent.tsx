@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Board } from '@/types/board';
-import UserImage from '../UserImage';
+import UserImage from '../ui/UserImage';
 import { formateFullTime } from '@/utils/day';
 
 type Props = {

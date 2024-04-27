@@ -1,6 +1,6 @@
 import { Board } from '@/types/board';
 import { formateAgo } from '@/utils/day';
-import UserImage from '../UserImage';
+import UserImage from '../ui/UserImage';
 
 type Props = Pick<Board, 'name' | 'title' | 'createdAt' | 'userImage'>;
 

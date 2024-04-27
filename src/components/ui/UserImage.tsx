@@ -3,16 +3,17 @@ import { defaultUserImage } from '@/constants/image';
 
 type Props = {
   title: string;
+  size?: number;
   userImage?: string;
 };
 
-export default function UserImage({ title, userImage }: Props) {
+export default function UserImage({ title, size, userImage }: Props) {
   return (
     <Image
       src={userImage ?? defaultUserImage}
       alt={title}
-      width={25}
-      height={25}
+      width={size ?? 25}
+      height={size ?? 25}
       className="rounded-full"
     />
   );
