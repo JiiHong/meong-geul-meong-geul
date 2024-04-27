@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useUserContext } from '@/context/UserContext';
 import { navbarList } from './Navbar';
 import LoginButton from './LoginButton';
-import UserImage from './UserImage';
+import UserLoginImage from './UserLoginImage';
 import { ClipLoader } from 'react-spinners';
 
 type Props = {
@@ -32,7 +32,7 @@ export default function Menu({ onClick, className }: Props) {
       <li className={className.buttonStyle}>
         {loginState === 'loading' && <ClipLoader color="#F9C175" size={25} />}
         {loginState === 'logout' && <LoginButton onClick={onClick} />}
-        {loginState === 'login' && <UserImage />}
+        {loginState === 'login' && <UserLoginImage />}
       </li>
     </ul>
   );

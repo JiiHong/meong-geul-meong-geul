@@ -6,7 +6,7 @@ import UserDropdown from './UserDropdown';
 import { useState } from 'react';
 import { defaultUserImage } from '@/constants/image';
 
-export default function UserImage() {
+export default function UserLoginImage() {
   const { user } = useUserContext();
   const [isActive, setIsActive] = useState(false);
 
