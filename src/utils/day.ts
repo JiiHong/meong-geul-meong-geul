@@ -8,3 +8,7 @@ extend(relaviteTime);
 export function formateAgo(time: string) {
   return dayjs(time).fromNow();
 }
+
+export function formateFullTime(time: string) {
+  return dayjs(time).format('YYYY-MM-DD HH:mm');
+}
