@@ -6,6 +6,7 @@ import {
   setDoc,
   query,
   orderBy,
+  getDoc,
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
@@ -61,4 +62,15 @@ export async function fetchPosts(category: string) {
     return posts;
   }
   return [];
+}
+
+export async function fetchPost(category: BoardCategory, id: string) {
+  const docRef = doc(db, `${category}Boards`, id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const post = docSnap.data() as Board;
+    return post;
+  }
+  throw new Error('존재하지 않는 글입니다.');
 }
