@@ -10,7 +10,11 @@ export default function WriteButton() {
 
   return (
     <div className="fixed bottom-10 right-5 text-2xl text-white rounded-full bg-gray-800 transition-all hover:scale-110 hover:brightness-125">
-      <Link href={`/write/${category}`} className="block w-full h-full p-2">
+      <Link
+        href={`/write/${category}`}
+        scroll={false}
+        className="block w-full h-full p-2"
+      >
         <PiPencilSimpleLine />
       </Link>
     </div>
