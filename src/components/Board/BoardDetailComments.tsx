@@ -3,6 +3,7 @@ import IconComment from '@/components/ui/IconComment';
 import IconHeart from '@/components/ui/IconHeart';
 import UserImage from '@/components/ui/UserImage';
 import IconReply from '@/components/ui/IconReply';
+import CommentForm from './CommentForm';
 
 type Props = {
   post: Board;
@@ -19,16 +20,7 @@ export default function BoardDetailComments({ post }: Props) {
         <IconComment />
         <span>{commentCount}</span>
       </div>
-      <form className="flex">
-        <input
-          type="text"
-          placeholder="댓글을 입력해주세요."
-          className="px-4 py-2 grow border rounded-l-md outline-none"
-        />
-        <button className="px-4 py-2 text-gray-50 rounded-r-md bg-gray-600">
-          등록
-        </button>
-      </form>
+      <CommentForm />
       <ul>
         <li className="p-4 space-y-2 border-b border-gray-200">
           <div className="flex items-center gap-2">
