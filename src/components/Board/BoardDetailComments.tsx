@@ -1,4 +1,4 @@
-import { Board } from '@/types/board';
+import { Board, BoardCategory } from '@/types/board';
 import IconComment from '@/components/ui/IconComment';
 import IconHeart from '@/components/ui/IconHeart';
 import UserImage from '@/components/ui/UserImage';
@@ -7,9 +7,10 @@ import CommentForm from './CommentForm';
 
 type Props = {
   post: Board;
+  category: BoardCategory;
 };
 
-export default function BoardDetailComments({ post }: Props) {
+export default function BoardDetailComments({ post, category }: Props) {
   const { likeCount, commentCount } = post;
 
   return (
@@ -20,7 +21,7 @@ export default function BoardDetailComments({ post }: Props) {
         <IconComment />
         <span>{commentCount}</span>
       </div>
-      <CommentForm />
+      <CommentForm postId={post.id} category={category} />
       <ul>
         <li className="p-4 space-y-2 border-b border-gray-200">
           <div className="flex items-center gap-2">

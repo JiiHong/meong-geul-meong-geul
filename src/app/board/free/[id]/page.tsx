@@ -15,7 +15,7 @@ export default async function FreeBoardDetailPage() {
   return (
     <main className="pt-8">
       <BoardDetailContent post={post} />
-      <BoardDetailComments post={post} />
+      <BoardDetailComments post={post} category={category} />
     </main>
   );
 }

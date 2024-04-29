@@ -11,6 +11,7 @@ import {
 import { app } from './firebase-config';
 import { User } from '@/types/user';
 import { Board, BoardCategory } from '@/types/board';
+import { Comment } from '@/types/comment';
 
 const db = getFirestore(app);
 
@@ -73,4 +74,16 @@ export async function fetchPost(category: BoardCategory, id: string) {
     return post;
   }
   throw new Error('존재하지 않는 글입니다.');
+}
+
+export async function uploadComment(
+  postId: string,
+  commentId: string,
+  category: BoardCategory,
+  comment: Comment,
+) {
+  return setDoc(
+    doc(db, `${category}Boards`, postId, 'comments', commentId),
+    comment,
+  );
 }
