@@ -7,9 +7,9 @@ import { Board, BoardCategory, WriteFormState } from '@/types/board';
 import CustomFileInput from './CustomFileInput';
 import WriteFormButton from './WriteFormButton';
 import { useUserContext } from '@/context/UserContext';
-import dayjs from 'dayjs';
 import { uploadBoardImage } from '@/service/firebase/firebase-storage';
 import usePost from '@/hooks/usePost';
+import { createTime } from '@/utils/day';
 
 const DEFAULT_DATA = {
   title: '',
@@ -61,7 +61,7 @@ export default function WriteForm({ category }: Props) {
       likeCount: 0,
       commentCount: 0,
       viewCount: 0,
-      createdAt: dayjs().format(),
+      createdAt: createTime(),
     };
 
     if (file) {

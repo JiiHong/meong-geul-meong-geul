@@ -12,3 +12,7 @@ export function formateAgo(time: string) {
 export function formateFullTime(time: string) {
   return dayjs(time).format('YYYY-MM-DD HH:mm');
 }
+
+export function createTime() {
+  return dayjs().format();
+}
