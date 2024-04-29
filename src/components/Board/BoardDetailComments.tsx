@@ -1,17 +1,18 @@
 import { Board, BoardCategory } from '@/types/board';
 import IconComment from '@/components/ui/IconComment';
 import IconHeart from '@/components/ui/IconHeart';
-import UserImage from '@/components/ui/UserImage';
-import IconReply from '@/components/ui/IconReply';
 import CommentForm from './CommentForm';
+import { fetchComments } from '@/service/firebase/firebase-firestore';
+import Comment from './Comment';
 
 type Props = {
   post: Board;
   category: BoardCategory;
 };
 
-export default function BoardDetailComments({ post, category }: Props) {
-  const { likeCount, commentCount } = post;
+export default async function BoardDetailComments({ post, category }: Props) {
+  const { id, likeCount, commentCount } = post;
+  const comments = await fetchComments(id, category);
 
   return (
     <section className="flex flex-col gap-4 p-8 mt-8 rounded-3xl bg-white">
@@ -23,18 +24,9 @@ export default function BoardDetailComments({ post, category }: Props) {
       </div>
       <CommentForm postId={post.id} category={category} />
       <ul>
-        <li className="p-4 space-y-2 border-b border-gray-200">
-          <div className="flex items-center gap-2">
-            <UserImage title="d" userImage="/profile.jpg" />
-            <span className="font-semibold">ekfjdl</span>
-            <span className="text-xs text-gray-400">2024-04-24 14:30</span>
-          </div>
-          <p className="text-sm">배고파 배고파 배고파 배고파</p>
-          <div className="flex items-center gap-2 text-sm text-amber-500 hover:brightness-125">
-            <IconReply />
-            <button className="">답글 달기</button>
-          </div>
-        </li>
+        {comments.map((comment) => (
+          <Comment key={comment.id} comment={comment} />
+        ))}
       </ul>
     </section>
   );
