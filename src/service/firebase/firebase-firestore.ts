@@ -91,7 +91,7 @@ export async function uploadComment(
 export async function fetchComments(postId: string, category: BoardCategory) {
   const q = query(
     collection(db, `${category}Boards`, postId, 'comments'),
-    orderBy('createdAt', 'desc'),
+    orderBy('createdAt', 'asc'),
   );
   const querySnapshot = await getDocs(q);
 
