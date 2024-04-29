@@ -22,7 +22,7 @@ export default async function BoardDetailComments({ post, category }: Props) {
         <IconComment />
         <span>{commentCount}</span>
       </div>
-      <CommentForm postId={post.id} category={category} />
+      <CommentForm postId={id} category={category} />
       <ul>
         {comments.map((comment) => (
           <Comment key={comment.id} comment={comment} category={category} />
