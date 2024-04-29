@@ -87,3 +87,19 @@ export async function uploadComment(
     comment,
   );
 }
+
+export async function fetchComments(postId: string, category: BoardCategory) {
+  const q = query(
+    collection(db, `${category}Boards`, postId, 'comments'),
+    orderBy('createdAt', 'desc'),
+  );
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const docs = querySnapshot.docs;
+    const comments = docs.map((doc) => doc.data() as Comment);
+
+    return comments;
+  }
+  return [];
+}
