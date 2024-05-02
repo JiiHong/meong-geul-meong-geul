@@ -1,8 +1,10 @@
+'use client';
+
 import { Board, BoardCategory } from '@/types/board';
+import useComments from '@/hooks/useComments';
 import IconComment from '@/components/ui/IconComment';
 import IconHeart from '@/components/ui/IconHeart';
 import CommentForm from './CommentForm';
-import { fetchComments } from '@/service/firebase/firebase-firestore';
 import Comment from './Comment';
 
 type Props = {
@@ -10,9 +12,11 @@ type Props = {
   category: BoardCategory;
 };
 
-export default async function BoardDetailComments({ post, category }: Props) {
+export default function BoardDetailComments({ post, category }: Props) {
   const { id, likeCount, commentCount } = post;
-  const comments = await fetchComments(id, category);
+  const {
+    commentQuery: { data: comments },
+  } = useComments(id, category);
 
   return (
     <section className="flex flex-col gap-4 p-8 mt-8 rounded-3xl bg-white">
@@ -24,12 +28,14 @@ export default async function BoardDetailComments({ post, category }: Props) {
       </div>
       <CommentForm postId={id} category={category} />
       <ul>
-        <Comment
-          postId={id}
-          comments={comments}
-          category={category}
-          replyId={null}
-        />
+        {comments && (
+          <Comment
+            postId={id}
+            comments={comments}
+            category={category}
+            replyId={null}
+          />
+        )}
       </ul>
     </section>
   );

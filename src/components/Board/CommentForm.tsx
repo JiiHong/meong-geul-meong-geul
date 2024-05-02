@@ -2,11 +2,10 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useUserContext } from '@/context/UserContext';
 import { BoardCategory } from '@/types/board';
 import { Comment } from '@/types/comment';
-import { uploadComment as sendComment } from '@/service/firebase/firebase-firestore';
+import useComments from '@/hooks/useComments';
 import { createTime } from '@/utils/day';
 
 type Props = {
@@ -14,13 +13,6 @@ type Props = {
   category: BoardCategory;
   replyId?: string;
   level?: number;
-};
-
-type MutationType = {
-  postId: string;
-  id: string;
-  category: BoardCategory;
-  newComment: Comment;
 };
 
 export default function CommentForm({
@@ -31,14 +23,7 @@ export default function CommentForm({
 }: Props) {
   const { user } = useUserContext();
   const [content, setContent] = useState('');
-  const queryClient = useQueryClient();
-  const uploadComment = useMutation({
-    mutationFn: ({ postId, id, category, newComment }: MutationType) => {
-      return sendComment(postId, id, category, newComment);
-    },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['comment', postId] }),
-  });
+  const { uploadComment } = useComments(postId, category);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setContent(e.target.value);
