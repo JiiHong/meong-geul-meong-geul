@@ -23,7 +23,7 @@ type Props = {
   replyId: string | null;
 };
 
-export default function Comments({
+export default function Comment({
   postId,
   replyId,
   comments,
@@ -69,7 +69,7 @@ export default function Comments({
                 />
               )}
             </li>
-            <Comments
+            <Comment
               postId={postId}
               replyId={id}
               comments={comments}
