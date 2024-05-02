@@ -51,14 +51,15 @@ export default function Comments({
                 </span>
               </div>
               <p className="text-sm">{content}</p>
-              <div className="flex items-center gap-2 text-sm text-amber-500 hover:brightness-125">
-                <IconReply />
-                {level < 5 && (
-                  <button
-                    onClick={handleClick}
-                  >{`${isOpen ? '닫기' : '답글 달기'}`}</button>
-                )}
-              </div>
+              {level < 5 && (
+                <button
+                  onClick={handleClick}
+                  className="flex items-center gap-2 text-sm text-amber-500 hover:brightness-125"
+                >
+                  <IconReply />
+                  {`${isOpen ? '닫기' : '답글 달기'}`}
+                </button>
+              )}
               {isOpen && (
                 <CommentForm
                   postId={postId}
