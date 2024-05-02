@@ -1,42 +1,82 @@
 'use client';
 
-import { useState } from 'react';
-import UserImage from '@/components/ui/UserImage';
-import IconReply from '@/components/ui/IconReply';
 import { BoardCategory } from '@/types/board';
 import { Comment as CommentType } from '@/types/comment';
-import { formateFullTime } from '@/utils/day';
 import CommentForm from './CommentForm';
+import React, { useState } from 'react';
+import UserImage from '../ui/UserImage';
+import { formateFullTime } from '@/utils/day';
+import IconReply from '../ui/IconReply';
 
-type Props = { comment: CommentType; category: BoardCategory };
+const PADDING_BY_LEVEL: { [key: number]: string } = {
+  0: 'pl-0',
+  1: 'pl-8',
+  2: 'pl-16',
+  3: 'pl-24',
+  4: 'pl-32',
+};
 
-export default function Comment({ comment, category }: Props) {
-  const { id, name, content, userImage, createdAt } = comment;
+type Props = {
+  postId: string;
+  comments: CommentType[];
+  category: BoardCategory;
+  replyId: string | null;
+};
+
+export default function Comments({
+  postId,
+  replyId,
+  comments,
+  category,
+}: Props) {
+  const filterdComments = comments.filter(
+    (comment) => comment.replyId === replyId,
+  );
+  if (filterdComments.length === 0) return;
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => setIsOpen((prev) => !prev);
 
   return (
-    <li className="p-4 space-y-2 border-b border-gray-200">
-      <div className="flex items-center gap-2">
-        <UserImage title={name} userImage={userImage ?? undefined} />
-        <span className="font-semibold">ekfjdl</span>
-        <span className="text-xs text-gray-400">
-          {formateFullTime(createdAt)}
-        </span>
-      </div>
-      <p className="text-sm">{content}</p>
-      <div className="flex items-center gap-2 text-sm text-amber-500 hover:brightness-125">
-        <IconReply />
-        <button
-          onClick={handleClick}
-        >{`${isOpen ? '닫기' : '답글 달기'}`}</button>
-      </div>
-      {isOpen && (
-        <div className="p-6 bg-gray-50 rounded-md">
-          <CommentForm category={category} postId={id} />
-        </div>
+    <>
+      {filterdComments.map(
+        ({ id, name, level, content, userImage, createdAt }) => (
+          <React.Fragment key={id}>
+            <li className={`p-4 ${PADDING_BY_LEVEL[level]} space-y-2 border-b`}>
+              <div className="flex items-center gap-2">
+                <UserImage title={name} userImage={userImage ?? undefined} />
+                <span className="font-semibold">ekfjdl</span>
+                <span className="text-xs text-gray-400">
+                  {formateFullTime(createdAt)}
+                </span>
+              </div>
+              <p className="text-sm">{content}</p>
+              <div className="flex items-center gap-2 text-sm text-amber-500 hover:brightness-125">
+                <IconReply />
+                {level < 5 && (
+                  <button
+                    onClick={handleClick}
+                  >{`${isOpen ? '닫기' : '답글 달기'}`}</button>
+                )}
+              </div>
+              {isOpen && (
+                <CommentForm
+                  postId={postId}
+                  replyId={id}
+                  level={level}
+                  category={category}
+                />
+              )}
+            </li>
+            <Comments
+              postId={postId}
+              replyId={id}
+              comments={comments}
+              category={category}
+            />
+          </React.Fragment>
+        ),
       )}
-    </li>
+    </>
   );
 }

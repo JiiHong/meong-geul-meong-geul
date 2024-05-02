@@ -5,6 +5,6 @@ export type Comment = {
   name: string;
   content: string;
   createdAt: string;
-  replyId?: string;
+  replyId: string | null;
   userImage?: string;
 };

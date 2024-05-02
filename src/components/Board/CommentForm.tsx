@@ -8,9 +8,19 @@ import { Comment } from '@/types/comment';
 import { uploadComment } from '@/service/firebase/firebase-firestore';
 import { createTime } from '@/utils/day';
 
-type Props = { postId: string; category: BoardCategory };
+type Props = {
+  postId: string;
+  category: BoardCategory;
+  replyId?: string;
+  level?: number;
+};
 
-export default function CommentForm({ postId, category }: Props) {
+export default function CommentForm({
+  postId,
+  category,
+  replyId,
+  level,
+}: Props) {
   const { user } = useUserContext();
   const [content, setContent] = useState('');
 
@@ -24,13 +34,18 @@ export default function CommentForm({ postId, category }: Props) {
     const { name, uid } = user;
     const comment: Comment = {
       id,
+      replyId: null,
       level: 0,
       content,
       name,
       uid,
       createdAt: createTime(),
     };
-    uploadComment(postId, id, category, comment);
+    const newComment = replyId
+      ? { ...comment, replyId, level: level! + 1 }
+      : comment;
+
+    uploadComment(postId, id, category, newComment);
   };
 
   return (

@@ -24,9 +24,12 @@ export default async function BoardDetailComments({ post, category }: Props) {
       </div>
       <CommentForm postId={id} category={category} />
       <ul>
-        {comments.map((comment) => (
-          <Comment key={comment.id} comment={comment} category={category} />
-        ))}
+        <Comment
+          postId={id}
+          comments={comments}
+          category={category}
+          replyId={null}
+        />
       </ul>
     </section>
   );
