@@ -51,7 +51,7 @@ export default function Comments({
                 </span>
               </div>
               <p className="text-sm">{content}</p>
-              {level < 5 && (
+              {level < 4 && (
                 <button
                   onClick={handleClick}
                   className="flex items-center gap-2 text-sm text-amber-500 hover:brightness-125"
