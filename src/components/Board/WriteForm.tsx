@@ -8,7 +8,7 @@ import CustomFileInput from './CustomFileInput';
 import WriteFormButton from './WriteFormButton';
 import { useUserContext } from '@/context/UserContext';
 import { uploadBoardImage } from '@/service/firebase/firebase-storage';
-import usePost from '@/hooks/usePost';
+import usePosts from '@/hooks/usePosts';
 import { createTime } from '@/utils/day';
 
 const DEFAULT_DATA = {
@@ -26,7 +26,7 @@ export default function WriteForm({ category }: Props) {
   const { user } = useUserContext();
   const router = useRouter();
 
-  const { uploadPost } = usePost(category);
+  const { uploadPost } = usePosts(category);
 
   const uploadPostMutate = (
     id: string,

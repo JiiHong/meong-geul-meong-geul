@@ -11,10 +11,10 @@ type MutationType = {
   contentImage?: string;
 };
 
-export default function usePost(category: BoardCategory) {
+export default function usePosts(category: BoardCategory) {
   const queryClient = useQueryClient();
 
-  const postQuery = useQuery({
+  const postsQuery = useQuery({
     queryKey: ['board', category],
     queryFn: () => fetchPosts(category),
     staleTime: 1000 * 60 * 3,
@@ -29,5 +29,5 @@ export default function usePost(category: BoardCategory) {
       queryClient.invalidateQueries({ queryKey: ['board', category] }),
   });
 
-  return { postQuery, uploadPost };
+  return { postsQuery, uploadPost };
 }

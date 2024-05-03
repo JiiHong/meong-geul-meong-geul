@@ -2,16 +2,17 @@
 
 import BoardCard from '@/components/Board/BoardCard';
 import { usePathname } from 'next/navigation';
-import usePost from '@/hooks/usePost';
+
 import { BoardCategory } from '@/types/board';
+import usePosts from '@/hooks/usePosts';
 
 export default function Posts() {
   const path = usePathname();
   const category = path.split('/')[2] as BoardCategory;
 
   const {
-    postQuery: { data: boards },
-  } = usePost(category);
+    postsQuery: { data: boards },
+  } = usePosts(category);
 
   return (
     <ul className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 py-8">
