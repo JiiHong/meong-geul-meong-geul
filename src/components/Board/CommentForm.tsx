@@ -46,7 +46,12 @@ export default function CommentForm({
       ? { ...comment, replyId, level: level! + 1 }
       : comment;
 
-    uploadComment.mutate({ postId, id, category, newComment });
+    uploadComment.mutate(
+      { postId, id, category, newComment },
+      {
+        onSuccess: () => setContent(''),
+      },
+    );
   };
 
   return (
