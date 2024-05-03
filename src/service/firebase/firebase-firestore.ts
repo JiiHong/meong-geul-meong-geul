@@ -8,6 +8,7 @@ import {
   orderBy,
   getDoc,
   deleteDoc,
+  updateDoc,
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
@@ -75,6 +76,18 @@ export async function fetchPost(category: BoardCategory, id: string) {
     return post;
   }
   throw new Error('존재하지 않는 글입니다.');
+}
+
+export async function increaseViewCount(
+  postId: string,
+  category: BoardCategory,
+  viewCount: number,
+) {
+  const ref = doc(db, `${category}Boards`, postId);
+
+  await updateDoc(ref, {
+    viewCount: viewCount + 1,
+  });
 }
 
 export async function uploadComment(

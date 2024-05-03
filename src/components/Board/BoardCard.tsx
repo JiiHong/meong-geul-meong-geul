@@ -5,6 +5,7 @@ import { Board, BoardCategory } from '@/types/board';
 import BoardCardHeader from './BoardCardHeader';
 import BoardCardContent from './BoardCardContent';
 import BoardCardFooter from './BoardCardFooter';
+import { increaseViewCount } from '@/service/firebase/firebase-firestore';
 
 type Props = {
   board: Board;
@@ -21,10 +22,11 @@ export default function BoardCard({ board, category }: Props) {
     userImage,
     likeCount,
     commentCount,
+    viewCount,
     createdAt,
   } = board;
 
-  const handleClick = () => {};
+  const handleClick = () => increaseViewCount(id, category, viewCount);
 
   return (
     <article onClick={handleClick} className="w-full h-full">
