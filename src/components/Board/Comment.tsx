@@ -4,8 +4,10 @@ import { BoardCategory } from '@/types/board';
 import { Comment as CommentType } from '@/types/comment';
 import CommentForm from './CommentForm';
 import React, { useState } from 'react';
-import UserImage from '../ui/UserImage';
+import { useUserContext } from '@/context/UserContext';
 import { formateFullTime } from '@/utils/day';
+import UserImage from '../ui/UserImage';
+import IconClose from '../ui/IconClose';
 import IconReply from '../ui/IconReply';
 
 const PADDING_BY_LEVEL: { [key: number]: string } = {
@@ -29,6 +31,7 @@ export default function Comment({
   comments,
   category,
 }: Props) {
+  const { user } = useUserContext();
   const filterdComments = comments.filter(
     (comment) => comment.replyId === replyId,
   );
@@ -40,7 +43,7 @@ export default function Comment({
   return (
     <>
       {filterdComments.map(
-        ({ id, name, level, content, userImage, createdAt }) => (
+        ({ id, uid, name, level, content, userImage, createdAt }) => (
           <React.Fragment key={id}>
             <li className={`p-4 ${PADDING_BY_LEVEL[level]} space-y-2 border-b`}>
               <div className="flex items-center gap-2">
@@ -49,6 +52,12 @@ export default function Comment({
                 <span className="text-xs text-gray-400">
                   {formateFullTime(createdAt)}
                 </span>
+                {user?.uid === uid &&
+                  !comments.find((comment) => comment.replyId === id) && (
+                    <button>
+                      <IconClose />
+                    </button>
+                  )}
               </div>
               <p className="text-sm">{content}</p>
               {level < 4 && (
