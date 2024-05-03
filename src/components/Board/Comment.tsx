@@ -1,11 +1,12 @@
 'use client';
 
+import React, { useState } from 'react';
 import { BoardCategory } from '@/types/board';
 import { Comment as CommentType } from '@/types/comment';
 import CommentForm from './CommentForm';
-import React, { useState } from 'react';
 import { useUserContext } from '@/context/UserContext';
 import { formateFullTime } from '@/utils/day';
+import useComments from '@/hooks/useComments';
 import UserImage from '../ui/UserImage';
 import IconClose from '../ui/IconClose';
 import IconReply from '../ui/IconReply';
@@ -38,6 +39,9 @@ export default function Comment({
   if (filterdComments.length === 0) return;
   const [isOpen, setIsOpen] = useState(false);
 
+  const { deleteComment } = useComments(postId, category);
+
+  const handleDeleteClick = (id: string) => deleteComment.mutate({ id });
   const handleClick = () => setIsOpen((prev) => !prev);
 
   return (
@@ -54,7 +58,7 @@ export default function Comment({
                 </span>
                 {user?.uid === uid &&
                   !comments.find((comment) => comment.replyId === id) && (
-                    <button>
+                    <button onClick={() => handleDeleteClick(id)}>
                       <IconClose />
                     </button>
                   )}

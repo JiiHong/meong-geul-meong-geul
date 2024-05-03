@@ -7,6 +7,7 @@ import {
   query,
   orderBy,
   getDoc,
+  deleteDoc,
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
@@ -102,4 +103,12 @@ export async function fetchComments(postId: string, category: BoardCategory) {
     return comments;
   }
   return [];
+}
+
+export async function deleteComment(
+  postId: string,
+  id: string,
+  category: BoardCategory,
+) {
+  await deleteDoc(doc(db, `${category}Boards`, postId, 'comments', id));
 }

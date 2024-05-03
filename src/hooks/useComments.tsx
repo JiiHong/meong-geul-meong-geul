@@ -3,6 +3,7 @@ import { BoardCategory } from '@/types/board';
 import { Comment } from '@/types/comment';
 import {
   fetchComments,
+  deleteComment as removeComment,
   uploadComment as sendComment,
 } from '@/service/firebase/firebase-firestore';
 
@@ -28,5 +29,12 @@ export default function useComments(postId: string, category: BoardCategory) {
       queryClient.invalidateQueries({ queryKey: ['comment', postId] }),
   });
 
-  return { commentQuery, uploadComment };
+  const deleteComment = useMutation({
+    mutationFn: ({ id }: Pick<MutationType, 'id'>) =>
+      removeComment(postId, id, category),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['comment', postId] }),
+  });
+
+  return { commentQuery, uploadComment, deleteComment };
 }
