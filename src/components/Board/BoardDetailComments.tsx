@@ -26,7 +26,7 @@ export default async function BoardDetailComments({ post, category }: Props) {
 
   return (
     <section className="flex flex-col gap-4 p-8 mt-8 rounded-3xl bg-white">
-      <div className="flex items-center gap-0.5">
+      <div className="flex items-center gap-0.5 pb-4 border-b">
         <IconHeart />
         <span className="mr-2">{likeCount}</span>
         <IconComment />
