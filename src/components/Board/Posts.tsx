@@ -21,7 +21,7 @@ export default function Posts() {
             key={board.id}
             className="h-64 border shadow-base rounded-2xl bg-white transition-all hover:-translate-y-2"
           >
-            <BoardCard board={board} />
+            <BoardCard board={board} category={category} />
           </li>
         ))}
     </ul>

@@ -1,14 +1,17 @@
+'use client';
+
 import Link from 'next/link';
-import { Board } from '@/types/board';
+import { Board, BoardCategory } from '@/types/board';
 import BoardCardHeader from './BoardCardHeader';
 import BoardCardContent from './BoardCardContent';
 import BoardCardFooter from './BoardCardFooter';
 
 type Props = {
   board: Board;
+  category: BoardCategory;
 };
 
-export default function BoardCard({ board }: Props) {
+export default function BoardCard({ board, category }: Props) {
   const {
     id,
     name,
@@ -21,10 +24,12 @@ export default function BoardCard({ board }: Props) {
     createdAt,
   } = board;
 
+  const handleClick = () => {};
+
   return (
-    <article className="w-full h-full">
+    <article onClick={handleClick} className="w-full h-full">
       <Link
-        href={`/board/free/${id}`}
+        href={`/board/${category}/${id}`}
         className="flex flex-col w-full h-full py-3"
       >
         <BoardCardHeader
