@@ -33,8 +33,8 @@ export default async function BoardDetailComments({ post, category }: Props) {
         <span>{commentCount}</span>
       </div>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <CommentForm postId={id} category={category} />
         <Comments postId={id} category={category} />
+        <CommentForm postId={id} category={category} />
       </HydrationBoundary>
     </section>
   );
