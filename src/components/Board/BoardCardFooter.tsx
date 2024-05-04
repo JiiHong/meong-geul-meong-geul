@@ -1,10 +1,16 @@
-import { Board } from '@/types/board';
+import { BoardCategory } from '@/types/board';
 import IconHeart from '../ui/IconHeart';
 import IconComment from '../ui/IconComment';
+import useComments from '@/hooks/useComments';
 
-type Props = Pick<Board, 'likeCount' | 'commentCount'>;
+type Props = { category: BoardCategory; id: string; likeCount: number };
 
-export default function BoardCardFooter({ likeCount, commentCount }: Props) {
+export default function BoardCardFooter({ category, id, likeCount }: Props) {
+  const {
+    commentQuery: { data: comments },
+  } = useComments(id, category);
+  const commentCount = comments ? comments.length : 0;
+
   return (
     <div className="flex items-center gap-3 px-2">
       <div className="flex items-center gap-0.5">

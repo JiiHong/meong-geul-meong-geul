@@ -16,7 +16,7 @@ export default function Comments({ postId, category }: Props) {
 
   return (
     <ul>
-      {comments && (
+      {comments && comments.length > 0 && (
         <Comment
           postId={postId}
           comments={comments}

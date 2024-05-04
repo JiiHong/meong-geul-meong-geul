@@ -1,6 +1,4 @@
 import { Board, BoardCategory } from '@/types/board';
-import IconComment from '@/components/ui/IconComment';
-import IconHeart from '@/components/ui/IconHeart';
 import CommentForm from './CommentForm';
 import Comments from './Comments';
 import {
@@ -9,6 +7,7 @@ import {
   dehydrate,
 } from '@tanstack/react-query';
 import { fetchComments } from '@/service/firebase/firebase-firestore';
+import ViewCount from './ViewCount';
 
 type Props = {
   post: Board;
@@ -16,7 +15,7 @@ type Props = {
 };
 
 export default async function BoardDetailComments({ post, category }: Props) {
-  const { id, likeCount, commentCount } = post;
+  const { id } = post;
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
@@ -26,13 +25,8 @@ export default async function BoardDetailComments({ post, category }: Props) {
 
   return (
     <section className="flex flex-col gap-4 p-8 mt-8 rounded-3xl bg-white">
-      <div className="flex items-center gap-0.5 pb-4 border-b">
-        <IconHeart />
-        <span className="mr-2">{likeCount}</span>
-        <IconComment />
-        <span>{commentCount}</span>
-      </div>
       <HydrationBoundary state={dehydrate(queryClient)}>
+        <ViewCount postId={id} category={category} />
         <Comments postId={id} category={category} />
         <CommentForm postId={id} category={category} />
       </HydrationBoundary>
