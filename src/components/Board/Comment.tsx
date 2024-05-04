@@ -32,12 +32,12 @@ export default function Comment({
   comments,
   category,
 }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
   const { user } = useUserContext();
   const filterdComments = comments.filter(
     (comment) => comment.replyId === replyId,
   );
   if (filterdComments.length === 0) return;
-  const [isOpen, setIsOpen] = useState(false);
 
   const { deleteComment } = useComments(postId, category);
 
