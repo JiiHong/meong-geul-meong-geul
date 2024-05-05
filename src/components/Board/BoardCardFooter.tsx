@@ -14,7 +14,7 @@ export default function BoardCardFooter({ category, id, likeCount }: Props) {
   return (
     <div className="flex items-center gap-3 px-2">
       <div className="flex items-center gap-0.5">
-        <IconHeart />
+        <IconHeart className="text-lg" />
         <span className="text-xs">{likeCount}</span>
       </div>
       <div className="flex items-center gap-0.5">
