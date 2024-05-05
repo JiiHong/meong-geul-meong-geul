@@ -1,15 +1,24 @@
+'use client';
+
 import Image from 'next/image';
-import { Board, BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/board';
 import UserImage from '../ui/UserImage';
 import { formateFullTime } from '@/utils/day';
 import LikeButton from './LikeButton';
+import usePost from '@/hooks/usePost';
 
 type Props = {
-  post: Board;
+  postId: string;
   category: BoardCategory;
 };
 
-export default function BoardDetailContent({ post, category }: Props) {
+export default function BoardDetailContent({ postId, category }: Props) {
+  const {
+    postQuery: { data: post },
+  } = usePost(category, postId);
+
+  if (!post) return <></>;
+
   const {
     id,
     title,

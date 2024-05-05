@@ -1,27 +1,28 @@
 'use client';
 
+import { useUserContext } from '@/context/UserContext';
+import useLikeCount from '@/hooks/useLikeCount';
+import { BoardCategory } from '@/types/board';
+import IconHeart from '../ui/IconHeart';
 import {
   fetchLikePostId,
-  increaseLikeCount,
   uploadLikePostId,
 } from '@/service/firebase/firebase-firestore';
-import IconHeart from '../ui/IconHeart';
-import { useUserContext } from '@/context/UserContext';
-import { BoardCategory } from '@/types/board';
 
 type Props = { postId: string; likeCount: number; category: BoardCategory };
 
 export default function LikeButton({ postId, likeCount, category }: Props) {
   const { user } = useUserContext();
+  const { increaseLikeCount } = useLikeCount({ postId, category, likeCount });
 
   const handleClick = () => {
     if (!user) return alert('로그인이 필요한 서비스입니다.');
-
     fetchLikePostId(user.id, postId) //
       .then((id) => {
         if (id) return alert('이미 좋아요를 누른 글입니다.');
-        increaseLikeCount(postId, category, likeCount);
-        uploadLikePostId(user.id, postId);
+        increaseLikeCount.mutate(undefined, {
+          onSuccess: () => uploadLikePostId(user.id, postId),
+        });
       });
   };
 
