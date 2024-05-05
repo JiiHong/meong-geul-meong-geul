@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Board } from '@/types/board';
 import UserImage from '../ui/UserImage';
 import { formateFullTime } from '@/utils/day';
-import IconHeart from '../ui/IconHeart';
+import LikeButton from './LikeButton';
 
 type Props = {
   post: Board;
@@ -46,10 +46,7 @@ export default function BoardDetailContent({ post }: Props) {
           />
         )}
         <div className="flex flex-col items-center mt-10 text-center">
-          <button className="px-6 py-3 border border-gray-400 rounded-md transition-all hover:bg-gray-50">
-            <IconHeart className="text-2xl" />
-            <span className="text-gray-800">{0}</span>
-          </button>
+          <LikeButton />
         </div>
       </div>
     </section>
