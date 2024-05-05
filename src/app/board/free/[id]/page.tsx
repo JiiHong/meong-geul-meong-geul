@@ -27,7 +27,7 @@ export default async function FreeBoardDetailPage() {
       {post && (
         <>
           <HydrationBoundary state={dehydrate(queryClient)}>
-            <BoardDetailContent post={post} />
+            <BoardDetailContent post={post} category={category} />
           </HydrationBoundary>
           <BoardDetailComments post={post} category={category} />
         </>

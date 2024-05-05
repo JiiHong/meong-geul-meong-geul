@@ -1,19 +1,22 @@
 import Image from 'next/image';
-import { Board } from '@/types/board';
+import { Board, BoardCategory } from '@/types/board';
 import UserImage from '../ui/UserImage';
 import { formateFullTime } from '@/utils/day';
 import LikeButton from './LikeButton';
 
 type Props = {
   post: Board;
+  category: BoardCategory;
 };
 
-export default function BoardDetailContent({ post }: Props) {
+export default function BoardDetailContent({ post, category }: Props) {
   const {
+    id,
     title,
     name,
     content,
     viewCount,
+    likeCount,
     createdAt,
     userImage,
     contentImage,
@@ -46,7 +49,7 @@ export default function BoardDetailContent({ post }: Props) {
           />
         )}
         <div className="flex flex-col items-center mt-10 text-center">
-          <LikeButton />
+          <LikeButton postId={id} likeCount={likeCount} category={category} />
         </div>
       </div>
     </section>

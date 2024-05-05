@@ -78,6 +78,33 @@ export async function fetchPost(category: BoardCategory, id: string) {
   throw new Error('존재하지 않는 글입니다.');
 }
 
+export async function fetchLikePostId(id: string, postId: string) {
+  const docRef = doc(db, 'users', id, 'likePost', postId);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const { postId: refPostId } = docSnap.data() as { postId: string };
+    return refPostId;
+  }
+  return null;
+}
+
+export async function uploadLikePostId(id: string, postId: string) {
+  return setDoc(doc(db, 'users', id, 'likePost', postId), { postId });
+}
+
+export async function increaseLikeCount(
+  postId: string,
+  category: BoardCategory,
+  likeCount: number,
+) {
+  const ref = doc(db, `${category}Boards`, postId);
+
+  await updateDoc(ref, {
+    likeCount: likeCount + 1,
+  });
+}
+
 export async function increaseViewCount(
   postId: string,
   category: BoardCategory,
