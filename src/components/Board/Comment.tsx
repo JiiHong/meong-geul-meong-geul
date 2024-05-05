@@ -1,15 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { BoardCategory } from '@/types/board';
 import { Comment as CommentType } from '@/types/comment';
-import CommentForm from './CommentForm';
 import { useUserContext } from '@/context/UserContext';
 import { formateFullTime } from '@/utils/day';
 import useComments from '@/hooks/useComments';
 import UserImage from '../ui/UserImage';
 import IconClose from '../ui/IconClose';
-import IconReply from '../ui/IconReply';
+import Replybutton from './Replybutton';
 
 const PADDING_BY_LEVEL: { [key: number]: string } = {
   0: 'pl-0',
@@ -32,17 +31,15 @@ export default function Comment({
   comments,
   category,
 }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
   const { user } = useUserContext();
+  const { deleteComment } = useComments(postId, category);
   const filterdComments = comments.filter(
     (comment) => comment.replyId === replyId,
   );
+
   if (filterdComments.length === 0) return;
 
-  const { deleteComment } = useComments(postId, category);
-
   const handleDeleteClick = (id: string) => deleteComment.mutate({ id });
-  const handleClick = () => setIsOpen((prev) => !prev);
 
   return (
     <>
@@ -65,20 +62,11 @@ export default function Comment({
               </div>
               <p className="text-sm">{content}</p>
               {level < 4 && (
-                <button
-                  onClick={handleClick}
-                  className="flex items-center gap-2 text-sm text-amber-500 hover:brightness-125"
-                >
-                  <IconReply />
-                  {`${isOpen ? '닫기' : '답글 달기'}`}
-                </button>
-              )}
-              {isOpen && (
-                <CommentForm
+                <Replybutton
                   postId={postId}
-                  replyId={id}
-                  level={level}
+                  id={id}
                   category={category}
+                  level={level}
                 />
               )}
             </li>
