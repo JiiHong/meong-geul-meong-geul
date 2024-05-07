@@ -1,0 +1,63 @@
+import { BoardCategory } from '@/types/board';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+
+type Props = {
+  totalItems: number;
+  itemCountPerPage: number;
+  pageCount: number;
+  currentPage: number;
+  category: BoardCategory;
+};
+
+export default function Pagination({
+  totalItems,
+  itemCountPerPage,
+  pageCount,
+  currentPage,
+  category,
+}: Props) {
+  const [start, setStart] = useState(1);
+  const totalPages = Math.ceil(totalItems / itemCountPerPage);
+
+  useEffect(() => {
+    if (currentPage === pageCount + start) setStart((prev) => prev + pageCount);
+    if (currentPage < start) setStart((prev) => prev - pageCount);
+  }, [currentPage]);
+
+  return (
+    <div className="flex justify-center">
+      <ul className="flex items-center gap-4 text-lg">
+        {start !== 1 && (
+          <li>
+            <Link href={`${category}?page=${start - pageCount}`}>
+              <IoIosArrowBack />
+            </Link>
+          </li>
+        )}
+        {[...Array(pageCount)].map((_, i) => (
+          <React.Fragment key={i}>
+            {i + start <= totalPages && (
+              <li>
+                <Link
+                  href={`${category}?page=${i + start}`}
+                  className={`block w-10 h-10 text-center leading-10 rounded-full ${i + start === currentPage ? 'bg-amber-600' : 'hover:bg-gray-200'}`}
+                >
+                  {i + start}
+                </Link>
+              </li>
+            )}
+          </React.Fragment>
+        ))}
+        <li>
+          {totalPages - currentPage > pageCount && (
+            <Link href={`${category}?page=${start + pageCount}`}>
+              <IoIosArrowForward />
+            </Link>
+          )}
+        </li>
+      </ul>
+    </div>
+  );
+}
