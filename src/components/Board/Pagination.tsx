@@ -29,13 +29,11 @@ export default function Pagination({
   return (
     <div className="flex justify-center">
       <ul className="flex items-center gap-4 text-lg">
-        {start !== 1 && (
-          <li>
-            <Link href={`${category}?page=${start - pageCount}`}>
-              <IoIosArrowBack />
-            </Link>
-          </li>
-        )}
+        <li className={`${start === 1 ? 'invisible' : 'visible'}`}>
+          <Link href={`${category}?page=${start - pageCount}`}>
+            <IoIosArrowBack />
+          </Link>
+        </li>
         {[...Array(pageCount)].map((_, i) => (
           <React.Fragment key={i}>
             {i + start <= totalPages && (
@@ -50,12 +48,12 @@ export default function Pagination({
             )}
           </React.Fragment>
         ))}
-        <li>
-          {totalPages - currentPage > pageCount && (
-            <Link href={`${category}?page=${start + pageCount}`}>
-              <IoIosArrowForward />
-            </Link>
-          )}
+        <li
+          className={`${totalPages - currentPage > pageCount ? 'visible' : 'invisible'}`}
+        >
+          <Link href={`${category}?page=${start + pageCount}`}>
+            <IoIosArrowForward />
+          </Link>
         </li>
       </ul>
     </div>

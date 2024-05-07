@@ -4,7 +4,13 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import usePosts from '@/hooks/usePosts';
 import BoardCard from '@/components/Board/BoardCard';
 import { BoardCategory } from '@/types/board';
-import Pagination from './Pagination';
+import dynamic from 'next/dynamic';
+import SkeletonPagination from '../ui/SkeletonPagination';
+
+const Pagination = dynamic(() => import('./Pagination'), {
+  ssr: false,
+  loading: () => <SkeletonPagination />,
+});
 
 export default function Posts() {
   const path = usePathname();
@@ -13,8 +19,8 @@ export default function Posts() {
   const page = useSearchParams().get('page');
   const currentPage = page && parseInt(page) > 0 ? parseInt(page) : 1;
   const itemCountPerPage = 12;
-  const startIndex = currentPage * itemCountPerPage - itemCountPerPage;
   const pageCount = 5;
+  const startIndex = currentPage * itemCountPerPage - itemCountPerPage;
 
   const {
     postsQuery: { data: boards },
