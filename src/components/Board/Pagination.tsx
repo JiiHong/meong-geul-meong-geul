@@ -22,8 +22,8 @@ export default function Pagination({
   const totalPages = Math.ceil(totalItems / itemCountPerPage);
 
   useEffect(() => {
-    if (currentPage === pageCount + start) setStart((prev) => prev + pageCount);
-    if (currentPage < start) setStart((prev) => prev - pageCount);
+    const slideCount = Math.floor((currentPage - 1) / pageCount);
+    setStart(pageCount * slideCount + 1);
   }, [currentPage]);
 
   return (
