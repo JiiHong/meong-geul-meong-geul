@@ -49,7 +49,7 @@ export default function Comment({
             <li className={`p-4 ${PADDING_BY_LEVEL[level]} space-y-2 border-b`}>
               <div className="flex items-center gap-2">
                 <UserImage title={name} userImage={userImage ?? undefined} />
-                <span className="font-semibold">ekfjdl</span>
+                <span className="font-semibold">{name}</span>
                 <span className="text-xs text-gray-400">
                   {formateFullTime(createdAt)}
                 </span>
