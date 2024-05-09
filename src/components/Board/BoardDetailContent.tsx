@@ -25,7 +25,7 @@ export default function BoardDetailContent({ postId, category }: Props) {
     name,
     content,
     viewCount,
-    likeCount,
+    recommendCount,
     createdAt,
     userImage,
     contentImage,
@@ -60,7 +60,7 @@ export default function BoardDetailContent({ postId, category }: Props) {
         <div className="flex flex-col items-center mt-10 text-center">
           <RecommendButton
             postId={id}
-            likeCount={likeCount}
+            recommendCount={recommendCount}
             category={category}
           />
         </div>

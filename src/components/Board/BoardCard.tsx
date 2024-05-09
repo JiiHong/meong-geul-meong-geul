@@ -20,7 +20,7 @@ export default function BoardCard({ board, category }: Props) {
     content,
     contentImage,
     userImage,
-    likeCount,
+    recommendCount,
     viewCount,
     createdAt,
   } = board;
@@ -44,7 +44,11 @@ export default function BoardCard({ board, category }: Props) {
           content={content}
           contentImage={contentImage}
         />
-        <BoardCardFooter category={category} id={id} likeCount={likeCount} />
+        <BoardCardFooter
+          category={category}
+          id={id}
+          recommendCount={recommendCount}
+        />
       </Link>
     </article>
   );

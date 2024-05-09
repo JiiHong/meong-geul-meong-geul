@@ -58,7 +58,7 @@ export default function WriteForm({ category }: Props) {
       id,
       uid,
       name,
-      likeCount: 0,
+      recommendCount: 0,
       commentCount: 0,
       viewCount: 0,
       createdAt: createTime(),

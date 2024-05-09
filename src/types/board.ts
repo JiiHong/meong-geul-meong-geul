@@ -4,7 +4,7 @@ export type Board = {
   name: string;
   title: string;
   content: string;
-  likeCount: number;
+  recommendCount: number;
   commentCount: number;
   viewCount: number;
   createdAt: string;
