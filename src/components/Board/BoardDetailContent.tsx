@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { BoardCategory } from '@/types/board';
 import UserImage from '../ui/UserImage';
 import { formateFullTime } from '@/utils/day';
-import LikeButton from './LikeButton';
+import RecommendButton from './RecommendButton';
 import usePost from '@/hooks/usePost';
 
 type Props = {
@@ -58,7 +58,11 @@ export default function BoardDetailContent({ postId, category }: Props) {
           />
         )}
         <div className="flex flex-col items-center mt-10 text-center">
-          <LikeButton postId={id} likeCount={likeCount} category={category} />
+          <RecommendButton
+            postId={id}
+            likeCount={likeCount}
+            category={category}
+          />
         </div>
       </div>
     </section>

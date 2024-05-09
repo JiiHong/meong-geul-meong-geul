@@ -1,5 +1,5 @@
 import { BoardCategory } from '@/types/board';
-import IconHeart from '../ui/IconHeart';
+import IconThumbsup from '../ui/IconThumbsup';
 import IconComment from '../ui/IconComment';
 import useComments from '@/hooks/useComments';
 
@@ -14,7 +14,7 @@ export default function BoardCardFooter({ category, id, likeCount }: Props) {
   return (
     <div className="flex items-center gap-3 px-2">
       <div className="flex items-center gap-0.5">
-        <IconHeart className="text-lg" />
+        <IconThumbsup className="text-lg" />
         <span className="text-xs">{likeCount}</span>
       </div>
       <div className="flex items-center gap-0.5">
