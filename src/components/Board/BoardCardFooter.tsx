@@ -1,14 +1,21 @@
 import { BoardCategory } from '@/types/board';
+import useComments from '@/hooks/useComments';
 import IconThumbsup from '../ui/IconThumbsup';
 import IconComment from '../ui/IconComment';
-import useComments from '@/hooks/useComments';
+import IconEye from '../ui/IconEye';
 
-type Props = { category: BoardCategory; id: string; recommendCount: number };
+type Props = {
+  category: BoardCategory;
+  id: string;
+  recommendCount: number;
+  viewCount: number;
+};
 
 export default function BoardCardFooter({
   category,
   id,
   recommendCount,
+  viewCount,
 }: Props) {
   const {
     commentQuery: { data: comments },
@@ -24,6 +31,10 @@ export default function BoardCardFooter({
       <div className="flex items-center gap-0.5">
         <IconComment className="text-lg text-orange-600" />
         <span className="text-xs text-orange-600">{commentCount}</span>
+      </div>
+      <div className="flex justify-end items-center grow gap-0.5">
+        <IconEye className="text-lg text-gray-300" />
+        <span className="text-xs text-gray-300">{viewCount}</span>
       </div>
     </div>
   );

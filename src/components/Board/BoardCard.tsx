@@ -48,6 +48,7 @@ export default function BoardCard({ board, category }: Props) {
           category={category}
           id={id}
           recommendCount={recommendCount}
+          viewCount={viewCount}
         />
       </Link>
     </article>
