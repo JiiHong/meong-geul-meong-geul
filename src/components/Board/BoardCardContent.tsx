@@ -10,8 +10,8 @@ export default function BoardCardContent({
 }: Props) {
   return (
     <div className="flex flex-col gap-1.5 h-full">
-      <p className="px-2 mt-2 text-sm font-semibold">{title}</p>
-      <div className="relative w-full h-full mb-4">
+      <p className="px-2 pt-3 text-sm font-semibold">{title}</p>
+      <div className="relative w-full h-full pb-4 max-h-32 border-b">
         {contentImage ? (
           <Image
             src={contentImage}
@@ -21,7 +21,7 @@ export default function BoardCardContent({
             className="object-contain"
           />
         ) : (
-          <p className="px-2 h-full text-xs break-all line-clamp-[9]">
+          <p className="px-2 h-full text-xs break-all line-clamp-[7]">
             {content}
           </p>
         )}
