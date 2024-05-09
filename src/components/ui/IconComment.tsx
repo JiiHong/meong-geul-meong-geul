@@ -1,5 +1,7 @@
 import { LiaCommentDotsSolid } from 'react-icons/lia';
 
-export default function IconComment() {
-  return <LiaCommentDotsSolid className="text-lg" />;
+type Props = { className: string };
+
+export default function IconComment({ className }: Props) {
+  return <LiaCommentDotsSolid className={`${className}`} />;
 }

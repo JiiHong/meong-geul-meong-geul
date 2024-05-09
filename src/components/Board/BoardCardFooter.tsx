@@ -18,12 +18,12 @@ export default function BoardCardFooter({
   return (
     <div className="flex items-center gap-3 px-2">
       <div className="flex items-center gap-0.5">
-        <IconThumbsup className="text-lg" />
-        <span className="text-xs">{recommendCount}</span>
+        <IconThumbsup className="text-sky-800" />
+        <span className="text-xs  text-sky-800">{recommendCount}</span>
       </div>
       <div className="flex items-center gap-0.5">
-        <IconComment />
-        <span className="text-xs">{commentCount}</span>
+        <IconComment className="text-lg text-orange-600" />
+        <span className="text-xs text-orange-600">{commentCount}</span>
       </div>
     </div>
   );
