@@ -4,7 +4,7 @@ import PopularPostCard from '@/components/Board/PopularPostCard';
 type Props = { posts: Board[]; category: BoardCategory };
 
 export default function PopularPosts({ posts, category }: Props) {
-  const popularPosts = posts
+  const popularPosts = [...posts]
     .sort((a, b) => b.recommendCount - a.recommendCount)
     .slice(0, 5);
 
