@@ -1,3 +1,11 @@
+import Board from '@/components/Board/Board';
+import BoardTitle from '@/components/Board/BoardTitle';
+
 export default function InfoBoardPage() {
-  return <div>정보게시판</div>;
+  return (
+    <main>
+      <BoardTitle text="정보게시판" />
+      <Board />
+    </main>
+  );
 }
