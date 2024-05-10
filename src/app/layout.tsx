@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${inter.className} bg-gray-100 py-5`}>
+      <body className={`${inter.className} p-5 md:px-0 bg-gray-100`}>
         <div className="w-full max-w-5xl mx-auto p-8 bg-gray-50 rounded-4xl lg:p-4">
           <ReactQueryProvider>
             <UserContextProvider>
