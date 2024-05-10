@@ -9,7 +9,7 @@ export default function PopularPostCard({ post, category }: Props) {
     post;
 
   return (
-    <li className="w-60 h-32 rounded-2xl shadow-base bg-orange-gradient flex-shrink-0">
+    <li className="w-56 md:w-44 h-32 rounded-2xl shadow-base bg-orange-gradient flex-shrink-0">
       <Link
         href={`${category}/${id}`}
         className="flex flex-col w-full h-full p-4"
