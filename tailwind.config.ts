@@ -36,8 +36,8 @@ const config: Config = {
         base: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
       },
       backgroundImage: {
-        'pofile-border':
-          'linear-gradient(133.91deg, #FFCE4F 8.49%, #FFC175 49.01%, #6788FF 92.03%);',
+        'orange-gradient':
+          'linear-gradient(177.92deg, #FFF3E6 1.7%, #FFFEF9 98.25%)',
       },
     },
   },

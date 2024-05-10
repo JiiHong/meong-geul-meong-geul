@@ -4,23 +4,27 @@ import {
   HydrationBoundary,
 } from '@tanstack/react-query';
 import { headers } from 'next/headers';
-import WriteButton from '@/components/Board/WriteButton';
+import { BoardCategory } from '@/types/board';
 import { fetchPosts } from '@/service/firebase/firebase-firestore';
 import Posts from '@/components/Board/Posts';
+import PopularPosts from '@/components/Board/PopularPosts';
+import WriteButton from '@/components/Board/WriteButton';
 
 export default async function Board() {
-  const headersList = headers();
-  const path = headersList.get('x-pathname') || '';
-  const category = path.split('/')[2];
   const queryClient = new QueryClient();
 
-  await queryClient.fetchQuery({
+  const headersList = headers();
+  const path = headersList.get('x-pathname') || '';
+  const category = path.split('/')[2] as BoardCategory;
+
+  const posts = await queryClient.fetchQuery({
     queryKey: ['board', category],
     queryFn: () => fetchPosts(category),
   });
 
   return (
     <section>
+      <PopularPosts posts={posts} category={category} />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Posts />
       </HydrationBoundary>
