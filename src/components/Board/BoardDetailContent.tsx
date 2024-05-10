@@ -39,7 +39,7 @@ export default function BoardDetailContent({ postId, category }: Props) {
 
   return (
     <section className="flex flex-col items-center p-8 rounded-3xl bg-white">
-      <div className="w-4/5">
+      <div className="w-11/12">
         <div className="flex justify-between items-center">
           <h1 className="mb-4 text-4xl font-semibold">{title}</h1>
           <div className="relative">
