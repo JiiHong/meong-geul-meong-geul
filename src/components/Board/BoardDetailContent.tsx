@@ -9,6 +9,7 @@ import RecommendButton from './RecommendButton';
 import usePost from '@/hooks/usePost';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import BoardDetailDropdown from './BoardDetailDropdown';
+import { useUserContext } from '@/context/UserContext';
 
 type Props = {
   postId: string;
@@ -23,10 +24,10 @@ export default function BoardDetailContent({ postId, category }: Props) {
 
   if (!post) return <></>;
 
-  const handleClick = () => setIsActive((prev) => !prev);
-
+  const { user } = useUserContext();
   const {
     id,
+    uid,
     title,
     name,
     content,
@@ -37,16 +38,22 @@ export default function BoardDetailContent({ postId, category }: Props) {
     contentImage,
   } = post;
 
+  const handleClick = () => setIsActive((prev) => !prev);
+
   return (
     <section className="flex flex-col items-center p-8 rounded-3xl bg-white">
       <div className="w-11/12">
         <div className="flex justify-between items-center">
           <h1 className="mb-4 text-4xl font-semibold">{title}</h1>
           <div className="relative">
-            <button onClick={handleClick}>
-              <HiDotsHorizontal className="text-2xl text-gray-700" />
-            </button>
-            <BoardDetailDropdown isActive={isActive} />
+            {user && user.uid === uid && (
+              <>
+                <button onClick={handleClick}>
+                  <HiDotsHorizontal className="text-2xl text-gray-700" />
+                </button>
+                <BoardDetailDropdown isActive={isActive} />
+              </>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-4 pb-3 border-b">
