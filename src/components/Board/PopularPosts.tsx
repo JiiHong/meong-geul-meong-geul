@@ -1,12 +1,19 @@
+'use client';
+
 import { Board, BoardCategory } from '@/types/board';
 import PopularPostCard from '@/components/Board/PopularPostCard';
+import usePosts from '@/hooks/usePosts';
 
 type Props = { posts: Board[]; category: BoardCategory };
 
-export default function PopularPosts({ posts, category }: Props) {
-  const popularPosts = [...posts]
-    .sort((a, b) => b.recommendCount - a.recommendCount)
-    .slice(0, 5);
+export default function PopularPosts({ category }: Props) {
+  const {
+    postsQuery: { data: posts },
+  } = usePosts(category);
+
+  const popularPosts = posts
+    ? [...posts].sort((a, b) => b.recommendCount - a.recommendCount).slice(0, 5)
+    : [];
 
   return (
     <section className="mt-4">
