@@ -39,7 +39,11 @@ export default function Comment({
 
   if (filterdComments.length === 0) return;
 
-  const handleDeleteClick = (id: string) => deleteComment.mutate({ id });
+  const handleDeleteClick = (id: string) => {
+    const isDelete = confirm('댓글을 삭제하시겠습니까?');
+    if (isDelete) return deleteComment.mutate({ id });
+    return;
+  };
 
   return (
     <>
