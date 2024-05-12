@@ -20,6 +20,7 @@ export default function BoardDetailDropdown({ isActive, category, id }: Props) {
       <li className="text-sm w-full">
         <button
           onClick={handleClick}
+          disabled={deletePost.isPending}
           className="block w-full py-1 hover:bg-gray-300"
         >
           삭제
