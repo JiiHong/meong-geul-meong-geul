@@ -3,6 +3,7 @@ import { BoardCategory } from '@/types/board';
 import { Comment } from '@/types/comment';
 import {
   fetchComments,
+  increaseCommentCount,
   deleteComment as removeComment,
   uploadComment as sendComment,
 } from '@/service/firebase/firebase-firestore';
@@ -24,16 +25,22 @@ export default function useComments(postId: string, category: BoardCategory) {
 
   const uploadComment = useMutation({
     mutationFn: ({ postId, id, category, newComment }: MutationType) =>
-      sendComment(postId, id, category, newComment),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['comment', postId] }),
+      sendComment(postId, id, category, newComment).then(() =>
+        increaseCommentCount(postId, category),
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comment', postId] });
+      queryClient.invalidateQueries({ queryKey: ['board', category] });
+    },
   });
 
   const deleteComment = useMutation({
     mutationFn: ({ id }: Pick<MutationType, 'id'>) =>
       removeComment(postId, id, category),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['comment', postId] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comment', postId] });
+      queryClient.invalidateQueries({ queryKey: ['board', category, postId] });
+    },
   });
 
   return { commentQuery, uploadComment, deleteComment };

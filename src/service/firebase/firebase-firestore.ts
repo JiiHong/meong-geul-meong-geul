@@ -10,6 +10,7 @@ import {
   deleteDoc,
   updateDoc,
   arrayUnion,
+  increment,
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
@@ -136,6 +137,17 @@ export async function uploadComment(
     doc(db, `${category}Boards`, postId, 'comments', commentId),
     comment,
   );
+}
+
+export async function increaseCommentCount(
+  postId: string,
+  category: BoardCategory,
+) {
+  const ref = doc(db, `${category}Boards`, postId);
+
+  await updateDoc(ref, {
+    commentCount: increment(1),
+  });
 }
 
 export async function fetchComments(postId: string, category: BoardCategory) {

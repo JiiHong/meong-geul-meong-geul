@@ -21,7 +21,7 @@ export default function Menu({ onClick, className }: Props) {
     <ul className={className.ul}>
       {navbarList.map(({ title, path }) => (
         <li
-          key={crypto.randomUUID()}
+          key={title}
           className={`text-lg font-bold transition-all hover:-translate-y-1 hover:text-gray-700 ${className.li} ${path === pathname ? 'text-gray-700' : 'text-gray-400'}`}
         >
           <Link href={path} className="px-4 py-3" onClick={onClick}>

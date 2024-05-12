@@ -21,6 +21,7 @@ export default function BoardCard({ board, category }: Props) {
     contentImage,
     userImage,
     recommendCount,
+    commentCount,
     viewCount,
     createdAt,
   } = board;
@@ -45,9 +46,8 @@ export default function BoardCard({ board, category }: Props) {
           contentImage={contentImage}
         />
         <BoardCardFooter
-          category={category}
-          id={id}
           recommendCount={recommendCount}
+          commentCount={commentCount}
           viewCount={viewCount}
         />
       </Link>
