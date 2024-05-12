@@ -1,12 +1,29 @@
-type Props = { isActive: boolean };
+import { BoardCategory } from '@/types/board';
+import usePost from '@/hooks/usePost';
+import { useRouter } from 'next/navigation';
 
-export default function BoardDetailDropdown({ isActive }: Props) {
+type Props = { isActive: boolean; category: BoardCategory; id: string };
+
+export default function BoardDetailDropdown({ isActive, category, id }: Props) {
+  const router = useRouter();
+  const { deletePost } = usePost(category, id);
+
+  const handleClick = () =>
+    deletePost.mutate(undefined, {
+      onSuccess: () => router.replace(`/board/${category}`),
+    });
+
   return (
     <ul
       className={`absolute top-1/2 left-1/2 -translate-x-1/2 w-20 py-2 mt-2 border rounded-md shadow-md bg-white ${isActive ? 'flex flex-col items-center gap-2' : 'hidden'}`}
     >
       <li className="text-sm w-full">
-        <button className="block w-full py-1 hover:bg-gray-300">삭제</button>
+        <button
+          onClick={handleClick}
+          className="block w-full py-1 hover:bg-gray-300"
+        >
+          삭제
+        </button>
       </li>
     </ul>
   );

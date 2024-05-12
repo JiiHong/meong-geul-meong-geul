@@ -51,7 +51,11 @@ export default function BoardDetailContent({ postId, category }: Props) {
                 <button onClick={handleClick}>
                   <HiDotsHorizontal className="text-2xl text-gray-700" />
                 </button>
-                <BoardDetailDropdown isActive={isActive} />
+                <BoardDetailDropdown
+                  isActive={isActive}
+                  category={category}
+                  id={id}
+                />
               </>
             )}
           </div>

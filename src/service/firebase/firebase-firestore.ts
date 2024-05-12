@@ -78,6 +78,10 @@ export async function fetchPost(category: BoardCategory, id: string) {
   throw new Error('존재하지 않는 글입니다.');
 }
 
+export async function deletePost(category: BoardCategory, id: string) {
+  await deleteDoc(doc(db, `${category}Boards`, id));
+}
+
 export async function fetchRecommendPostId(id: string, postId: string) {
   const docRef = doc(db, 'users', id, 'recommendPost', postId);
   const docSnap = await getDoc(docRef);
