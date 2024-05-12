@@ -51,6 +51,7 @@ export default function SignupModal() {
         name,
         createdAt: createTime(),
         recommendPosts: [],
+        commentPosts: [],
       };
       sendUser(uid, newUser) //
         .then(() => {

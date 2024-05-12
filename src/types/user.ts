@@ -4,5 +4,6 @@ export type User = {
   name: string;
   createdAt: string;
   recommendPosts: string[];
+  commentPosts: string[];
   profileImage?: string;
 };

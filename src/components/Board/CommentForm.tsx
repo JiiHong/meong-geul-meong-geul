@@ -53,7 +53,7 @@ export default function CommentForm({
       : comment;
 
     uploadComment.mutate(
-      { postId, id, category, newComment },
+      { uid, postId, id, category, newComment },
       {
         onSuccess: () => {
           setContent('');

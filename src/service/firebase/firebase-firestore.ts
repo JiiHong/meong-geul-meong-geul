@@ -142,6 +142,7 @@ export async function increaseViewCount(
 }
 
 export async function uploadComment(
+  uid: string,
   postId: string,
   commentId: string,
   category: BoardCategory,
@@ -150,7 +151,12 @@ export async function uploadComment(
   return setDoc(
     doc(db, `${category}Boards`, postId, 'comments', commentId),
     comment,
-  );
+  ).then(() => uploadCommentPostId(uid, postId));
+}
+
+export async function uploadCommentPostId(uid: string, postId: string) {
+  const ref = doc(db, 'users', uid);
+  return updateDoc(ref, { commentPosts: arrayUnion(postId) });
 }
 
 export async function increaseCommentCount(

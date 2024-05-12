@@ -9,6 +9,7 @@ import {
 } from '@/service/firebase/firebase-firestore';
 
 type MutationType = {
+  uid: string;
   postId: string;
   id: string;
   category: BoardCategory;
@@ -24,8 +25,8 @@ export default function useComments(postId: string, category: BoardCategory) {
   });
 
   const uploadComment = useMutation({
-    mutationFn: ({ postId, id, category, newComment }: MutationType) =>
-      sendComment(postId, id, category, newComment).then(() =>
+    mutationFn: ({ uid, postId, id, category, newComment }: MutationType) =>
+      sendComment(uid, postId, id, category, newComment).then(() =>
         increaseCommentCount(postId, category),
       ),
     onSuccess: () => {
