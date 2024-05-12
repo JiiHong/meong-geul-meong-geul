@@ -55,7 +55,10 @@ export default function Comment({
                 </span>
                 {user?.uid === uid &&
                   !comments.find((comment) => comment.replyId === id) && (
-                    <button onClick={() => handleDeleteClick(id)}>
+                    <button
+                      onClick={() => handleDeleteClick(id)}
+                      className="p-1 rounded-full hover:bg-gray-200"
+                    >
                       <IconClose />
                     </button>
                   )}
