@@ -44,7 +44,7 @@ export default function SignupModal() {
       }
 
       const newUser = { id, uid, name, createdAt: Date.now() };
-      sendUser(id, newUser) //
+      sendUser(uid, newUser) //
         .then(() => {
           setCookie(token);
           setUser(newUser);

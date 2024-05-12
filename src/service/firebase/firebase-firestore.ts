@@ -41,8 +41,8 @@ export async function fetchUserFromName(name: string) {
   return users.find((user) => user.name === name);
 }
 
-export async function sendUser(id: string, user: User) {
-  return setDoc(doc(db, 'users', id), user);
+export async function sendUser(uid: string, user: User) {
+  return setDoc(doc(db, 'users', uid), user);
 }
 
 export async function uploadPost(
