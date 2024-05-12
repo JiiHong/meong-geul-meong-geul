@@ -23,6 +23,7 @@ export default function CommentForm({
 }: Props) {
   const { user } = useUserContext();
   const [content, setContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { uploadComment } = useComments(postId, category);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -31,6 +32,11 @@ export default function CommentForm({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user) return alert('로그인이 필요한 서비스입니다.');
+    if (content.trim().length < 1) {
+      setContent('');
+      return alert('내용을 입력해주세요.');
+    }
+    setIsLoading((prev) => !prev);
     const id = uuid();
     const { name, uid } = user;
     const comment: Comment = {
@@ -49,7 +55,10 @@ export default function CommentForm({
     uploadComment.mutate(
       { postId, id, category, newComment },
       {
-        onSuccess: () => setContent(''),
+        onSuccess: () => {
+          setContent('');
+          setIsLoading((prev) => !prev);
+        },
       },
     );
   };
@@ -59,11 +68,15 @@ export default function CommentForm({
       <input
         type="text"
         value={content}
+        min={1}
         placeholder="댓글을 입력해주세요."
         onChange={handleChange}
         className="px-4 py-2 grow border rounded-l-md outline-none"
       />
-      <button className="px-4 py-2 text-gray-50 rounded-r-md bg-gray-600">
+      <button
+        disabled={isLoading}
+        className="px-4 py-2 text-gray-50 rounded-r-md bg-gray-600"
+      >
         등록
       </button>
     </form>
