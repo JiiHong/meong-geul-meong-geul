@@ -88,19 +88,22 @@ export async function deletePost(category: BoardCategory, postId: string) {
 
   const users = await fetchUsers();
 
-  removeRecommendPostId(users, postId);
+  removeRecommendOrCommentPostId(users, postId, 'recommendPosts');
+  removeRecommendOrCommentPostId(users, postId, 'commentPosts');
 }
 
-async function removeRecommendPostId(users: User[], postId: string) {
-  const filteredUsers = users.filter((user) =>
-    user.recommendPosts.includes(postId),
-  );
+async function removeRecommendOrCommentPostId(
+  users: User[],
+  postId: string,
+  key: 'recommendPosts' | 'commentPosts',
+) {
+  const filteredUsers = users.filter((user) => user[key].includes(postId));
 
   if (filteredUsers.length > 0) {
     users.forEach(async (user) => {
       const ref = doc(db, 'users', user.uid);
       await updateDoc(ref, {
-        recommendPosts: user.recommendPosts.filter((post) => post !== postId),
+        [key]: user[key].filter((post) => post !== postId),
       });
     });
   }
