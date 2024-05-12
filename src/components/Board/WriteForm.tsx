@@ -104,7 +104,7 @@ export default function WriteForm({ category }: Props) {
         className="px-4 py-2 text-lg border outline-none rounded-lg md:px-2 md:py-1 md:text-base"
       />
       <CustomFileInput onChange={handleChange} file={file} />
-      <WriteFormButton />
+      <WriteFormButton disabled={uploadPost.isPending} />
     </form>
   );
 }

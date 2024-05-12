@@ -1,6 +1,8 @@
 import { useRouter } from 'next/navigation';
 
-export default function WriteFormButton() {
+type Props = { disabled: boolean };
+
+export default function WriteFormButton({ disabled }: Props) {
   const router = useRouter();
 
   const handleCancelClick = () => router.back();
@@ -14,7 +16,10 @@ export default function WriteFormButton() {
       >
         취소
       </button>
-      <button className="text-white border bg-amber-500 hover:brightness-110">
+      <button
+        disabled={disabled}
+        className="text-white border bg-amber-500 hover:brightness-110"
+      >
         등록
       </button>
     </div>
