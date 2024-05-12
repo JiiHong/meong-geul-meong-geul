@@ -75,7 +75,7 @@ export default function CommentForm({
       />
       <button
         disabled={isLoading}
-        className="px-4 py-2 text-gray-50 rounded-r-md bg-gray-600"
+        className="px-4 py-2 text-gray-50 rounded-r-md bg-gray-600 hover:brightness-110"
       >
         등록
       </button>
