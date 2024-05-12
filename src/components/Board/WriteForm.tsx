@@ -21,7 +21,7 @@ type Props = {
 };
 
 export default function WriteForm({ category }: Props) {
-  const [board, setBoard] = useState<WriteFormState>(DEFAULT_DATA);
+  const [post, setPost] = useState<WriteFormState>(DEFAULT_DATA);
   const [file, setFile] = useState<File | null>(null);
   const { user } = useUserContext();
   const router = useRouter();
@@ -44,17 +44,25 @@ export default function WriteForm({ category }: Props) {
     const { name, value } = e.target;
     const { files } = e.target as HTMLInputElement;
     if (name === 'file') return setFile(files && files[0]);
-    setBoard({ ...board, [name]: value });
+    setPost({ ...post, [name]: value });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user) return;
+    if (post.title.trim().length < 1) {
+      setPost((prev) => ({ ...prev, title: '' }));
+      return alert('제목을 입력해주세요.');
+    }
+    if (post.content.trim().length < 1) {
+      setPost((prev) => ({ ...prev, content: '' }));
+      return alert('내용을 입력해주세요.');
+    }
 
     const id = uuid();
     const { uid, name } = user;
     const newPost = {
-      ...board,
+      ...post,
       id,
       uid,
       name,
@@ -79,7 +87,7 @@ export default function WriteForm({ category }: Props) {
       <input
         type="text"
         name="title"
-        value={board.title}
+        value={post.title}
         maxLength={29}
         required
         placeholder="제목"
@@ -89,7 +97,7 @@ export default function WriteForm({ category }: Props) {
       <textarea
         name="content"
         rows={12}
-        value={board.content}
+        value={post.content}
         required
         placeholder="내용"
         onChange={handleChange}
