@@ -33,7 +33,7 @@ export default function RecommendButton({
       .then((id) => {
         if (id) return alert('이미 추천한 글입니다.');
         increaseRecommendCount.mutate(undefined, {
-          onSuccess: () => uploadRecommendPostId(user.id, postId),
+          onSuccess: () => uploadRecommendPostId(user.uid, postId),
         });
       });
   };

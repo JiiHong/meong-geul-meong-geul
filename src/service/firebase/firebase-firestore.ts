@@ -9,6 +9,7 @@ import {
   getDoc,
   deleteDoc,
   updateDoc,
+  arrayUnion,
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
@@ -93,8 +94,9 @@ export async function fetchRecommendPostId(id: string, postId: string) {
   return null;
 }
 
-export async function uploadRecommendPostId(id: string, postId: string) {
-  return setDoc(doc(db, 'users', id, 'recommendPost', postId), { postId });
+export async function uploadRecommendPostId(uid: string, postId: string) {
+  const ref = doc(db, 'users', uid);
+  return updateDoc(ref, { recommendPost: arrayUnion(postId) });
 }
 
 export async function increaseRecommendCount(
