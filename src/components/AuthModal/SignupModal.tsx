@@ -10,6 +10,7 @@ import {
   fetchUserFromName,
   sendUser,
 } from '@/service/firebase/firebase-firestore';
+import { User } from '@/types/user';
 import { createTime } from '@/utils/day';
 
 type Params = { slug: string };
@@ -44,7 +45,13 @@ export default function SignupModal() {
         return;
       }
 
-      const newUser = { id, uid, name, createdAt: createTime() };
+      const newUser: User = {
+        id,
+        uid,
+        name,
+        createdAt: createTime(),
+        recommendPosts: [],
+      };
       sendUser(uid, newUser) //
         .then(() => {
           setCookie(token);
