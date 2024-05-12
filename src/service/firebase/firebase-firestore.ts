@@ -30,10 +30,13 @@ export async function fetchUsers(): Promise<User[]> {
 }
 
 export async function fetchUserFromUid(uid: string) {
-  const users = await fetchUsers();
-  const user = users.find((user) => user.uid === uid);
+  const docRef = doc(db, 'users', uid);
+  const docSnap = await getDoc(docRef);
 
-  return user ? user : null;
+  if (docSnap.exists()) {
+    return docSnap.data() as User;
+  }
+  return null;
 }
 
 export async function fetchUserFromName(name: string) {
