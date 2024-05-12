@@ -83,8 +83,22 @@ export async function fetchPost(category: BoardCategory, id: string) {
   throw new Error('존재하지 않는 글입니다.');
 }
 
-export async function deletePost(category: BoardCategory, id: string) {
-  await deleteDoc(doc(db, `${category}Boards`, id));
+export async function deletePost(category: BoardCategory, postId: string) {
+  await deleteDoc(doc(db, `${category}Boards`, postId));
+
+  const users = await fetchUsers();
+  const filteredUsers = users.filter((user) =>
+    user.recommendPosts.includes(postId),
+  );
+
+  if (filteredUsers.length > 0) {
+    filteredUsers.forEach(async (user) => {
+      const ref = doc(db, 'users', user.uid);
+      await updateDoc(ref, {
+        recommendPosts: user.recommendPosts.filter((post) => post !== postId),
+      });
+    });
+  }
 }
 
 export async function fetchRecommendPostsId(uid: string) {
