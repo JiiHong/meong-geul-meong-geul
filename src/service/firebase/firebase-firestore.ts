@@ -87,12 +87,17 @@ export async function deletePost(category: BoardCategory, postId: string) {
   await deleteDoc(doc(db, `${category}Boards`, postId));
 
   const users = await fetchUsers();
+
+  removeRecommendPostId(users, postId);
+}
+
+async function removeRecommendPostId(users: User[], postId: string) {
   const filteredUsers = users.filter((user) =>
     user.recommendPosts.includes(postId),
   );
 
   if (filteredUsers.length > 0) {
-    filteredUsers.forEach(async (user) => {
+    users.forEach(async (user) => {
       const ref = doc(db, 'users', user.uid);
       await updateDoc(ref, {
         recommendPosts: user.recommendPosts.filter((post) => post !== postId),
