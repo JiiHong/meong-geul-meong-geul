@@ -99,7 +99,7 @@ export async function fetchRecommendPostId(id: string, postId: string) {
 
 export async function uploadRecommendPostId(uid: string, postId: string) {
   const ref = doc(db, 'users', uid);
-  return updateDoc(ref, { recommendPost: arrayUnion(postId) });
+  return updateDoc(ref, { recommendPosts: arrayUnion(postId) });
 }
 
 export async function increaseRecommendCount(
