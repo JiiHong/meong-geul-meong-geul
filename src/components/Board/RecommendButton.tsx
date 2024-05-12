@@ -5,7 +5,7 @@ import useRecommendCount from '@/hooks/useRecommendCount';
 import { BoardCategory } from '@/types/board';
 import IconThumbsup from '../ui/IconThumbsup';
 import {
-  fetchRecommendPostId,
+  fetchRecommendPostsId,
   uploadRecommendPostId,
 } from '@/service/firebase/firebase-firestore';
 
@@ -29,9 +29,10 @@ export default function RecommendButton({
 
   const handleClick = () => {
     if (!user) return alert('로그인이 필요한 서비스입니다.');
-    fetchRecommendPostId(user.id, postId) //
-      .then((id) => {
-        if (id) return alert('이미 추천한 글입니다.');
+    fetchRecommendPostsId(user.uid) //
+      .then((ids) => {
+        const isExist = ids.find((id) => id === postId);
+        if (isExist) return alert('이미 추천한 글입니다.');
         increaseRecommendCount.mutate(undefined, {
           onSuccess: () => uploadRecommendPostId(user.uid, postId),
         });

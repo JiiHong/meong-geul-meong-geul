@@ -86,15 +86,15 @@ export async function deletePost(category: BoardCategory, id: string) {
   await deleteDoc(doc(db, `${category}Boards`, id));
 }
 
-export async function fetchRecommendPostId(id: string, postId: string) {
-  const docRef = doc(db, 'users', id, 'recommendPost', postId);
+export async function fetchRecommendPostsId(uid: string) {
+  const docRef = doc(db, 'users', uid);
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    const { postId: refPostId } = docSnap.data() as { postId: string };
-    return refPostId;
+    const { recommendPosts } = docSnap.data() as User;
+    return recommendPosts;
   }
-  return null;
+  return [];
 }
 
 export async function uploadRecommendPostId(uid: string, postId: string) {
