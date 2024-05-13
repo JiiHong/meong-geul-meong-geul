@@ -80,7 +80,7 @@ export async function fetchPost(category: BoardCategory, id: string) {
     const post = docSnap.data() as Board;
     return post;
   }
-  throw new Error('존재하지 않는 글입니다.');
+  return null;
 }
 
 export async function deletePost(category: BoardCategory, postId: string) {

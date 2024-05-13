@@ -4,6 +4,7 @@ import {
   QueryClient,
   dehydrate,
 } from '@tanstack/react-query';
+import { notFound } from 'next/navigation';
 import { BoardCategory } from '@/types/board';
 import BoardDetailContent from '@/components/Board/BoardDetailContent';
 import BoardDetailComments from '@/components/Board/BoardDetailComments';
@@ -21,6 +22,9 @@ export default async function BoardDetail() {
     queryKey: ['board', category, id],
     queryFn: () => fetchPost(category, id),
   });
+
+  if (!post) return notFound();
+
   return (
     <>
       {post && (

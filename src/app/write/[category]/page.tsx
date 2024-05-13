@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import WriteForm from '@/components/Board/WriteForm';
 import { BoardCategory } from '@/types/board';
 
@@ -7,7 +8,11 @@ type Props = {
   };
 };
 
+const categorys = ['free', 'info', 'question'];
+
 export default function WritePage({ params: { category } }: Props) {
+  if (!categorys.includes(category)) return notFound();
+
   return (
     <section>
       <WriteForm category={category} />
@@ -16,6 +21,5 @@ export default function WritePage({ params: { category } }: Props) {
 }
 
 export function generateStaticParams() {
-  const categorys = ['free', 'info', 'question'];
   return categorys.map((category) => ({ category }));
 }
