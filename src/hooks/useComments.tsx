@@ -3,7 +3,7 @@ import { BoardCategory } from '@/types/board';
 import { Comment } from '@/types/comment';
 import {
   fetchComments,
-  increaseCommentCount,
+  updateCommentCount,
   deleteComment as removeComment,
   uploadComment as sendComment,
 } from '@/service/firebase/firebase-firestore';
@@ -27,7 +27,7 @@ export default function useComments(postId: string, category: BoardCategory) {
   const uploadComment = useMutation({
     mutationFn: ({ uid, postId, id, category, newComment }: MutationType) =>
       sendComment(uid, postId, id, category, newComment).then(() =>
-        increaseCommentCount(postId, category),
+        updateCommentCount(postId, category, 1),
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comment', postId] });

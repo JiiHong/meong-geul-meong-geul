@@ -167,14 +167,15 @@ export async function uploadCommentPostId(uid: string, postId: string) {
   return updateDoc(ref, { commentPosts: arrayUnion(postId) });
 }
 
-export async function increaseCommentCount(
+export async function updateCommentCount(
   postId: string,
   category: BoardCategory,
+  count: number,
 ) {
   const ref = doc(db, `${category}Boards`, postId);
 
   await updateDoc(ref, {
-    commentCount: increment(1),
+    commentCount: increment(count),
   });
 }
 
