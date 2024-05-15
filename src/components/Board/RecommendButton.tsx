@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useUserContext } from '@/context/UserContext';
 import useRecommendCount from '@/hooks/useRecommendCount';
 import { BoardCategory } from '@/types/board';
@@ -20,6 +21,7 @@ export default function RecommendButton({
   recommendCount,
   category,
 }: Props) {
+  const router = useRouter();
   const { user } = useUserContext();
   const { increaseRecommendCount } = useRecommendCount({
     postId,
@@ -28,7 +30,7 @@ export default function RecommendButton({
   });
 
   const handleClick = () => {
-    if (!user) return alert('로그인이 필요한 서비스입니다.');
+    if (!user) return router.push('/login');
     fetchRecommendPostsId(user.uid) //
       .then((ids) => {
         const isExist = ids.find((id) => id === postId);
