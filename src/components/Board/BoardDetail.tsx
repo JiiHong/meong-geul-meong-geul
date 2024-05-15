@@ -27,14 +27,10 @@ export default async function BoardDetail() {
 
   return (
     <>
-      {post && (
-        <>
-          <HydrationBoundary state={dehydrate(queryClient)}>
-            <BoardDetailContent postId={id} category={category} />
-          </HydrationBoundary>
-          <BoardDetailComments post={post} category={category} />
-        </>
-      )}
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <BoardDetailContent postId={id} category={category} />
+      </HydrationBoundary>
+      <BoardDetailComments post={post} category={category} />
     </>
   );
 }
