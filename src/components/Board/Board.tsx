@@ -26,7 +26,7 @@ export default async function Board() {
     <section>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <PopularPosts posts={posts} category={category} />
-        <Posts />
+        <Posts category={category} />
       </HydrationBoundary>
       <WriteButton />
     </section>
