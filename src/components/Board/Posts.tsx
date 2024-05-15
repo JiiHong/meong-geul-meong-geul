@@ -1,21 +1,13 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import usePosts from '@/hooks/usePosts';
 import BoardCard from '@/components/Board/BoardCard';
 import { BoardCategory } from '@/types/board';
-import dynamic from 'next/dynamic';
-import SkeletonPagination from '../ui/SkeletonPagination';
+import Pagination from './Pagination';
 
-const Pagination = dynamic(() => import('./Pagination'), {
-  ssr: false,
-  loading: () => <SkeletonPagination />,
-});
+type Props = { category: BoardCategory; page: string | undefined };
 
-type Props = { category: BoardCategory };
-
-export default function Posts({ category }: Props) {
-  const page = useSearchParams().get('page');
+export default function Posts({ category, page }: Props) {
   const currentPage = page && parseInt(page) > 0 ? parseInt(page) : 1;
   const itemCountPerPage = 12;
   const pageCount = 5;

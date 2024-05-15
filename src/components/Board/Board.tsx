@@ -10,7 +10,9 @@ import Posts from '@/components/Board/Posts';
 import PopularPosts from '@/components/Board/PopularPosts';
 import WriteButton from '@/components/Board/WriteButton';
 
-export default async function Board() {
+type Props = { page: string | undefined };
+
+export default async function Board({ page }: Props) {
   const queryClient = new QueryClient();
 
   const headersList = headers();
@@ -26,7 +28,7 @@ export default async function Board() {
     <section>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <PopularPosts posts={posts} category={category} />
-        <Posts category={category} />
+        <Posts category={category} page={page} />
       </HydrationBoundary>
       <WriteButton />
     </section>
