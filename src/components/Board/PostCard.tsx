@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { Board, BoardCategory } from '@/types/board';
-import BoardCardHeader from './BoardCardHeader';
-import BoardCardContent from './BoardCardContent';
-import BoardCardFooter from './BoardCardFooter';
+import PostCardHeader from './PostCardHeader';
+import PostCardContent from './PostCardContent';
+import PostCardFooter from './PostCardFooter';
 import { increaseViewCount } from '@/service/firebase/firebase-firestore';
 
 type Props = {
@@ -34,18 +34,18 @@ export default function PostCard({ post, category }: Props) {
         href={`/board/${category}/${id}`}
         className="flex flex-col w-full h-full py-3"
       >
-        <BoardCardHeader
+        <PostCardHeader
           name={name}
           title={title}
           createdAt={createdAt}
           userImage={userImage}
         />
-        <BoardCardContent
+        <PostCardContent
           title={title}
           content={content}
           contentImage={contentImage}
         />
-        <BoardCardFooter
+        <PostCardFooter
           recommendCount={recommendCount}
           commentCount={commentCount}
           viewCount={viewCount}

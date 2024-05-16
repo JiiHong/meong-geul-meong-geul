@@ -4,7 +4,7 @@ import UserImage from '../ui/UserImage';
 
 type Props = Pick<Board, 'name' | 'title' | 'createdAt' | 'userImage'>;
 
-export default function BoardCardHeader({
+export default function PostCardHeader({
   name,
   title,
   createdAt,

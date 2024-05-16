@@ -3,7 +3,7 @@ import { Board } from '@/types/board';
 
 type Props = Pick<Board, 'title' | 'content' | 'contentImage'>;
 
-export default function BoardCardContent({
+export default function PostCardContent({
   title,
   content,
   contentImage,

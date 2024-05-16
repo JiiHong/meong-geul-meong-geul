@@ -8,7 +8,7 @@ type Props = {
   viewCount: number;
 };
 
-export default function BoardCardFooter({
+export default function PostCardFooter({
   recommendCount,
   commentCount,
   viewCount,
