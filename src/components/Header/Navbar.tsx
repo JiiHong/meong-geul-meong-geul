@@ -1,5 +1,6 @@
 import DesktopMenu from './DesktopMenu';
 import MobileMenu from './MobileMenu';
+import LoginButton from './LoginButton';
 
 type NavbarList = {
   title: string;
@@ -14,9 +15,11 @@ export const navbarList: NavbarList[] = [
 
 export default function Navbar() {
   return (
-    <nav>
+    <nav className="flex gap-4">
       <DesktopMenu />
       <MobileMenu />
+      <LoginButton />
+      {/* {loginState === 'login' && <UserLoginImage />} */}
     </nav>
   );
 }
