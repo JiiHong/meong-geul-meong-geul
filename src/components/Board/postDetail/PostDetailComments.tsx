@@ -1,4 +1,4 @@
-import { Board, BoardCategory } from '@/types/board';
+import { Post, BoardCategory } from '@/types/Post';
 import CommentForm from '../comments/CommentForm';
 import Comments from '../comments/Comments';
 import {
@@ -10,7 +10,7 @@ import { fetchComments } from '@/service/firebase/firebase-firestore';
 import ViewCount from '../ViewCount';
 
 type Props = {
-  post: Board;
+  post: Post;
   category: BoardCategory;
 };
 

@@ -3,7 +3,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuid } from 'uuid';
-import { Board, BoardCategory, WriteFormState } from '@/types/board';
+import { Post, BoardCategory, WriteFormState } from '@/types/Post';
 import CustomFileInput from '../CustomFileInput';
 import WriteFormButton from './WriteFormButton';
 import { useUserContext } from '@/context/UserContext';
@@ -28,11 +28,7 @@ export default function WriteForm({ category }: Props) {
 
   const { uploadPost } = usePosts(category);
 
-  const uploadPostMutate = (
-    id: string,
-    newPost: Board,
-    contentImage?: string,
-  ) =>
+  const uploadPostMutate = (id: string, newPost: Post, contentImage?: string) =>
     uploadPost.mutate(
       { id, newPost, contentImage },
       { onSuccess: () => router.replace(`/board/${category}`) },

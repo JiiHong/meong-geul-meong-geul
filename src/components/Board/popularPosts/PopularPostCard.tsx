@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { Board, BoardCategory } from '@/types/board';
+import { Post, BoardCategory } from '@/types/Post';
 import UserImage from '../../ui/UserImage';
 
-type Props = { post: Board; category: BoardCategory };
+type Props = { post: Post; category: BoardCategory };
 
 export default function PopularPostCard({ post, category }: Props) {
   const { id, name, title, content, userImage, recommendCount, commentCount } =

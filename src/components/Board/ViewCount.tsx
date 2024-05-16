@@ -1,6 +1,6 @@
 'use client';
 
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import useComments from '@/hooks/useComments';
 import IconComment from '@/components/ui/icons/IconComment';
 

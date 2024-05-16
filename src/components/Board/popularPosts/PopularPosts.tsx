@@ -1,10 +1,10 @@
 'use client';
 
-import { Board, BoardCategory } from '@/types/board';
+import { Post, BoardCategory } from '@/types/Post';
 import PopularPostCard from '@/components/Board/popularPosts/PopularPostCard';
 import usePosts from '@/hooks/usePosts';
 
-type Props = { posts: Board[]; category: BoardCategory };
+type Props = { posts: Post[]; category: BoardCategory };
 
 export default function PopularPosts({ category }: Props) {
   const {

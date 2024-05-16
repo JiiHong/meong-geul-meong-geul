@@ -1,4 +1,4 @@
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import usePost from '@/hooks/usePost';
 import { useRouter } from 'next/navigation';
 

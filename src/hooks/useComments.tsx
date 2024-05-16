@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import { Comment } from '@/types/comment';
 import {
   fetchComments,

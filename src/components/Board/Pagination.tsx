@@ -1,4 +1,4 @@
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';

@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuid } from 'uuid';
 import { useUserContext } from '@/context/UserContext';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import { Comment } from '@/types/comment';
 import useComments from '@/hooks/useComments';
 import { createTime } from '@/utils/day';

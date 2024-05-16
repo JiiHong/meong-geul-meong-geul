@@ -4,7 +4,7 @@ import {
   HydrationBoundary,
 } from '@tanstack/react-query';
 import { headers } from 'next/headers';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import { fetchPosts } from '@/service/firebase/firebase-firestore';
 import Posts from '@/components/Board/posts/Posts';
 import PopularPosts from '@/components/Board/popularPosts/PopularPosts';

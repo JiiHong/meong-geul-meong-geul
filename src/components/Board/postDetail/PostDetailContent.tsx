@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import UserImage from '../../ui/UserImage';
 import { formateFullTime } from '@/utils/day';
 import RecommendButton from '../RecommendButton';

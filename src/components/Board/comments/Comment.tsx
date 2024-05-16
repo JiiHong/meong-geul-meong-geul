@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import { Comment as CommentType } from '@/types/comment';
 import { useUserContext } from '@/context/UserContext';
 import { formateFullTime } from '@/utils/day';

@@ -1,14 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { Board, BoardCategory } from '@/types/board';
+import { Post, BoardCategory } from '@/types/Post';
 import PostCardHeader from './PostCardHeader';
 import PostCardContent from './PostCardContent';
 import PostCardFooter from './PostCardFooter';
 import { increaseViewCount } from '@/service/firebase/firebase-firestore';
 
 type Props = {
-  post: Board;
+  post: Post;
   category: BoardCategory;
 };
 

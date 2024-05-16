@@ -5,7 +5,7 @@ import {
   dehydrate,
 } from '@tanstack/react-query';
 import { notFound } from 'next/navigation';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import PostDetailContent from '@/components/Board/postDetail/PostDetailContent';
 import PostDetailComments from '@/components/Board/postDetail/PostDetailComments';
 import { fetchPost } from '@/service/firebase/firebase-firestore';

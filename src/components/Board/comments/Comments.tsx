@@ -2,7 +2,7 @@
 
 import useComments from '@/hooks/useComments';
 import Comment from './Comment';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 
 type Props = {
   postId: string;

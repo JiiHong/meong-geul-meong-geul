@@ -1,4 +1,4 @@
-export type Board = {
+export type Post = {
   id: string;
   uid: string;
   name: string;
@@ -12,6 +12,6 @@ export type Board = {
   contentImage?: string;
 };
 
-export type WriteFormState = Pick<Board, 'title' | 'content'>;
+export type WriteFormState = Pick<Post, 'title' | 'content'>;
 
 export type BoardCategory = 'info' | 'question' | 'free';

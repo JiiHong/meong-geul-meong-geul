@@ -14,7 +14,7 @@ import {
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
-import { Board, BoardCategory } from '@/types/board';
+import { Post, BoardCategory } from '@/types/Post';
 import { Comment } from '@/types/comment';
 
 const db = getFirestore(app);
@@ -52,7 +52,7 @@ export async function sendUser(uid: string, user: User) {
 export async function uploadPost(
   id: string,
   category: BoardCategory,
-  post: Board,
+  post: Post,
 ) {
   return setDoc(doc(db, `${category}Boards`, id), post);
 }
@@ -65,7 +65,7 @@ export async function fetchPosts(category: string) {
   const querySnapshot = await getDocs(q);
   if (!querySnapshot.empty) {
     const docs = querySnapshot.docs;
-    const posts = docs.map((doc) => doc.data() as Board);
+    const posts = docs.map((doc) => doc.data() as Post);
 
     return posts;
   }
@@ -77,7 +77,7 @@ export async function fetchPost(category: BoardCategory, id: string) {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    const post = docSnap.data() as Board;
+    const post = docSnap.data() as Post;
     return post;
   }
   return null;

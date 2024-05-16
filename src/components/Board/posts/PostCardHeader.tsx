@@ -1,8 +1,8 @@
-import { Board } from '@/types/board';
+import { Post } from '@/types/Post';
 import { formateAgo } from '@/utils/day';
 import UserImage from '../../ui/UserImage';
 
-type Props = Pick<Board, 'name' | 'title' | 'createdAt' | 'userImage'>;
+type Props = Pick<Post, 'name' | 'title' | 'createdAt' | 'userImage'>;
 
 export default function PostCardHeader({
   name,

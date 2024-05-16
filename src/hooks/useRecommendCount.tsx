@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { increaseRecommendCount as upRecommendCount } from '@/service/firebase/firebase-firestore';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 
 type Props = {
   postId: string;

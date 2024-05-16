@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useUserContext } from '@/context/UserContext';
 import useRecommendCount from '@/hooks/useRecommendCount';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import IconThumbsup from '../ui/icons/IconThumbsup';
 import {
   fetchRecommendPostsId,

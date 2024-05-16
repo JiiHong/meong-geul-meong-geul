@@ -2,7 +2,7 @@
 
 import usePosts from '@/hooks/usePosts';
 import PostCard from '@/components/Board/posts/PostCard';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import Pagination from '../Pagination';
 
 type Props = { category: BoardCategory; page: string | undefined };

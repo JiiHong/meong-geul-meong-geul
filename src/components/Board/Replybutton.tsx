@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import IconReply from '../ui/icons/IconReply';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 import CommentForm from './comments/CommentForm';
 
 type Props = {

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import WriteForm from '@/components/Board/write/WriteForm';
-import { BoardCategory } from '@/types/board';
+import { BoardCategory } from '@/types/Post';
 
 type Props = {
   params: {

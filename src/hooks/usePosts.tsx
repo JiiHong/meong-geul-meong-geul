@@ -3,11 +3,11 @@ import {
   fetchPosts,
   uploadPost as sendPost,
 } from '@/service/firebase/firebase-firestore';
-import { Board, BoardCategory } from '@/types/board';
+import { Post, BoardCategory } from '@/types/Post';
 
 type MutationType = {
   id: string;
-  newPost: Board;
+  newPost: Post;
   contentImage?: string;
 };
 

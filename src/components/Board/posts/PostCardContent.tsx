@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { Board } from '@/types/board';
+import { Post } from '@/types/Post';
 
-type Props = Pick<Board, 'title' | 'content' | 'contentImage'>;
+type Props = Pick<Post, 'title' | 'content' | 'contentImage'>;
 
 export default function PostCardContent({
   title,
