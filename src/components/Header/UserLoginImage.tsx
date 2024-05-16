@@ -4,8 +4,9 @@ import { useUserContext } from '@/context/UserContext';
 import Image from 'next/image';
 import UserDropdown from './UserDropdown';
 import { useState } from 'react';
+import { defaultUserImage } from '@/constants/image';
 
-export default function UserImage() {
+export default function UserLoginImage() {
   const { user } = useUserContext();
   const [isActive, setIsActive] = useState(false);
 
@@ -15,7 +16,7 @@ export default function UserImage() {
     <div className="relative p-[0.125rem] bg-pofile-border rounded-full">
       {user && (
         <Image
-          src={user.profileImage ?? '/profile.jpg'}
+          src={user.profileImage ?? defaultUserImage}
           alt={user.name}
           width={45}
           height={45}

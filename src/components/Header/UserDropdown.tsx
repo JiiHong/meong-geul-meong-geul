@@ -1,13 +1,15 @@
 'use client';
 
 import { logout } from '@/service/firebase/firebase-auth';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   isActive: boolean;
 };
 
 export default function UserDropdown({ isActive }: Props) {
-  const handleClick = () => logout();
+  const router = useRouter();
+  const handleClick = () => logout().then(() => router.refresh());
 
   return (
     <ul
