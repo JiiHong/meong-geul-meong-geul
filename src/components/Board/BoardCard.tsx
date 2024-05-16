@@ -8,11 +8,11 @@ import BoardCardFooter from './BoardCardFooter';
 import { increaseViewCount } from '@/service/firebase/firebase-firestore';
 
 type Props = {
-  board: Board;
+  post: Board;
   category: BoardCategory;
 };
 
-export default function BoardCard({ board, category }: Props) {
+export default function BoardCard({ post, category }: Props) {
   const {
     id,
     name,
@@ -24,7 +24,7 @@ export default function BoardCard({ board, category }: Props) {
     commentCount,
     viewCount,
     createdAt,
-  } = board;
+  } = post;
 
   const handleClick = () => increaseViewCount(id, category, viewCount);
 

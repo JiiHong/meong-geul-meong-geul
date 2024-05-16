@@ -14,27 +14,27 @@ export default function Posts({ category, page }: Props) {
   const startIndex = currentPage * itemCountPerPage - itemCountPerPage;
 
   const {
-    postsQuery: { data: boards },
+    postsQuery: { data: posts },
   } = usePosts(category);
 
   return (
     <>
-      {boards && (
+      {posts && (
         <>
           <ul className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 py-8">
-            {boards
+            {posts
               .slice(startIndex, startIndex + itemCountPerPage)
-              .map((board) => (
+              .map((post) => (
                 <li
-                  key={board.id}
+                  key={post.id}
                   className="h-64 border shadow-base rounded-2xl bg-white transition-all hover:-translate-y-2"
                 >
-                  <BoardCard board={board} category={category} />
+                  <BoardCard post={post} category={category} />
                 </li>
               ))}
           </ul>
           <Pagination
-            totalItems={boards.length}
+            totalItems={posts.length}
             currentPage={currentPage}
             itemCountPerPage={itemCountPerPage}
             pageCount={pageCount}
