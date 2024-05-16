@@ -7,7 +7,7 @@ import { useUserContext } from '@/context/UserContext';
 import { formateFullTime } from '@/utils/day';
 import useComments from '@/hooks/useComments';
 import UserImage from '../../ui/UserImage';
-import IconClose from '../../ui/IconClose';
+import IconClose from '../../ui/icons/IconClose';
 import Replybutton from '../Replybutton';
 
 const PADDING_BY_LEVEL: { [key: number]: string } = {

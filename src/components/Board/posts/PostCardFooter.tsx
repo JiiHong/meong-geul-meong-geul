@@ -1,6 +1,6 @@
-import IconThumbsup from '../../ui/IconThumbsup';
-import IconComment from '../../ui/IconComment';
-import IconEye from '../../ui/IconEye';
+import IconThumbsup from '../../ui/icons/IconThumbsup';
+import IconComment from '../../ui/icons/IconComment';
+import IconEye from '../../ui/icons/IconEye';
 
 type Props = {
   recommendCount: number;

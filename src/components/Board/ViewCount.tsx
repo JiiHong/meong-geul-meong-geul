@@ -2,7 +2,7 @@
 
 import { BoardCategory } from '@/types/board';
 import useComments from '@/hooks/useComments';
-import IconComment from '@/components/ui/IconComment';
+import IconComment from '@/components/ui/icons/IconComment';
 
 type Props = {
   postId: string;

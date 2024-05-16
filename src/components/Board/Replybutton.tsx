@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import IconReply from '../ui/IconReply';
+import IconReply from '../ui/icons/IconReply';
 import { BoardCategory } from '@/types/board';
 import CommentForm from './comments/CommentForm';
 
