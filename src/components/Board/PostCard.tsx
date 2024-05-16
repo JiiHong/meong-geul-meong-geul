@@ -12,7 +12,7 @@ type Props = {
   category: BoardCategory;
 };
 
-export default function BoardCard({ post, category }: Props) {
+export default function PostCard({ post, category }: Props) {
   const {
     id,
     name,

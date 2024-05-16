@@ -1,7 +1,7 @@
 'use client';
 
 import usePosts from '@/hooks/usePosts';
-import BoardCard from '@/components/Board/BoardCard';
+import PostCard from '@/components/Board/PostCard';
 import { BoardCategory } from '@/types/board';
 import Pagination from './Pagination';
 
@@ -29,7 +29,7 @@ export default function Posts({ category, page }: Props) {
                   key={post.id}
                   className="h-64 border shadow-base rounded-2xl bg-white transition-all hover:-translate-y-2"
                 >
-                  <BoardCard post={post} category={category} />
+                  <PostCard post={post} category={category} />
                 </li>
               ))}
           </ul>
