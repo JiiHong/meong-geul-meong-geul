@@ -6,8 +6,8 @@ import {
 } from '@tanstack/react-query';
 import { notFound } from 'next/navigation';
 import { BoardCategory } from '@/types/board';
-import PostDetailContent from '@/components/Board/PostDetailContent';
-import PostDetailComments from '@/components/Board/PostDetailComments';
+import PostDetailContent from '@/components/Board/postDetail/PostDetailContent';
+import PostDetailComments from '@/components/Board/postDetail/PostDetailComments';
 import { fetchPost } from '@/service/firebase/firebase-firestore';
 
 export default async function PostDetail() {

@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { BoardCategory } from '@/types/board';
-import UserImage from '../ui/UserImage';
+import UserImage from '../../ui/UserImage';
 import { formateFullTime } from '@/utils/day';
-import RecommendButton from './RecommendButton';
+import RecommendButton from '../RecommendButton';
 import usePost from '@/hooks/usePost';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import PostDetailDropdown from './PostDetailDropdown';

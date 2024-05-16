@@ -1,13 +1,13 @@
 import { Board, BoardCategory } from '@/types/board';
-import CommentForm from './CommentForm';
-import Comments from './Comments';
+import CommentForm from '../CommentForm';
+import Comments from '../Comments';
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from '@tanstack/react-query';
 import { fetchComments } from '@/service/firebase/firebase-firestore';
-import ViewCount from './ViewCount';
+import ViewCount from '../ViewCount';
 
 type Props = {
   post: Board;
