@@ -1,7 +1,7 @@
 'use client';
 
 import usePosts from '@/hooks/usePosts';
-import PostCard from '@/components/Board/post/PostCard';
+import PostCard from '@/components/Board/posts/PostCard';
 import { BoardCategory } from '@/types/board';
 import Pagination from '../Pagination';
 
