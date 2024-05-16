@@ -1,6 +1,6 @@
 import { Board, BoardCategory } from '@/types/board';
-import CommentForm from '../CommentForm';
-import Comments from '../Comments';
+import CommentForm from '../comments/CommentForm';
+import Comments from '../comments/Comments';
 import {
   HydrationBoundary,
   QueryClient,

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import IconReply from '../ui/IconReply';
 import { BoardCategory } from '@/types/board';
-import CommentForm from './CommentForm';
+import CommentForm from './comments/CommentForm';
 
 type Props = {
   postId: string;

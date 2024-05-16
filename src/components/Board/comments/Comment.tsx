@@ -6,9 +6,9 @@ import { Comment as CommentType } from '@/types/comment';
 import { useUserContext } from '@/context/UserContext';
 import { formateFullTime } from '@/utils/day';
 import useComments from '@/hooks/useComments';
-import UserImage from '../ui/UserImage';
-import IconClose from '../ui/IconClose';
-import Replybutton from './Replybutton';
+import UserImage from '../../ui/UserImage';
+import IconClose from '../../ui/IconClose';
+import Replybutton from '../Replybutton';
 
 const PADDING_BY_LEVEL: { [key: number]: string } = {
   0: 'pl-0',
