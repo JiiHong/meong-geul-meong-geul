@@ -8,7 +8,7 @@ import { BoardCategory } from '@/types/board';
 import { fetchPosts } from '@/service/firebase/firebase-firestore';
 import Posts from '@/components/Board/post/Posts';
 import PopularPosts from '@/components/Board/PopularPosts';
-import WriteButton from '@/components/Board/WriteButton';
+import WriteButton from '@/components/Board/write/WriteButton';
 
 type Props = { page: string | undefined };
 

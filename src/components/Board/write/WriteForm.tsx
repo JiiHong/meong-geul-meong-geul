@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuid } from 'uuid';
 import { Board, BoardCategory, WriteFormState } from '@/types/board';
-import CustomFileInput from './CustomFileInput';
+import CustomFileInput from '../CustomFileInput';
 import WriteFormButton from './WriteFormButton';
 import { useUserContext } from '@/context/UserContext';
 import { uploadBoardImage } from '@/service/firebase/firebase-storage';

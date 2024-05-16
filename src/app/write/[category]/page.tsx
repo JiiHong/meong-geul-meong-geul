@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import WriteForm from '@/components/Board/WriteForm';
+import WriteForm from '@/components/Board/write/WriteForm';
 import { BoardCategory } from '@/types/board';
 
 type Props = {
