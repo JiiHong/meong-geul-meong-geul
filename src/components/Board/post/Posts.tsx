@@ -1,9 +1,9 @@
 'use client';
 
 import usePosts from '@/hooks/usePosts';
-import PostCard from '@/components/Board/PostCard';
+import PostCard from '@/components/Board/post/PostCard';
 import { BoardCategory } from '@/types/board';
-import Pagination from './Pagination';
+import Pagination from '../Pagination';
 
 type Props = { category: BoardCategory; page: string | undefined };
 
