@@ -8,7 +8,7 @@ import { formateFullTime } from '@/utils/day';
 import RecommendButton from './RecommendButton';
 import usePost from '@/hooks/usePost';
 import { HiDotsHorizontal } from 'react-icons/hi';
-import BoardDetailDropdown from './BoardDetailDropdown';
+import PostDetailDropdown from './PostDetailDropdown';
 import { useUserContext } from '@/context/UserContext';
 
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
   category: BoardCategory;
 };
 
-export default function BoardDetailContent({ postId, category }: Props) {
+export default function PostDetailContent({ postId, category }: Props) {
   const [isActive, setIsActive] = useState(false);
   const {
     postQuery: { data: post },
@@ -51,7 +51,7 @@ export default function BoardDetailContent({ postId, category }: Props) {
                 <button onClick={handleClick}>
                   <HiDotsHorizontal className="text-2xl text-gray-700" />
                 </button>
-                <BoardDetailDropdown
+                <PostDetailDropdown
                   isActive={isActive}
                   category={category}
                   id={id}

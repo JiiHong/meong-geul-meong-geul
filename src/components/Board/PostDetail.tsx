@@ -6,11 +6,11 @@ import {
 } from '@tanstack/react-query';
 import { notFound } from 'next/navigation';
 import { BoardCategory } from '@/types/board';
-import BoardDetailContent from '@/components/Board/BoardDetailContent';
-import BoardDetailComments from '@/components/Board/BoardDetailComments';
+import PostDetailContent from '@/components/Board/PostDetailContent';
+import PostDetailComments from '@/components/Board/PostDetailComments';
 import { fetchPost } from '@/service/firebase/firebase-firestore';
 
-export default async function BoardDetail() {
+export default async function PostDetail() {
   const headersList = headers();
   const path = (headersList.get('x-pathname') || '').split('/');
   const category = path[2] as BoardCategory;
@@ -28,9 +28,9 @@ export default async function BoardDetail() {
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <BoardDetailContent postId={id} category={category} />
+        <PostDetailContent postId={id} category={category} />
       </HydrationBoundary>
-      <BoardDetailComments post={post} category={category} />
+      <PostDetailComments post={post} category={category} />
     </>
   );
 }

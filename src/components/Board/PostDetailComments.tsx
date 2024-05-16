@@ -14,7 +14,7 @@ type Props = {
   category: BoardCategory;
 };
 
-export default async function BoardDetailComments({ post, category }: Props) {
+export default async function PostDetailComments({ post, category }: Props) {
   const { id } = post;
   const queryClient = new QueryClient();
 

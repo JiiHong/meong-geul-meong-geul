@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 type Props = { isActive: boolean; category: BoardCategory; id: string };
 
-export default function BoardDetailDropdown({ isActive, category, id }: Props) {
+export default function PostDetailDropdown({ isActive, category, id }: Props) {
   const router = useRouter();
   const { deletePost } = usePost(category, id);
 
