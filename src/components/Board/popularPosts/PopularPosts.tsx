@@ -1,7 +1,7 @@
 'use client';
 
 import { Board, BoardCategory } from '@/types/board';
-import PopularPostCard from '@/components/Board/PopularPostCard';
+import PopularPostCard from '@/components/Board/popularPosts/PopularPostCard';
 import usePosts from '@/hooks/usePosts';
 
 type Props = { posts: Board[]; category: BoardCategory };

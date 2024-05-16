@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Board, BoardCategory } from '@/types/board';
-import UserImage from '../ui/UserImage';
+import UserImage from '../../ui/UserImage';
 
 type Props = { post: Board; category: BoardCategory };
 
