@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  loginModal,
 }: Readonly<{
   children: React.ReactNode;
   loginModal: React.ReactNode;
@@ -29,7 +28,6 @@ export default function RootLayout({
               <UserContextProvider>
                 <Header />
                 {children}
-                {loginModal}
               </UserContextProvider>
             </NextAuthContext>
           </ReactQueryProvider>
