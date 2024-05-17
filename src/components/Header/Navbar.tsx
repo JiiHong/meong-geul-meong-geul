@@ -3,7 +3,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import DesktopMenu from './DesktopMenu';
 import MobileMenu from './MobileMenu';
 import LoginButton from './LoginButton';
-import UserLoginImage from './UserLoginImage';
+import UserProfileImage from './UserProfileImage';
 
 type NavbarList = {
   title: string;
@@ -23,7 +23,7 @@ export default async function Navbar() {
     <nav className="flex gap-4">
       <DesktopMenu />
       <MobileMenu />
-      {session ? <UserLoginImage /> : <LoginButton />}
+      {session ? <UserProfileImage /> : <LoginButton />}
     </nav>
   );
 }
