@@ -1,5 +1,7 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
+import { auth } from '@/service/firebase/firebase-auth';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -13,6 +15,14 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async signIn({ account }) {
+      const googleCredential = GoogleAuthProvider.credential(account?.id_token);
+      const userCredential = await signInWithCredential(auth, googleCredential);
+
+      return userCredential ? true : false;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
