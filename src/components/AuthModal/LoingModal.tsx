@@ -1,9 +1,11 @@
 import GoogleLoginButton from '@/components/AuthModal/GoogleLoginButton';
 import Modal from './Modal';
 
-export default function LoginModal() {
+type Props = { onClick: () => void };
+
+export default function LoginModal({ onClick }: Props) {
   return (
-    <Modal backCount={1}>
+    <Modal onClick={onClick}>
       <div className="flex justify-center items-center grow">
         <GoogleLoginButton />
       </div>
