@@ -16,13 +16,16 @@ type User = UserSession | null;
 type ContextProps = {
   user: User;
   setUser: Dispatch<SetStateAction<User>>;
-} | null;
+};
 
 type Props = {
   children: React.ReactNode;
 };
 
-const UserContext = createContext<ContextProps>(null);
+const UserContext = createContext<ContextProps>({
+  user: null,
+  setUser: () => {},
+});
 
 export function UserContextProvider({ children }: Props) {
   const { data } = useSession();
