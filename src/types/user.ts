@@ -8,3 +8,5 @@ export type User = {
   name?: string;
   profileImage?: string;
 };
+
+export type UserSession = Pick<User, 'uid' | 'email' | 'name' | 'profileImage'>;
