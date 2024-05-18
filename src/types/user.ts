@@ -1,7 +1,7 @@
 export type User = {
   id: string;
   uid: string;
-  name: string;
+  name?: string;
   createdAt: string;
   recommendPosts: string[];
   commentPosts: string[];
