@@ -1,20 +1,21 @@
 'use client';
 
-import Link from 'next/link';
+import { useState } from 'react';
+import LoginModal from '../AuthModal/LoingModal';
 
-type Props = {
-  onClick?: () => void;
-};
+export default function LoginButton() {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => setIsOpen((prev) => !prev);
 
-export default function LoginButton({ onClick }: Props) {
   return (
-    <button
-      className="py-2 text-base text-white font-bold rounded-3xl bg-gray-800 transition-all hover:-translate-y-1 hover:bg-gray-900 hover:brightness-120 self-center"
-      onClick={onClick}
-    >
-      <Link href="/login" className="px-4 py-3">
+    <>
+      <button
+        className="px-4 py-2 text-base text-white font-bold rounded-3xl bg-gray-800 transition-all hover:-translate-y-1 hover:bg-gray-900 hover:brightness-120"
+        onClick={handleClick}
+      >
         로그인
-      </Link>
-    </button>
+      </button>
+      {isOpen && <LoginModal onClick={handleClick} />}
+    </>
   );
 }

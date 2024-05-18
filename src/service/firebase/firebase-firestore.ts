@@ -11,6 +11,7 @@ import {
   updateDoc,
   arrayUnion,
   increment,
+  where,
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
@@ -36,6 +37,19 @@ export async function fetchUserFromUid(uid: string) {
 
   if (docSnap.exists()) {
     return docSnap.data() as User;
+  }
+  return null;
+}
+
+export async function fetchUserFormEamil(email: string) {
+  const q = query(collection(db, 'users'), where('email', '==', email));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const docs = querySnapshot.docs;
+    const User = docs.map((doc) => doc.data() as User);
+
+    return User;
   }
   return null;
 }
