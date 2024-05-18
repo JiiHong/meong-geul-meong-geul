@@ -8,44 +8,34 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { onUserStateChange } from '@/service/firebase/firebase-auth';
-import { User } from '@/types/user';
+import { useSession } from 'next-auth/react';
+import { UserSession } from '@/types/user';
 
-export type LoginState = 'loading' | 'login' | 'logout';
+type User = UserSession | null;
 
 type ContextProps = {
-  user: User | null;
-  setUser: Dispatch<SetStateAction<User | null>>;
-  loginState: LoginState;
-  setLoginState: Dispatch<SetStateAction<LoginState>>;
-  token: string;
-  setToken: Dispatch<SetStateAction<string>>;
-};
+  user: User;
+  setUser: Dispatch<SetStateAction<User>>;
+} | null;
 
 type Props = {
   children: React.ReactNode;
 };
 
-const UserContext = createContext<ContextProps>({
-  user: null,
-  setUser: () => {},
-  loginState: 'loading',
-  setLoginState: () => {},
-  token: '',
-  setToken: () => {},
-});
+const UserContext = createContext<ContextProps>(null);
 
 export function UserContextProvider({ children }: Props) {
-  const [user, setUser] = useState<User | null>(null);
-  const [loginState, setLoginState] = useState<LoginState>('loading');
-  const [token, setToken] = useState('');
+  const { data } = useSession();
+  const [user, setUser] = useState<User>(null);
 
-  useEffect(() => onUserStateChange(setUser, setLoginState), []);
+  useEffect(() => {
+    if (data) {
+      setUser(data.user);
+    }
+  }, [data]);
 
   return (
-    <UserContext.Provider
-      value={{ user, setUser, loginState, setLoginState, token, setToken }}
-    >
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );
