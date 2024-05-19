@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header/Header';
-import { UserContextProvider } from '@/context/UserContext';
-import NextAuthContext from '@/context/NextAuthContext';
 import ReactQueryProvider from '@/components/ReactQueryProviders';
+import NextAuthContext from '@/context/NextAuthContext';
+import { UserContextProvider } from '@/context/UserContext';
+import { ModalContextProvider } from '@/context/ModalContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,8 +27,10 @@ export default function RootLayout({
           <ReactQueryProvider>
             <NextAuthContext>
               <UserContextProvider>
-                <Header />
-                {children}
+                <ModalContextProvider>
+                  <Header />
+                  {children}
+                </ModalContextProvider>
               </UserContextProvider>
             </NextAuthContext>
           </ReactQueryProvider>
