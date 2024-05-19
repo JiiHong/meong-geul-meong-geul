@@ -1,6 +1,7 @@
 'use client';
 
 import { useUserContext } from '@/context/UserContext';
+import { useModalContext } from '@/context/ModalContext';
 import useRecommendCount from '@/hooks/useRecommendCount';
 import { BoardCategory } from '@/types/Post';
 import IconThumbsup from '../ui/icons/IconThumbsup';
@@ -21,6 +22,7 @@ export default function RecommendButton({
   category,
 }: Props) {
   const { user } = useUserContext();
+  const { toggleModal } = useModalContext();
   const { increaseRecommendCount } = useRecommendCount({
     postId,
     category,
@@ -28,7 +30,7 @@ export default function RecommendButton({
   });
 
   const handleClick = () => {
-    if (!user) return alert('로그인이 필요한 서비스입니다.');
+    if (!user) return toggleModal();
     fetchRecommendPostsId(user.uid) //
       .then((ids) => {
         const isExist = ids.find((id) => id === postId);
