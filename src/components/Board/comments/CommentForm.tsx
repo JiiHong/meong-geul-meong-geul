@@ -3,6 +3,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useUserContext } from '@/context/UserContext';
+import { useModalContext } from '@/context/ModalContext';
 import { BoardCategory } from '@/types/Post';
 import { Comment } from '@/types/comment';
 import useComments from '@/hooks/useComments';
@@ -22,6 +23,7 @@ export default function CommentForm({
   level,
 }: Props) {
   const { user } = useUserContext();
+  const { toggleModal } = useModalContext();
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { uploadComment } = useComments(postId, category);
@@ -31,7 +33,7 @@ export default function CommentForm({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!user) return alert('로그인이 필요한 서비스입니다.');
+    if (!user) return toggleModal();
     if (!user.name) return alert('마이페이지에서 닉네임을 등록해주세요.');
     if (content.trim().length < 1) {
       setContent('');

@@ -4,15 +4,17 @@ import { useRouter } from 'next/navigation';
 import { PiPencilSimpleLine } from 'react-icons/pi';
 import { BoardCategory } from '@/types/Post';
 import { useUserContext } from '@/context/UserContext';
+import { useModalContext } from '@/context/ModalContext';
 
 type Props = { category: BoardCategory };
 
 export default function WriteButton({ category }: Props) {
   const { user } = useUserContext();
+  const { toggleModal } = useModalContext();
   const router = useRouter();
 
   const handleClick = () => {
-    if (!user) return alert('로그인이 필요한 서비스입니다.');
+    if (!user) return toggleModal();
     if (!user.name) return alert('마이페이지에서 닉네임을 등록해주세요.');
 
     router.push(`/write/${category}`);
