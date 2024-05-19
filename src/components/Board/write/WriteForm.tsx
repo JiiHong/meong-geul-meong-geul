@@ -61,7 +61,7 @@ export default function WriteForm({ category }: Props) {
       ...post,
       id,
       uid,
-      name,
+      name: name ?? '',
       recommendCount: 0,
       commentCount: 0,
       viewCount: 0,

@@ -30,7 +30,7 @@ export default async function Board({ page }: Props) {
         <PopularPosts posts={posts} category={category} />
         <Posts category={category} page={page} />
       </HydrationBoundary>
-      <WriteButton />
+      <WriteButton category={category} />
     </section>
   );
 }

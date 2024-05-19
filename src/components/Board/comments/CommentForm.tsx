@@ -1,7 +1,6 @@
 'use client';
 
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { v4 as uuid } from 'uuid';
 import { useUserContext } from '@/context/UserContext';
 import { BoardCategory } from '@/types/Post';
@@ -22,7 +21,6 @@ export default function CommentForm({
   replyId,
   level,
 }: Props) {
-  const router = useRouter();
   const { user } = useUserContext();
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +31,8 @@ export default function CommentForm({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!user) return router.push('/login');
+    if (!user) return alert('로그인이 필요한 서비스입니다.');
+    if (!user.name) return alert('마이페이지에서 닉네임을 등록해주세요.');
     if (content.trim().length < 1) {
       setContent('');
       return alert('내용을 입력해주세요.');
