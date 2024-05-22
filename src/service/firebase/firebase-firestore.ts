@@ -106,7 +106,7 @@ export async function deletePost(category: BoardCategory, postId: string) {
   Promise.all(promiseList).catch(console.log);
 }
 
-async function removeRecommendOrCommentPostId(
+export async function removeRecommendOrCommentPostId(
   postId: string,
   key: 'recommendPosts' | 'commentPosts',
 ) {

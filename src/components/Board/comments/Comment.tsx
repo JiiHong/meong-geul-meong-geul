@@ -9,6 +9,7 @@ import useComments from '@/hooks/useComments';
 import UserImage from '../../ui/UserImage';
 import IconClose from '../../ui/icons/IconClose';
 import Replybutton from '../Replybutton';
+import { removeRecommendOrCommentPostId } from '@/service/firebase/firebase-firestore';
 
 const PADDING_BY_LEVEL: { [key: number]: string } = {
   0: 'pl-0',
@@ -41,7 +42,22 @@ export default function Comment({
 
   const handleDeleteClick = (id: string) => {
     const isDelete = confirm('댓글을 삭제하시겠습니까?');
-    if (isDelete) return deleteComment.mutate({ id });
+
+    if (user && isDelete) {
+      deleteComment.mutate(
+        { id },
+        {
+          onSuccess: () => {
+            const myComments = comments.filter(
+              (comment) => comment.uid === user.uid,
+            );
+            if (myComments.length - 1 === 0) {
+              removeRecommendOrCommentPostId(postId, 'commentPosts');
+            }
+          },
+        },
+      );
+    }
     return;
   };
 
