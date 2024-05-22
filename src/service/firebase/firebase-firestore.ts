@@ -98,22 +98,28 @@ export async function fetchPost(category: BoardCategory, id: string) {
 }
 
 export async function deletePost(category: BoardCategory, postId: string) {
-  await deleteDoc(doc(db, `${category}Boards`, postId));
-
-  const users = await fetchUsers();
-
-  removeRecommendOrCommentPostId(users, postId, 'recommendPosts');
-  removeRecommendOrCommentPostId(users, postId, 'commentPosts');
+  const promiseList = [
+    deleteDoc(doc(db, `${category}Boards`, postId)),
+    removeRecommendOrCommentPostId(postId, 'recommendPosts'),
+    removeRecommendOrCommentPostId(postId, 'commentPosts'),
+  ];
+  Promise.all(promiseList).catch(console.log);
 }
 
-async function removeRecommendOrCommentPostId(
-  users: User[],
+export async function removeRecommendOrCommentPostId(
   postId: string,
   key: 'recommendPosts' | 'commentPosts',
 ) {
-  const filteredUsers = users.filter((user) => user[key].includes(postId));
+  const q = query(
+    collection(db, 'users'),
+    where(key, 'array-contains', postId),
+  );
+  const querySnapshot = await getDocs(q);
 
-  if (filteredUsers.length > 0) {
+  if (!querySnapshot.empty) {
+    const docs = querySnapshot.docs;
+    const users = docs.map((doc) => doc.data() as User);
+
     users.forEach(async (user) => {
       const ref = doc(db, 'users', user.uid);
       await updateDoc(ref, {
