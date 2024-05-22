@@ -11,16 +11,18 @@ export default function UserLoginImage() {
   const handleClick = () => setIsActive((active) => !active);
 
   return (
-    <button className="relative p-[0.125rem] bg-pofile-border rounded-full">
-      <Image
-        src={defaultUserImage}
-        alt={'user'}
-        width={45}
-        height={45}
-        className="rounded-full cursor-pointer p-[0.15rem] bg-white"
-        onClick={handleClick}
-      />
+    <div className="relative">
+      <button className="p-[0.125rem] bg-pofile-border rounded-full">
+        <Image
+          src={defaultUserImage}
+          alt={'user'}
+          width={45}
+          height={45}
+          className="rounded-full cursor-pointer p-[0.15rem] bg-white"
+          onClick={handleClick}
+        />
+      </button>
       {isActive && <UserDropdown isActive={isActive} />}
-    </button>
+    </div>
   );
 }
