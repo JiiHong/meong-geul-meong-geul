@@ -50,9 +50,11 @@ export default function ImageForm({ user }: Props) {
         className="hidden"
         onChange={handleChange}
       />
-      <button className="px-4 py-2 text-gray-100 rounded-md bg-rose-600 cursor-pointer">
-        삭제
-      </button>
+      {url && (
+        <button className="px-4 py-2 text-gray-100 rounded-md bg-rose-600 cursor-pointer">
+          삭제
+        </button>
+      )}
     </form>
   );
 }
