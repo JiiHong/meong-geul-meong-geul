@@ -22,7 +22,7 @@ export default function ImageForm({ user }: Props) {
     if (files) {
       uploadProfileImage(files[0], user.email)
         .then((url) => updateProfileImageUrl(user.uid, url))
-        .then((url) => update({ profileImage: url }))
+        .then((url) => update({ ...user, profileImage: url }))
         .then((data) => data && setUrl(data.user.profileImage));
     }
   };
@@ -30,7 +30,7 @@ export default function ImageForm({ user }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     deleteProfileImageUrl(user.uid)
-      .then((url) => update({ profileImage: url }))
+      .then((url) => update({ ...user, profileImage: url }))
       .then((data) => data && setUrl(undefined));
   };
 
