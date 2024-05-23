@@ -11,8 +11,8 @@ type Props = {
 };
 
 export default function UserImage({ title, size = 'small', userImage }: Props) {
-  const containerSize = useMemo(() => translateContainerSize(size), []);
-  const imageSize = useMemo(() => translateImageSize(size), []);
+  const containerSize = useMemo(() => translateContainerSize(size), [size]);
+  const imageSize = useMemo(() => translateImageSize(size), [size]);
 
   return (
     <div
