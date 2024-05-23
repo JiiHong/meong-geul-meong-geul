@@ -4,7 +4,6 @@ export default function MyPageLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-  loginModal: React.ReactNode;
 }>) {
   return (
     <main className="flex gap-5">
