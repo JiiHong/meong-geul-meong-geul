@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/next-auth/options';
 import ImageForm from './ImageForm';
 import { notFound } from 'next/navigation';
 
