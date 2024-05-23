@@ -1,13 +1,12 @@
-'use client';
-
 import { signOut } from 'next-auth/react';
 
 type Props = {
   isActive: boolean;
+  onClick: () => void;
 };
 
-export default function UserDropdown({ isActive }: Props) {
-  const handleClick = () => signOut();
+export default function UserDropdown({ isActive, onClick }: Props) {
+  const handleClick = () => signOut().then(onClick);
 
   return (
     <ul

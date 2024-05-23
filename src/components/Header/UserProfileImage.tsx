@@ -22,7 +22,7 @@ export default function UserLoginImage() {
           onClick={handleClick}
         />
       </button>
-      {isActive && <UserDropdown isActive={isActive} />}
+      {isActive && <UserDropdown isActive={isActive} onClick={handleClick} />}
     </div>
   );
 }
