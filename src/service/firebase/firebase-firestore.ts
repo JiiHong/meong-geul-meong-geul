@@ -12,6 +12,7 @@ import {
   arrayUnion,
   increment,
   where,
+  deleteField,
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
@@ -61,6 +62,20 @@ export async function fetchUserFromName(name: string) {
 
 export async function sendUser(uid: string, user: User) {
   return setDoc(doc(db, 'users', uid), user);
+}
+
+export async function updateProfileImageUrl(uid: string, url: string) {
+  const ref = doc(db, 'users', uid);
+  return updateDoc(ref, {
+    profileImage: url,
+  }).then(() => url);
+}
+
+export async function deleteProfileImageUrl(uid: string) {
+  const ref = doc(db, 'users', uid);
+  return updateDoc(ref, {
+    profileImage: deleteField(),
+  });
 }
 
 export async function uploadPost(
