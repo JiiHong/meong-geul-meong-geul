@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserSession } from '@/types/user';
 import { uploadProfileImage } from '@/service/firebase/firebase-storage';
@@ -11,16 +11,19 @@ import {
   updateAllCategoryPost,
 } from '@/service/firebase/firebase-firestore';
 import UserImage from '@/components/ui/UserImage';
+import Loader from '@/components/ui/Loader';
 
 type Props = { user: UserSession };
 
 export default function ImageForm({ user }: Props) {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
 
     if (files && files[0]) {
+      setIsLoading((prev) => !prev);
       uploadProfileImage(files[0], user.email)
         .then((url) =>
           updateProfileImageUrl(user.uid, url) //
@@ -29,7 +32,10 @@ export default function ImageForm({ user }: Props) {
                 .then(() => updateAllCategoryPost(user.uid, 'userImage', url)),
             ),
         )
-        .then(router.refresh);
+        .then(() => {
+          setIsLoading((prev) => !prev);
+          router.refresh();
+        });
     }
   };
 
@@ -43,19 +49,23 @@ export default function ImageForm({ user }: Props) {
       <UserImage title="profile" userImage={user.profileImage} size="big" />
       <label
         htmlFor="file"
-        className="px-4 py-2 text-gray-100 rounded-md bg-gray-700 cursor-pointer"
+        className={`px-4 py-2 text-gray-100 rounded-md bg-gray-700 ${isLoading ? 'cursor-wait' : 'cursor-pointer'}`}
       >
-        이미지 변경
+        {isLoading ? <Loader /> : '이미지 변경'}
       </label>
       <input
         type="file"
         id="file"
         accept="image/*"
+        disabled={isLoading}
         className="hidden"
         onChange={handleChange}
       />
       {user.profileImage && (
-        <button className="px-4 py-2 text-gray-100 rounded-md bg-rose-600 cursor-pointer">
+        <button
+          disabled={isLoading}
+          className={`px-4 py-2 text-gray-100 rounded-md bg-rose-600 `}
+        >
           삭제
         </button>
       )}
