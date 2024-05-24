@@ -6,7 +6,9 @@ import { UserSession } from '@/types/user';
 import { uploadProfileImage } from '@/service/firebase/firebase-storage';
 import {
   deleteProfileImageUrl,
+  fetchPostsFromUid,
   updateProfileImageUrl,
+  updateAllCategoryPost,
 } from '@/service/firebase/firebase-firestore';
 import UserImage from '@/components/ui/UserImage';
 
@@ -20,7 +22,13 @@ export default function ImageForm({ user }: Props) {
 
     if (files) {
       uploadProfileImage(files[0], user.email)
-        .then((url) => updateProfileImageUrl(user.uid, url))
+        .then((url) =>
+          updateProfileImageUrl(user.uid, url) //
+            .then((url) =>
+              fetchPostsFromUid('free', user.uid) //
+                .then(() => updateAllCategoryPost(user.uid, 'userImage', url)),
+            ),
+        )
         .then(router.refresh);
     }
   };

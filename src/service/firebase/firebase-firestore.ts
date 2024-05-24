@@ -101,6 +101,57 @@ export async function fetchPosts(category: string) {
   return [];
 }
 
+export async function fetchPostsFromUid(category: BoardCategory, uid: string) {
+  const q = query(
+    collection(db, `${category}Boards`),
+    where('uid', '==', uid),
+    orderBy('createdAt', 'desc'),
+  );
+  const querySnapshot = await getDocs(q);
+  if (!querySnapshot.empty) {
+    const docs = querySnapshot.docs;
+    const posts = docs.map((doc) => doc.data() as Post);
+
+    return posts;
+  }
+  return [];
+}
+
+export async function updatePost(
+  category: BoardCategory,
+  id: string,
+  key: keyof Post,
+  value: string,
+) {
+  const ref = doc(db, `${category}Boards`, id);
+
+  await updateDoc(ref, {
+    [key]: value,
+  });
+}
+
+export async function updateAllCategoryPost(
+  uid: string,
+  key: keyof Post,
+  value: string,
+) {
+  const posts = await Promise.all([
+    fetchPostsFromUid('free', uid),
+    fetchPostsFromUid('info', uid),
+    fetchPostsFromUid('question', uid),
+  ]).catch(console.error);
+
+  if (posts) {
+    const flatedPosts = posts.flat();
+
+    await Promise.all(
+      flatedPosts.map(({ id, category }) =>
+        updatePost(category, id, key, value),
+      ),
+    ).catch(console.error);
+  }
+}
+
 export async function fetchPost(category: BoardCategory, id: string) {
   const docRef = doc(db, `${category}Boards`, id);
   const docSnap = await getDoc(docRef);
