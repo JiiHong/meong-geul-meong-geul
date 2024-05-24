@@ -20,7 +20,7 @@ export default function ImageForm({ user }: Props) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
 
-    if (files) {
+    if (files && files[0]) {
       uploadProfileImage(files[0], user.email)
         .then((url) =>
           updateProfileImageUrl(user.uid, url) //
