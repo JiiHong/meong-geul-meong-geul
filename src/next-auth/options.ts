@@ -4,7 +4,7 @@ import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
 import { v4 as uuid } from 'uuid';
 import { auth } from '@/service/firebase/firebase-auth';
 import {
-  fetchUserFormEamil,
+  fetchUserFromEmail,
   fetchUserFromUid,
   sendUser,
 } from '@/service/firebase/firebase-firestore';
@@ -49,7 +49,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session }) {
       const user = session.user;
 
-      const fetchedUser = await fetchUserFormEamil(user?.email ?? '');
+      const fetchedUser = await fetchUserFromEmail(user?.email ?? '');
 
       if (fetchedUser) {
         const { uid, email, name, profileImage } = fetchedUser[0];

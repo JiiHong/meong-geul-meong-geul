@@ -42,7 +42,7 @@ export async function fetchUserFromUid(uid: string) {
   return null;
 }
 
-export async function fetchUserFormEamil(email: string) {
+export async function fetchUserFromEmail(email: string) {
   const q = query(collection(db, 'users'), where('email', '==', email));
   const querySnapshot = await getDocs(q);
 
