@@ -36,6 +36,7 @@ export default function ImageForm({ user }: Props) {
         )
         .then(() => {
           setIsLoading((prev) => !prev);
+          window.alert('이미지가 변경되었습니다. 🙌');
           router.refresh();
         });
     }
