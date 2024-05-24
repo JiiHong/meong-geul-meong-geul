@@ -56,7 +56,8 @@ export default function WriteForm({ category }: Props) {
     }
 
     const id = uuid();
-    const { uid, name } = session.user;
+    const { uid, name, profileImage } = session.user;
+
     const newPost = {
       ...post,
       id,
@@ -66,6 +67,7 @@ export default function WriteForm({ category }: Props) {
       commentCount: 0,
       viewCount: 0,
       category,
+      userImage: profileImage,
       createdAt: createTime(),
     };
 
