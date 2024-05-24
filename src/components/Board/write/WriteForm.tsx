@@ -65,6 +65,7 @@ export default function WriteForm({ category }: Props) {
       recommendCount: 0,
       commentCount: 0,
       viewCount: 0,
+      category,
       createdAt: createTime(),
     };
 
