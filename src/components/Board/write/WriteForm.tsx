@@ -6,10 +6,10 @@ import { v4 as uuid } from 'uuid';
 import { Post, BoardCategory, WriteFormState } from '@/types/Post';
 import CustomFileInput from '../CustomFileInput';
 import WriteFormButton from './WriteFormButton';
-import { useUserContext } from '@/context/UserContext';
 import { uploadBoardImage } from '@/service/firebase/firebase-storage';
 import usePosts from '@/hooks/usePosts';
 import { createTime } from '@/utils/day';
+import { useSession } from 'next-auth/react';
 
 const DEFAULT_DATA = {
   title: '',
@@ -23,7 +23,7 @@ type Props = {
 export default function WriteForm({ category }: Props) {
   const [post, setPost] = useState<WriteFormState>(DEFAULT_DATA);
   const [file, setFile] = useState<File | null>(null);
-  const { user } = useUserContext();
+  const { data: session } = useSession();
   const router = useRouter();
 
   const { uploadPost } = usePosts(category);
@@ -45,7 +45,7 @@ export default function WriteForm({ category }: Props) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!user) return;
+    if (!session) return;
     if (post.title.trim().length < 1) {
       setPost((prev) => ({ ...prev, title: '' }));
       return alert('제목을 입력해주세요.');
@@ -56,7 +56,7 @@ export default function WriteForm({ category }: Props) {
     }
 
     const id = uuid();
-    const { uid, name } = user;
+    const { uid, name } = session.user;
     const newPost = {
       ...post,
       id,
