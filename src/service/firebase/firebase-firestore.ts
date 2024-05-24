@@ -117,7 +117,7 @@ export async function fetchPostsFromUid(category: BoardCategory, uid: string) {
   return [];
 }
 
-export async function updatePost(
+async function updatePost(
   category: BoardCategory,
   id: string,
   key: keyof Post,
@@ -130,10 +130,23 @@ export async function updatePost(
   });
 }
 
+async function deletePostKey(
+  category: BoardCategory,
+  id: string,
+  key: keyof Post,
+) {
+  const ref = doc(db, `${category}Boards`, id);
+
+  await updateDoc(ref, {
+    [key]: deleteField(),
+  });
+}
+
 export async function updateAllCategoryPost(
   uid: string,
   key: keyof Post,
-  value: string,
+  method: 'update' | 'delete',
+  value?: string,
 ) {
   const posts = await Promise.all([
     fetchPostsFromUid('free', uid),
@@ -146,7 +159,9 @@ export async function updateAllCategoryPost(
 
     await Promise.all(
       flatedPosts.map(({ id, category }) =>
-        updatePost(category, id, key, value),
+        method === 'update'
+          ? updatePost(category, id, key, value ?? '')
+          : deletePostKey(category, id, key),
       ),
     ).catch(console.error);
   }

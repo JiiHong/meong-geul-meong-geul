@@ -29,7 +29,9 @@ export default function ImageForm({ user }: Props) {
           updateProfileImageUrl(user.uid, url) //
             .then((url) =>
               fetchPostsFromUid('free', user.uid) //
-                .then(() => updateAllCategoryPost(user.uid, 'userImage', url)),
+                .then(() =>
+                  updateAllCategoryPost(user.uid, 'userImage', 'update', url),
+                ),
             ),
         )
         .then(() => {
@@ -41,7 +43,12 @@ export default function ImageForm({ user }: Props) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    deleteProfileImageUrl(user.uid).then(router.refresh);
+    deleteProfileImageUrl(user.uid)
+      .then(router.refresh) //
+      .then(() => {
+        fetchPostsFromUid('free', user.uid) //
+          .then(() => updateAllCategoryPost(user.uid, 'userImage', 'delete'));
+      });
   };
 
   return (
@@ -66,7 +73,7 @@ export default function ImageForm({ user }: Props) {
           disabled={isLoading}
           className={`px-4 py-2 text-gray-100 rounded-md bg-rose-600 `}
         >
-          삭제
+          {isLoading ? <Loader /> : '삭제'}
         </button>
       )}
     </form>
