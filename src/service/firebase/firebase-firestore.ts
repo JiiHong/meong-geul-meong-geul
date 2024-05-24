@@ -64,11 +64,11 @@ export async function sendUser(uid: string, user: User) {
   return setDoc(doc(db, 'users', uid), user);
 }
 
-export async function updateProfileImageUrl(uid: string, url: string) {
+export async function updateUser(uid: string, key: keyof User, value: string) {
   const ref = doc(db, 'users', uid);
   return updateDoc(ref, {
-    profileImage: url,
-  }).then(() => url);
+    [key]: value,
+  }).then(() => value);
 }
 
 export async function deleteProfileImageUrl(uid: string) {
