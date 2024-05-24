@@ -1,17 +1,13 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/next-auth/options';
+import { UserSession } from '@/types/user';
 import ImageForm from './ImageForm';
-import { notFound } from 'next/navigation';
 
-export default async function ImageFieldset() {
-  const session = await getServerSession(authOptions);
+type Props = { user: UserSession };
 
-  if (!session) notFound();
-
+export default async function ImageFieldset({ user }: Props) {
   return (
     <fieldset className="space-y-4">
       <legend className="text-gray-800 font-bold">프로필 이미지</legend>
-      <ImageForm user={session.user} />
+      <ImageForm user={user} />
     </fieldset>
   );
 }

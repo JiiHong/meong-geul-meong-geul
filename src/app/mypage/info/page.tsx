@@ -11,7 +11,7 @@ export default async function InfoPage() {
 
   return (
     <section className="space-y-10">
-      <ImageFieldset />
+      <ImageFieldset user={session.user} />
       <NicknameFieldset user={session.user} />
     </section>
   );
