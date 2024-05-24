@@ -13,7 +13,7 @@ export default function MyPageNavbar() {
   const splitedPath = usePathname().split('/')[2];
 
   return (
-    <ul>
+    <ul className="flex flex-col md:flex-row">
       {lists.map(({ title, path }, index) => (
         <li
           key={index}
