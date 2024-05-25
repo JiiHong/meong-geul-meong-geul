@@ -30,6 +30,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.11.30"],\
           ["@types/react", "npm:18.2.70"],\
           ["@types/react-dom", "npm:18.2.22"],\
+          ["@types/ua-parser-js", "npm:0.7.39"],\
           ["@types/uuid", "npm:9.0.8"],\
           ["@typescript-eslint/eslint-plugin", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:7.4.0"],\
           ["@typescript-eslint/parser", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:7.4.0"],\
@@ -56,6 +57,7 @@ const RAW_RUNTIME_STATE =
           ["sharp", "npm:0.33.3"],\
           ["tailwindcss", "npm:3.4.1"],\
           ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"],\
+          ["ua-parser-js", "npm:1.0.37"],\
           ["uuid", "npm:9.0.1"]\
         ],\
         "linkType": "SOFT"\
@@ -2268,6 +2270,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/@types-tough-cookie-npm-4.0.5-8c5e2162e1-10c0.zip/node_modules/@types/tough-cookie/",\
         "packageDependencies": [\
           ["@types/tough-cookie", "npm:4.0.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/ua-parser-js", [\
+      ["npm:0.7.39", {\
+        "packageLocation": "../../../.yarn/berry/cache/@types-ua-parser-js-npm-0.7.39-23053990d8-10c0.zip/node_modules/@types/ua-parser-js/",\
+        "packageDependencies": [\
+          ["@types/ua-parser-js", "npm:0.7.39"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5964,6 +5975,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.11.30"],\
           ["@types/react", "npm:18.2.70"],\
           ["@types/react-dom", "npm:18.2.22"],\
+          ["@types/ua-parser-js", "npm:0.7.39"],\
           ["@types/uuid", "npm:9.0.8"],\
           ["@typescript-eslint/eslint-plugin", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:7.4.0"],\
           ["@typescript-eslint/parser", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:7.4.0"],\
@@ -5990,6 +6002,7 @@ const RAW_RUNTIME_STATE =
           ["sharp", "npm:0.33.3"],\
           ["tailwindcss", "npm:3.4.1"],\
           ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"],\
+          ["ua-parser-js", "npm:1.0.37"],\
           ["uuid", "npm:9.0.1"]\
         ],\
         "linkType": "SOFT"\
@@ -8070,6 +8083,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/typescript-patch-0b5476accc-10c0.zip/node_modules/typescript/",\
         "packageDependencies": [\
           ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["ua-parser-js", [\
+      ["npm:1.0.37", {\
+        "packageLocation": "../../../.yarn/berry/cache/ua-parser-js-npm-1.0.37-b79655e1b5-10c0.zip/node_modules/ua-parser-js/",\
+        "packageDependencies": [\
+          ["ua-parser-js", "npm:1.0.37"]\
         ],\
         "linkType": "HARD"\
       }]\
