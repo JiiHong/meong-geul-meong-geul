@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 const lists = [
   { title: '내 정보', path: 'info' },
   { title: '추천한 글', path: 'recommended' },
-  { title: '댓글단 글', path: 'commented' },
+  { title: '댓글 단 글', path: 'commented' },
 ];
 
 export default function MyPageNavbar() {
