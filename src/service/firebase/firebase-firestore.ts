@@ -157,7 +157,9 @@ export async function fetchMyPagePosts(
   });
 
   const posts = await Promise.all(fetchPromises);
-
+  posts.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
   return posts;
 }
 
