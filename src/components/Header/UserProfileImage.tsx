@@ -1,26 +1,24 @@
 'use client';
 
-import Image from 'next/image';
-import UserDropdown from './UserDropdown';
 import { useState } from 'react';
-import { defaultUserImage } from '@/constants/image';
+import UserDropdown from './UserDropdown';
+import UserImage from '../ui/UserImage';
 
-export default function UserLoginImage() {
+type Props = { name?: string; image?: string };
+
+export default function UserLoginImage({ name, image }: Props) {
   const [isActive, setIsActive] = useState(false);
-
   const handleClick = () => setIsActive((active) => !active);
 
   return (
-    <button className="relative p-[0.125rem] bg-pofile-border rounded-full">
-      <Image
-        src={defaultUserImage}
-        alt={'user'}
-        width={45}
-        height={45}
-        className="rounded-full cursor-pointer p-[0.15rem] bg-white"
+    <div className="relative">
+      <button
+        className="p-0.5 bg-pofile-border rounded-full"
         onClick={handleClick}
-      />
-      {isActive && <UserDropdown isActive={isActive} />}
-    </button>
+      >
+        <UserImage title={name ?? 'user'} userImage={image} size="medium" />
+      </button>
+      {isActive && <UserDropdown isActive={isActive} onClick={handleClick} />}
+    </div>
   );
 }

@@ -18,9 +18,10 @@ export default function useRecommendCount({
   const increaseRecommendCount = useMutation({
     mutationFn: () => upRecommendCount(postId, category, recommendCount),
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['board', category, postId],
-      });
+      queryClient.invalidateQueries({ queryKey: ['board', category, postId] });
+      queryClient.invalidateQueries({ queryKey: ['board', category] });
+      queryClient.invalidateQueries({ queryKey: ['myPage', 'commentPosts'] });
+      queryClient.invalidateQueries({ queryKey: ['myPage', 'recommendPosts'] });
     },
   });
   return { increaseRecommendCount };

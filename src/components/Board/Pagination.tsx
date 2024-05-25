@@ -8,7 +8,7 @@ type Props = {
   itemCountPerPage: number;
   pageCount: number;
   currentPage: number;
-  category: BoardCategory;
+  category?: BoardCategory;
 };
 
 export default function Pagination({
@@ -24,13 +24,15 @@ export default function Pagination({
   useEffect(() => {
     const slideCount = Math.floor((currentPage - 1) / pageCount);
     setStart(pageCount * slideCount + 1);
-  }, [currentPage]);
+  }, [currentPage, pageCount]);
 
   return (
     <div className="flex justify-center">
       <ul className="flex items-center gap-4 text-lg">
         <li className={`${start === 1 ? 'invisible' : 'visible'}`}>
-          <Link href={`${category}?page=${start - pageCount}`}>
+          <Link
+            href={`${category ? `${category}?page=${start - pageCount}` : `?page=${start - pageCount}`}`}
+          >
             <IoIosArrowBack />
           </Link>
         </li>
@@ -39,7 +41,7 @@ export default function Pagination({
             {i + start <= totalPages && (
               <li>
                 <Link
-                  href={`${category}?page=${i + start}`}
+                  href={`${category ? `${category}?page=${i + start}` : `?page=${i + start}`}`}
                   className={`block w-10 h-10 text-center leading-10 rounded-full ${i + start === currentPage ? 'bg-amber-600' : 'hover:bg-gray-200'}`}
                 >
                   {i + start}
@@ -51,7 +53,9 @@ export default function Pagination({
         <li
           className={`${totalPages - currentPage > pageCount ? 'visible' : 'invisible'}`}
         >
-          <Link href={`${category}?page=${start + pageCount}`}>
+          <Link
+            href={`${category ? `${category}?page=${start + pageCount}` : `?page=${start + pageCount}`}`}
+          >
             <IoIosArrowForward />
           </Link>
         </li>

@@ -10,3 +10,13 @@ export async function uploadBoardImage(file: File, category: string) {
   return uploadBytes(storageRef, file) //
     .then((snapshot) => getDownloadURL(snapshot.ref));
 }
+
+export async function uploadProfileImage(file: File, email: string) {
+  const id = uuid();
+  const metadata = {
+    contentType: file.type,
+  };
+  const storageRef = ref(storage, `users/${email}/${id}`);
+  return uploadBytes(storageRef, file, metadata) //
+    .then((snapshot) => getDownloadURL(snapshot.ref));
+}

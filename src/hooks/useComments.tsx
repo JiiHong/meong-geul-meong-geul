@@ -32,6 +32,8 @@ export default function useComments(postId: string, category: BoardCategory) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comment', postId] });
       queryClient.invalidateQueries({ queryKey: ['board', category] });
+      queryClient.invalidateQueries({ queryKey: ['myPage', 'commentPosts'] });
+      queryClient.invalidateQueries({ queryKey: ['myPage', 'recommendPosts'] });
     },
   });
 
@@ -43,6 +45,8 @@ export default function useComments(postId: string, category: BoardCategory) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comment', postId] });
       queryClient.invalidateQueries({ queryKey: ['board', category] });
+      queryClient.invalidateQueries({ queryKey: ['myPage', 'commentPosts'] });
+      queryClient.invalidateQueries({ queryKey: ['myPage', 'recommendPosts'] });
     },
   });
 

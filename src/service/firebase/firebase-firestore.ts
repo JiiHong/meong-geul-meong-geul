@@ -12,6 +12,7 @@ import {
   arrayUnion,
   increment,
   where,
+  deleteField,
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
@@ -41,7 +42,7 @@ export async function fetchUserFromUid(uid: string) {
   return null;
 }
 
-export async function fetchUserFormEamil(email: string) {
+export async function fetchUserFromEmail(email: string) {
   const q = query(collection(db, 'users'), where('email', '==', email));
   const querySnapshot = await getDocs(q);
 
@@ -61,6 +62,20 @@ export async function fetchUserFromName(name: string) {
 
 export async function sendUser(uid: string, user: User) {
   return setDoc(doc(db, 'users', uid), user);
+}
+
+export async function updateUser(uid: string, key: keyof User, value: string) {
+  const ref = doc(db, 'users', uid);
+  return updateDoc(ref, {
+    [key]: value,
+  }).then(() => value);
+}
+
+export async function deleteProfileImageUrl(uid: string) {
+  const ref = doc(db, 'users', uid);
+  return updateDoc(ref, {
+    profileImage: deleteField(),
+  });
 }
 
 export async function uploadPost(
@@ -84,6 +99,118 @@ export async function fetchPosts(category: string) {
     return posts;
   }
   return [];
+}
+
+export async function fetchPostsFromUid(category: BoardCategory, uid: string) {
+  const q = query(
+    collection(db, `${category}Boards`),
+    where('uid', '==', uid),
+    orderBy('createdAt', 'desc'),
+  );
+  const querySnapshot = await getDocs(q);
+  if (!querySnapshot.empty) {
+    const docs = querySnapshot.docs;
+    const posts = docs.map((doc) => doc.data() as Post);
+
+    return posts;
+  }
+  return [];
+}
+
+export async function fetchPostsFromPostId(
+  category: BoardCategory,
+  postId: string,
+) {
+  const q = query(
+    collection(db, `${category}Boards`),
+    where('id', '==', postId),
+  );
+  const querySnapshot = await getDocs(q);
+  if (!querySnapshot.empty) {
+    const docs = querySnapshot.docs;
+    const posts = docs.map((doc) => doc.data() as Post);
+
+    return posts;
+  }
+  return [];
+}
+
+export async function fetchMyPagePosts(
+  uid: string,
+  type: 'recommendPosts' | 'commentPosts',
+) {
+  const user = await fetchUserFromUid(uid);
+
+  if (!user) return [];
+
+  const postIdList = user[type];
+
+  const fetchPromises = postIdList.map(async (id) => {
+    const result = await Promise.all([
+      fetchPostsFromPostId('free', id),
+      fetchPostsFromPostId('info', id),
+      fetchPostsFromPostId('question', id),
+    ]);
+    const post = result.flat();
+
+    return post[0];
+  });
+
+  const posts = await Promise.all(fetchPromises);
+  posts.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
+  return posts;
+}
+
+async function updatePost(
+  category: BoardCategory,
+  id: string,
+  key: keyof Post,
+  value: string,
+) {
+  const ref = doc(db, `${category}Boards`, id);
+
+  await updateDoc(ref, {
+    [key]: value,
+  });
+}
+
+async function deletePostKey(
+  category: BoardCategory,
+  id: string,
+  key: keyof Post,
+) {
+  const ref = doc(db, `${category}Boards`, id);
+
+  await updateDoc(ref, {
+    [key]: deleteField(),
+  });
+}
+
+export async function updateAllCategoryPost(
+  uid: string,
+  key: keyof Post,
+  method: 'update' | 'delete',
+  value?: string,
+) {
+  const posts = await Promise.all([
+    fetchPostsFromUid('free', uid),
+    fetchPostsFromUid('info', uid),
+    fetchPostsFromUid('question', uid),
+  ]).catch(console.error);
+
+  if (posts) {
+    const flatedPosts = posts.flat();
+
+    await Promise.all(
+      flatedPosts.map(({ id, category }) =>
+        method === 'update'
+          ? updatePost(category, id, key, value ?? '')
+          : deletePostKey(category, id, key),
+      ),
+    ).catch(console.error);
+  }
 }
 
 export async function fetchPost(category: BoardCategory, id: string) {

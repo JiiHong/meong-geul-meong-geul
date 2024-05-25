@@ -18,13 +18,13 @@ type Props = {
 
 export default function PostDetailContent({ postId, category }: Props) {
   const [isActive, setIsActive] = useState(false);
+  const { user } = useUserContext();
   const {
     postQuery: { data: post },
   } = usePost(category, postId);
 
   if (!post) return <></>;
 
-  const { user } = useUserContext();
   const {
     id,
     uid,
@@ -61,7 +61,7 @@ export default function PostDetailContent({ postId, category }: Props) {
           </div>
         </div>
         <div className="flex items-center gap-4 pb-3 border-b">
-          <UserImage title={name} userImage={userImage} size={40} />
+          <UserImage title={name} userImage={userImage} size="medium" />
           <div className="flex flex-col -space-y-2">
             <span className="text-lg">{name}</span>
             <div className="space-x-4">

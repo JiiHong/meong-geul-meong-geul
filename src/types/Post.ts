@@ -4,6 +4,7 @@ export type Post = {
   name: string;
   title: string;
   content: string;
+  category: BoardCategory;
   recommendCount: number;
   commentCount: number;
   viewCount: number;
