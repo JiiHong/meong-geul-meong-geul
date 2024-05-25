@@ -1,6 +1,8 @@
-import { notFound } from 'next/navigation';
-import WriteForm from '@/components/Board/write/WriteForm';
+import { getServerSession } from 'next-auth';
+import { notFound, redirect } from 'next/navigation';
 import { BoardCategory } from '@/types/Post';
+import { authOptions } from '@/next-auth/options';
+import WriteForm from '@/components/Board/write/WriteForm';
 
 type Props = {
   params: {
@@ -10,12 +12,15 @@ type Props = {
 
 const categorys = ['free', 'info', 'question'];
 
-export default function WritePage({ params: { category } }: Props) {
+export default async function WritePage({ params: { category } }: Props) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect(`/board/${category}`);
   if (!categorys.includes(category)) return notFound();
 
   return (
     <section>
-      <WriteForm category={category} />
+      <WriteForm category={category} session={session} />
     </section>
   );
 }
