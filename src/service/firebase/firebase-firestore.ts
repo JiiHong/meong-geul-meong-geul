@@ -117,6 +117,50 @@ export async function fetchPostsFromUid(category: BoardCategory, uid: string) {
   return [];
 }
 
+export async function fetchPostsFromPostId(
+  category: BoardCategory,
+  postId: string,
+) {
+  const q = query(
+    collection(db, `${category}Boards`),
+    where('id', '==', postId),
+  );
+  const querySnapshot = await getDocs(q);
+  if (!querySnapshot.empty) {
+    const docs = querySnapshot.docs;
+    const posts = docs.map((doc) => doc.data() as Post);
+
+    return posts;
+  }
+  return [];
+}
+
+export async function fetchMyPagePosts(
+  uid: string,
+  type: 'recommendPosts' | 'commentPosts',
+) {
+  const user = await fetchUserFromUid(uid);
+
+  if (!user) return [];
+
+  const postIdList = user[type];
+
+  const fetchPromises = postIdList.map(async (id) => {
+    const result = await Promise.all([
+      fetchPostsFromPostId('free', id),
+      fetchPostsFromPostId('info', id),
+      fetchPostsFromPostId('question', id),
+    ]);
+    const post = result.flat();
+
+    return post[0];
+  });
+
+  const posts = await Promise.all(fetchPromises);
+
+  return posts;
+}
+
 async function updatePost(
   category: BoardCategory,
   id: string,
