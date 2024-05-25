@@ -5,12 +5,15 @@ import {
   dehydrate,
 } from '@tanstack/react-query';
 import { notFound } from 'next/navigation';
+import { authOptions } from '@/next-auth/options';
 import { BoardCategory } from '@/types/Post';
 import PostDetailContent from '@/components/Board/postDetail/PostDetailContent';
 import PostDetailComments from '@/components/Board/postDetail/PostDetailComments';
 import { fetchPost } from '@/service/firebase/firebase-firestore';
+import { getServerSession } from 'next-auth';
 
 export default async function PostDetail() {
+  const session = await getServerSession(authOptions);
   const headersList = headers();
   const path = (headersList.get('x-pathname') || '').split('/');
   const category = path[2] as BoardCategory;
@@ -28,7 +31,7 @@ export default async function PostDetail() {
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <PostDetailContent postId={id} category={category} />
+        <PostDetailContent postId={id} category={category} session={session} />
       </HydrationBoundary>
       <PostDetailComments post={post} category={category} />
     </>
