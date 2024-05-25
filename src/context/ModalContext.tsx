@@ -3,22 +3,30 @@
 import { createContext, useContext, useState } from 'react';
 
 type ContextProps = {
-  isOpen: boolean;
-  toggleModal: () => void;
+  loginOpen: boolean;
+  signupOpen: boolean;
+  toggleLoginOpen: () => void;
+  toggleSingupOpen: () => void;
 };
 type Props = { children: React.ReactNode };
 
 const ModalContext = createContext<ContextProps>({
-  isOpen: false,
-  toggleModal: () => {},
+  loginOpen: false,
+  signupOpen: false,
+  toggleLoginOpen: () => {},
+  toggleSingupOpen: () => {},
 });
 
 export function ModalContextProvider({ children }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleOpen = () => setIsOpen((prev) => !prev);
+  const [loginOpen, setIsOpen] = useState(false);
+  const [signupOpen, setSignupOpen] = useState(false);
+  const toggleLoginOpen = () => setIsOpen((prev) => !prev);
+  const toggleSingupOpen = () => setSignupOpen((prev) => !prev);
 
   return (
-    <ModalContext.Provider value={{ isOpen, toggleModal: toggleOpen }}>
+    <ModalContext.Provider
+      value={{ loginOpen, signupOpen, toggleLoginOpen, toggleSingupOpen }}
+    >
       {children}
     </ModalContext.Provider>
   );

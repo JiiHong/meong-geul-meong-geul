@@ -10,13 +10,11 @@ type Props = { category: BoardCategory };
 
 export default function WriteButton({ category }: Props) {
   const { user } = useUserContext();
-  const { toggleModal } = useModalContext();
+  const { toggleLoginOpen } = useModalContext();
   const router = useRouter();
 
   const handleClick = () => {
-    if (!user) return toggleModal();
-    if (!user.name) return alert('마이페이지에서 닉네임을 등록해주세요.');
-
+    if (!user) return toggleLoginOpen();
     router.push(`/write/${category}`);
   };
 

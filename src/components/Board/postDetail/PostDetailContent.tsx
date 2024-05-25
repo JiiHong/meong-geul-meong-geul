@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Session } from 'next-auth';
 import Image from 'next/image';
 import { BoardCategory } from '@/types/Post';
 import UserImage from '../../ui/UserImage';
@@ -9,16 +10,19 @@ import RecommendButton from '../RecommendButton';
 import usePost from '@/hooks/usePost';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import PostDetailDropdown from './PostDetailDropdown';
-import { useUserContext } from '@/context/UserContext';
 
 type Props = {
   postId: string;
   category: BoardCategory;
+  session: Session | null;
 };
 
-export default function PostDetailContent({ postId, category }: Props) {
+export default function PostDetailContent({
+  postId,
+  category,
+  session,
+}: Props) {
   const [isActive, setIsActive] = useState(false);
-  const { user } = useUserContext();
   const {
     postQuery: { data: post },
   } = usePost(category, postId);
@@ -46,7 +50,7 @@ export default function PostDetailContent({ postId, category }: Props) {
         <div className="flex justify-between items-center">
           <h1 className="mb-4 text-4xl font-semibold">{title}</h1>
           <div className="relative">
-            {user && user.uid === uid && (
+            {session && session.user.uid === uid && (
               <>
                 <button onClick={handleClick}>
                   <HiDotsHorizontal className="text-2xl text-gray-700" />

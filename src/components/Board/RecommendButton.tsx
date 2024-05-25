@@ -22,7 +22,7 @@ export default function RecommendButton({
   category,
 }: Props) {
   const { user } = useUserContext();
-  const { toggleModal } = useModalContext();
+  const { toggleLoginOpen } = useModalContext();
   const { increaseRecommendCount } = useRecommendCount({
     postId,
     category,
@@ -30,7 +30,7 @@ export default function RecommendButton({
   });
 
   const handleClick = () => {
-    if (!user) return toggleModal();
+    if (!user) return toggleLoginOpen();
     fetchRecommendPostsId(user.uid) //
       .then((ids) => {
         const isExist = ids.find((id) => id === postId);
