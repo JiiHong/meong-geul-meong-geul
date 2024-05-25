@@ -2,12 +2,12 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import { createTime } from '@/utils/day';
 import { useUserContext } from '@/context/UserContext';
 import { useModalContext } from '@/context/ModalContext';
 import { BoardCategory } from '@/types/Post';
 import { Comment } from '@/types/comment';
 import useComments from '@/hooks/useComments';
-import { createTime } from '@/utils/day';
 
 type Props = {
   postId: string;
@@ -34,7 +34,6 @@ export default function CommentForm({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user) return toggleLoginOpen();
-    if (!user.name) return alert('마이페이지에서 닉네임을 등록해주세요.');
     if (content.trim().length < 1) {
       setContent('');
       return alert('내용을 입력해주세요.');
@@ -47,7 +46,7 @@ export default function CommentForm({
       replyId: null,
       level: 0,
       content,
-      name,
+      name: name ?? '',
       uid,
       createdAt: createTime(),
     };

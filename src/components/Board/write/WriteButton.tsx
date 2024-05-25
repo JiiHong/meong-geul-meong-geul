@@ -15,8 +15,6 @@ export default function WriteButton({ category }: Props) {
 
   const handleClick = () => {
     if (!user) return toggleLoginOpen();
-    if (!user.name) return alert('마이페이지에서 닉네임을 등록해주세요.');
-
     router.push(`/write/${category}`);
   };
 
