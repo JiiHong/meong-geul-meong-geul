@@ -23,7 +23,7 @@ export default function CommentForm({
   level,
 }: Props) {
   const { user } = useUserContext();
-  const { toggleModal } = useModalContext();
+  const { toggleLoginOpen } = useModalContext();
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { uploadComment } = useComments(postId, category);
@@ -33,7 +33,7 @@ export default function CommentForm({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!user) return toggleModal();
+    if (!user) return toggleLoginOpen();
     if (!user.name) return alert('마이페이지에서 닉네임을 등록해주세요.');
     if (content.trim().length < 1) {
       setContent('');

@@ -25,6 +25,7 @@ export default async function Navbar() {
       <MobileMenu />
       {session ? (
         <UserProfileImage
+          session={session}
           name={session.user.name}
           image={session.user.profileImage}
         />
