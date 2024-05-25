@@ -2,9 +2,9 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Session } from 'next-auth';
 import { v4 as uuid } from 'uuid';
 import { Post, BoardCategory, WriteFormState } from '@/types/Post';
-import { useUserContext } from '@/context/UserContext';
 import CustomFileInput from '../CustomFileInput';
 import WriteFormButton from './WriteFormButton';
 import { uploadBoardImage } from '@/service/firebase/firebase-storage';
@@ -18,12 +18,13 @@ const DEFAULT_DATA = {
 
 type Props = {
   category: BoardCategory;
+  session: Session;
 };
 
-export default function WriteForm({ category }: Props) {
+export default function WriteForm({ category, session }: Props) {
   const [post, setPost] = useState<WriteFormState>(DEFAULT_DATA);
   const [file, setFile] = useState<File | null>(null);
-  const { user } = useUserContext();
+
   const router = useRouter();
 
   const { uploadPost } = usePosts(category);
@@ -45,7 +46,7 @@ export default function WriteForm({ category }: Props) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!user) return;
+    if (!session) return;
     if (post.title.trim().length < 1) {
       setPost((prev) => ({ ...prev, title: '' }));
       return alert('제목을 입력해주세요.');
@@ -56,9 +57,9 @@ export default function WriteForm({ category }: Props) {
     }
 
     const id = uuid();
-    const { uid, name, profileImage } = user;
+    const { uid, name, profileImage } = session.user;
 
-    const newPost = {
+    const newPost: Post = {
       ...post,
       id,
       uid,
@@ -67,9 +68,9 @@ export default function WriteForm({ category }: Props) {
       commentCount: 0,
       viewCount: 0,
       category,
-      userImage: profileImage,
       createdAt: createTime(),
     };
+    profileImage && (newPost.userImage = profileImage);
 
     if (file) {
       return uploadBoardImage(file, category) //

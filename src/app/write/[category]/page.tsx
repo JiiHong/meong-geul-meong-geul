@@ -20,7 +20,7 @@ export default async function WritePage({ params: { category } }: Props) {
 
   return (
     <section>
-      <WriteForm category={category} />
+      <WriteForm category={category} session={session} />
     </section>
   );
 }
