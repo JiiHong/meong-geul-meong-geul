@@ -51,6 +51,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:18.2.0"],\
           ["react-icons", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:5.0.1"],\
+          ["react-multi-carousel", "npm:2.8.5"],\
           ["react-spinners", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:0.13.8"],\
           ["sharp", "npm:0.33.3"],\
           ["tailwindcss", "npm:3.4.1"],\
@@ -5984,6 +5985,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:18.2.0"],\
           ["react-icons", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:5.0.1"],\
+          ["react-multi-carousel", "npm:2.8.5"],\
           ["react-spinners", "virtual:859bd13e1db777e793ef5ff20d28af612ae412855f6407b5ea55e37f48fbcb316b4ccd177724dc66ef156eb266468ebf8394c1ef120091d2fc439ba39c387286#npm:0.13.8"],\
           ["sharp", "npm:0.33.3"],\
           ["tailwindcss", "npm:3.4.1"],\
@@ -7076,6 +7078,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/react-is-npm-16.13.1-a9b9382b4f-10c0.zip/node_modules/react-is/",\
         "packageDependencies": [\
           ["react-is", "npm:16.13.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-multi-carousel", [\
+      ["npm:2.8.5", {\
+        "packageLocation": "../../../.yarn/berry/cache/react-multi-carousel-npm-2.8.5-deb66f82c0-10c0.zip/node_modules/react-multi-carousel/",\
+        "packageDependencies": [\
+          ["react-multi-carousel", "npm:2.8.5"]\
         ],\
         "linkType": "HARD"\
       }]\
