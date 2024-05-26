@@ -18,10 +18,14 @@ export default function PostDetailDropdown({
   const router = useRouter();
   const { deletePost } = usePost(category, uid, id);
 
-  const handleClick = () =>
-    deletePost.mutate(undefined, {
-      onSuccess: () => router.replace(`/board/${category}`),
-    });
+  const handleClick = () => {
+    const confirm = window.confirm('글을 삭제하시겠습니까?');
+    if (confirm) {
+      deletePost.mutate(undefined, {
+        onSuccess: () => router.replace(`/board/${category}`),
+      });
+    }
+  };
 
   return (
     <ul
