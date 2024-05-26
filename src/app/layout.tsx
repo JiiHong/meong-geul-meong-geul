@@ -10,7 +10,10 @@ import { ModalContextProvider } from '@/context/ModalContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '멍글멍글',
+  title: {
+    template: '%s | 멍글멍글',
+    default: '멍글멍글',
+  },
   description: '반려견 커뮤니티',
 };
 
