@@ -20,6 +20,7 @@ const PADDING_BY_LEVEL: { [key: number]: string } = {
 };
 
 type Props = {
+  isAdmin: boolean;
   postId: string;
   comments: CommentType[];
   category: BoardCategory;
@@ -27,6 +28,7 @@ type Props = {
 };
 
 export default function Comment({
+  isAdmin,
   postId,
   replyId,
   comments,
@@ -40,16 +42,16 @@ export default function Comment({
 
   if (filterdComments.length === 0) return;
 
-  const handleDeleteClick = (id: string) => {
+  const handleDeleteClick = (uid: string, id: string) => {
     const isDelete = confirm('댓글을 삭제하시겠습니까?');
 
     if (user && isDelete) {
       deleteComment.mutate(
-        { id },
+        { uid, id },
         {
-          onSuccess: () => {
+          onSuccess: (uid) => {
             const myComments = comments.filter(
-              (comment) => comment.uid === user.uid,
+              (comment) => comment.uid === uid,
             );
             if (myComments.length - 1 === 0) {
               removeRecommendOrCommentPostId(postId, 'commentPosts');
@@ -73,10 +75,10 @@ export default function Comment({
                 <span className="text-xs text-gray-400">
                   {formateFullTime(createdAt)}
                 </span>
-                {user?.uid === uid &&
+                {(user?.uid === uid || isAdmin) &&
                   !comments.find((comment) => comment.replyId === id) && (
                     <button
-                      onClick={() => handleDeleteClick(id)}
+                      onClick={() => handleDeleteClick(uid, id)}
                       className="p-1 rounded-full hover:bg-gray-200"
                     >
                       <IconClose />
@@ -94,6 +96,7 @@ export default function Comment({
               )}
             </li>
             <Comment
+              isAdmin={isAdmin}
               postId={postId}
               replyId={id}
               comments={comments}

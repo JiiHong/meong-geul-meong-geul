@@ -6,6 +6,7 @@ import { auth } from '@/service/firebase/firebase-auth';
 import {
   fetchUserFromEmail,
   fetchUserFromUid,
+  isAdmin,
   sendUser,
 } from '@/service/firebase/firebase-firestore';
 import { User } from '@/types/user';
@@ -49,18 +50,21 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session }) {
       const user = session.user;
-
+      const email = session.user.email;
+      const admin = await isAdmin(email);
       const fetchedUser = await fetchUserFromEmail(user?.email ?? '');
 
       if (fetchedUser) {
         const { uid, email, name, profileImage } = fetchedUser[0];
         session.user = {
+          isAdmin: admin,
           uid,
           email,
           name,
           profileImage,
         };
       }
+      console.log(session.user);
 
       return session;
     },

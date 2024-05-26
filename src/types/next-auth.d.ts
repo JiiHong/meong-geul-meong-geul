@@ -2,6 +2,6 @@ import { UserSession } from './user';
 
 declare module 'next-auth' {
   interface Session {
-    user: UserSession;
+    user: UserSession & { isAdmin: boolean };
   }
 }
