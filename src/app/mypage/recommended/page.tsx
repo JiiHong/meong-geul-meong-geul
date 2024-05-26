@@ -8,6 +8,12 @@ import {
 import { authOptions } from '@/next-auth/options';
 import { fetchMyPagePosts } from '@/service/firebase/firebase-firestore';
 import MyPagePosts from '@/components/my/posts/MyPagePosts';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '추천한 글',
+  description: '내가 추천한 글 목록.',
+};
 
 type Props = { searchParams: { page: string } };
 
