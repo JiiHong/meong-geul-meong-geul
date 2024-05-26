@@ -254,7 +254,7 @@ export async function deletePost(
     removeRecommendOrCommentPostId(postId, 'recommendPosts'),
     removeRecommendOrCommentPostId(postId, 'commentPosts'),
   ];
-  await Promise.all(promiseList).catch(console.log);
+  await Promise.all(promiseList).catch(console.error);
 }
 
 export async function removeRecommendOrCommentPostId(
