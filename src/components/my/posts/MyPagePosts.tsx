@@ -6,7 +6,7 @@ import UseMyPagePost from '@/hooks/useMyPagePost';
 
 type Props = {
   uid: string;
-  type: 'recommendPosts' | 'commentPosts';
+  type: 'recommendPosts' | 'commentPosts' | 'myPosts';
   page: string;
 };
 

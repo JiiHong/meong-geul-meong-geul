@@ -6,11 +6,15 @@ import ReactQueryProvider from '@/components/ReactQueryProviders';
 import NextAuthContext from '@/context/NextAuthContext';
 import { UserContextProvider } from '@/context/UserContext';
 import { ModalContextProvider } from '@/context/ModalContext';
+import Footer from '@/components/main/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '멍글멍글',
+  title: {
+    template: '%s | 멍글멍글',
+    default: '멍글멍글',
+  },
   description: '반려견 커뮤니티',
 };
 
@@ -34,6 +38,7 @@ export default function RootLayout({
               </UserContextProvider>
             </NextAuthContext>
           </ReactQueryProvider>
+          <Footer />
         </div>
       </body>
     </html>
