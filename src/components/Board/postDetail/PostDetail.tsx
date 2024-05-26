@@ -31,7 +31,12 @@ export default async function PostDetail() {
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <PostDetailContent postId={id} category={category} session={session} />
+        <PostDetailContent
+          category={category}
+          uid={(session && session.user.uid) ?? ''}
+          postId={id}
+          session={session}
+        />
       </HydrationBoundary>
       <PostDetailComments post={post} category={category} />
     </>

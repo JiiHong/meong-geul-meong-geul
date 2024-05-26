@@ -29,9 +29,14 @@ export default function WriteForm({ category, session }: Props) {
 
   const { uploadPost } = usePosts(category);
 
-  const uploadPostMutate = (id: string, newPost: Post, contentImage?: string) =>
+  const uploadPostMutate = (
+    uid: string,
+    id: string,
+    newPost: Post,
+    contentImage?: string,
+  ) =>
     uploadPost.mutate(
-      { id, newPost, contentImage },
+      { uid, id, newPost, contentImage },
       { onSuccess: () => router.replace(`/board/${category}`) },
     );
 
@@ -74,9 +79,11 @@ export default function WriteForm({ category, session }: Props) {
 
     if (file) {
       return uploadBoardImage(file, category) //
-        .then((contentImage) => uploadPostMutate(id, newPost, contentImage));
+        .then((contentImage) =>
+          uploadPostMutate(uid, id, newPost, contentImage),
+        );
     }
-    return uploadPostMutate(id, newPost);
+    return uploadPostMutate(uid, id, newPost);
   };
 
   return (

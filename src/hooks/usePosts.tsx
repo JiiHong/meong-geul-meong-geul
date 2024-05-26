@@ -6,6 +6,7 @@ import {
 import { Post, BoardCategory } from '@/types/Post';
 
 type MutationType = {
+  uid: string;
   id: string;
   newPost: Post;
   contentImage?: string;
@@ -21,12 +22,14 @@ export default function usePosts(category: BoardCategory) {
   });
 
   const uploadPost = useMutation({
-    mutationFn: ({ id, newPost, contentImage }: MutationType) => {
+    mutationFn: ({ uid, id, newPost, contentImage }: MutationType) => {
       const prop = contentImage ? { ...newPost, contentImage } : { ...newPost };
-      return sendPost(id, category, prop);
+      return sendPost(uid, id, category, prop);
     },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['board', category] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['board', category] });
+      queryClient.invalidateQueries({ queryKey: ['myPage', 'myPosts'] });
+    },
   });
 
   return { postsQuery, uploadPost };

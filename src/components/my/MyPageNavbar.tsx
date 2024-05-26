@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 
 const lists = [
   { title: '내 정보', path: 'info' },
+  { title: '내가 쓴 글', path: 'myposts' },
   { title: '추천한 글', path: 'recommended' },
   { title: '댓글 단 글', path: 'commented' },
 ];

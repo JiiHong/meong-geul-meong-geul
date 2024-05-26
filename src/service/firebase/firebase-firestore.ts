@@ -13,6 +13,8 @@ import {
   increment,
   where,
   deleteField,
+  FieldValue,
+  arrayRemove,
 } from 'firebase/firestore';
 import { app } from './firebase-config';
 import { User } from '@/types/user';
@@ -64,7 +66,11 @@ export async function sendUser(uid: string, user: User) {
   return setDoc(doc(db, 'users', uid), user);
 }
 
-export async function updateUser(uid: string, key: keyof User, value: string) {
+export async function updateUser(
+  uid: string,
+  key: keyof User,
+  value: string | FieldValue,
+) {
   const ref = doc(db, 'users', uid);
   return updateDoc(ref, {
     [key]: value,
@@ -79,11 +85,13 @@ export async function deleteProfileImageUrl(uid: string) {
 }
 
 export async function uploadPost(
+  uid: string,
   id: string,
   category: BoardCategory,
   post: Post,
 ) {
-  return setDoc(doc(db, `${category}Boards`, id), post);
+  return setDoc(doc(db, `${category}Boards`, id), post) //
+    .then(() => updateUser(uid, 'myPosts', arrayUnion(id)));
 }
 
 export async function fetchPosts(category: string) {
@@ -137,7 +145,7 @@ export async function fetchPostsFromPostId(
 
 export async function fetchMyPagePosts(
   uid: string,
-  type: 'recommendPosts' | 'commentPosts',
+  type: 'recommendPosts' | 'commentPosts' | 'myPosts',
 ) {
   const user = await fetchUserFromUid(uid);
 
@@ -224,13 +232,18 @@ export async function fetchPost(category: BoardCategory, id: string) {
   return null;
 }
 
-export async function deletePost(category: BoardCategory, postId: string) {
+export async function deletePost(
+  category: BoardCategory,
+  uid: string,
+  postId: string,
+) {
   const promiseList = [
     deleteDoc(doc(db, `${category}Boards`, postId)),
+    updateUser(uid, 'myPosts', arrayRemove(postId)),
     removeRecommendOrCommentPostId(postId, 'recommendPosts'),
     removeRecommendOrCommentPostId(postId, 'commentPosts'),
   ];
-  Promise.all(promiseList).catch(console.log);
+  await Promise.all(promiseList).catch(console.log);
 }
 
 export async function removeRecommendOrCommentPostId(

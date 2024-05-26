@@ -3,7 +3,7 @@ import { fetchMyPagePosts } from '@/service/firebase/firebase-firestore';
 
 export default function UseMyPagePost(
   uid: string,
-  type: 'recommendPosts' | 'commentPosts',
+  type: 'recommendPosts' | 'commentPosts' | 'myPosts',
 ) {
   const myPagePostQuery = useQuery({
     queryKey: ['myPage', type],
