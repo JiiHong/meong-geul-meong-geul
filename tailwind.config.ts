@@ -40,6 +40,7 @@ const config: Config = {
           'linear-gradient(133.91deg, #FFCE4F 8.49%, #FFC175 49.01%, #6788FF 92.03%);',
         'orange-gradient':
           'linear-gradient(177.92deg, #FFF3E6 1.7%, #FFFEF9 98.25%)',
+        ddong: `url('/ddong.png')`,
       },
     },
   },
