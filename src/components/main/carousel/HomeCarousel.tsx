@@ -15,7 +15,6 @@ export default function HomeCarousel() {
   parser.setUA(userAgent);
   const result = parser.getResult();
   const deviceType = (result.device && result.device.type) || 'desktop';
-  console.log(result);
 
   return (
     <MultiCarousel deviceType={deviceType}>
