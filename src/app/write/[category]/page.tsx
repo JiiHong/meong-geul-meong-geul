@@ -3,6 +3,7 @@ import { notFound, redirect } from 'next/navigation';
 import { BoardCategory } from '@/types/Post';
 import { authOptions } from '@/next-auth/options';
 import WriteForm from '@/components/Board/write/WriteForm';
+import { Metadata } from 'next';
 
 type Props = {
   params: {
@@ -27,4 +28,10 @@ export default async function WritePage({ params: { category } }: Props) {
 
 export function generateStaticParams() {
   return categorys.map((category) => ({ category }));
+}
+
+export function generateMetadata({ params: { category } }: Props): Metadata {
+  return {
+    title: `${category} 글쓰기`,
+  };
 }
