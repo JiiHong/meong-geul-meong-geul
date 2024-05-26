@@ -34,9 +34,12 @@ export default function RecommendButton({
     fetchRecommendPostsId(user.uid) //
       .then((ids) => {
         const isExist = ids.find((id) => id === postId);
-        if (isExist) return alert('이미 추천한 글입니다.');
+        if (isExist) return window.alert('이미 추천한 글입니다.');
         increaseRecommendCount.mutate(undefined, {
-          onSuccess: () => uploadRecommendPostId(user.uid, postId),
+          onSuccess: () => {
+            uploadRecommendPostId(user.uid, postId);
+            window.alert('추천했습니다!');
+          },
         });
       });
   };

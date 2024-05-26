@@ -39,7 +39,7 @@ export default function SignupModal({ uid }: Props) {
     if (!validateNickname(text))
       return window.alert('닉네임을 다시 입력해주세요. 🥺');
 
-    const confirm = window.confirm(`'${text}'`);
+    const confirm = window.confirm('가입하시겠습니까?');
     if (!confirm) return;
     updateUser(uid, 'name', text);
     router.refresh();
