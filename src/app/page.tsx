@@ -26,6 +26,16 @@ export default function Home() {
           calssName="bg-[#CDDBEB4D]"
         />
       </section>
+      <section className="space-y-2 text-center">
+        <p className="text-lg text-gray-600">
+          <span className="text-amber-500">함께하는 나의 반려견</span>, 우리의
+          이야기
+        </p>
+        <p className="text-lg text-gray-600">
+          새로운 모험과 소중한 순간들을
+          <span className="text-amber-500"> 함께 나누는 곳</span>
+        </p>
+      </section>
     </main>
   );
 }
