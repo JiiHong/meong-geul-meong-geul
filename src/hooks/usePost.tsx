@@ -5,7 +5,11 @@ import {
   fetchPost,
 } from '@/service/firebase/firebase-firestore';
 
-export default function usePost(category: BoardCategory, id: string) {
+export default function usePost(
+  category: BoardCategory,
+  uid: string,
+  id: string,
+) {
   const queryClient = useQueryClient();
 
   const postQuery = useQuery({
@@ -15,10 +19,11 @@ export default function usePost(category: BoardCategory, id: string) {
   });
 
   const deletePost = useMutation({
-    mutationFn: () => removePost(category, id),
+    mutationFn: () => removePost(category, uid, id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['board', category] });
       queryClient.invalidateQueries({ queryKey: ['board', category, id] });
+      queryClient.invalidateQueries({ queryKey: ['myPage', 'myPosts'] });
     },
   });
 

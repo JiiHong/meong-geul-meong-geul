@@ -12,26 +12,27 @@ import { HiDotsHorizontal } from 'react-icons/hi';
 import PostDetailDropdown from './PostDetailDropdown';
 
 type Props = {
-  postId: string;
   category: BoardCategory;
+  uid: string;
+  postId: string;
   session: Session | null;
 };
 
 export default function PostDetailContent({
-  postId,
   category,
+  uid,
+  postId,
   session,
 }: Props) {
   const [isActive, setIsActive] = useState(false);
   const {
     postQuery: { data: post },
-  } = usePost(category, postId);
+  } = usePost(category, uid, postId);
 
   if (!post) return <></>;
 
   const {
     id,
-    uid,
     title,
     name,
     content,
@@ -58,6 +59,7 @@ export default function PostDetailContent({
                 <PostDetailDropdown
                   isActive={isActive}
                   category={category}
+                  uid={uid}
                   id={id}
                 />
               </>

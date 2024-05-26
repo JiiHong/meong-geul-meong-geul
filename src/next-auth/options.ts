@@ -38,6 +38,7 @@ export const authOptions: NextAuthOptions = {
           email,
           recommendPosts: [],
           commentPosts: [],
+          myPosts: [],
           createdAt: createTime(),
         };
 
