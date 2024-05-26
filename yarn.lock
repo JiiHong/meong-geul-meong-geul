@@ -1544,6 +1544,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/ua-parser-js@npm:^0.7.39":
+  version: 0.7.39
+  resolution: "@types/ua-parser-js@npm:0.7.39"
+  checksum: 10c0/fea522f42dfc2854d9c93144a13c3db3bbe1c791458451db06d46bec7e1dbbe945d1542e02bb38378e39a04bdb7810b43e2ead26f9e6c250832e187312522708
+  languageName: node
+  linkType: hard
+
 "@types/uuid@npm:^9":
   version: 9.0.8
   resolution: "@types/uuid@npm:9.0.8"
@@ -4493,6 +4500,7 @@ __metadata:
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
+    "@types/ua-parser-js": "npm:^0.7.39"
     "@types/uuid": "npm:^9"
     "@typescript-eslint/eslint-plugin": "npm:^7.4.0"
     "@typescript-eslint/parser": "npm:^7.4.0"
@@ -4514,10 +4522,12 @@ __metadata:
     react: "npm:^18"
     react-dom: "npm:^18"
     react-icons: "npm:^5.0.1"
+    react-multi-carousel: "npm:^2.8.5"
     react-spinners: "npm:^0.13.8"
     sharp: "npm:^0.33.3"
     tailwindcss: "npm:^3.3.0"
     typescript: "npm:^5"
+    ua-parser-js: "npm:^1.0.37"
     uuid: "npm:^9.0.1"
   languageName: unknown
   linkType: soft
@@ -5396,6 +5406,13 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 10c0/33977da7a5f1a287936a0c85639fec6ca74f4f15ef1e59a6bc20338fc73dc69555381e211f7a3529b8150a1f71e4225525b41b60b52965bda53ce7d47377ada1
+  languageName: node
+  linkType: hard
+
+"react-multi-carousel@npm:^2.8.5":
+  version: 2.8.5
+  resolution: "react-multi-carousel@npm:2.8.5"
+  checksum: 10c0/6c5bf167f6aba91a6457d3992f53ecd12eca7f45d022d61b380f5303f18bca35e2edb28ff1a726fb7eee72cbd520264b4821de14b0c0a4fd778174fb1fdded0e
   languageName: node
   linkType: hard
 
@@ -6327,6 +6344,13 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/6e51f8b7e6ec55b897b9e56b67e864fe8f44e30f4a14357aad5dc0f7432db2f01efc0522df0b6c36d361c51f2dc3dcac5c832efd96a404cfabf884e915d38828
+  languageName: node
+  linkType: hard
+
+"ua-parser-js@npm:^1.0.37":
+  version: 1.0.37
+  resolution: "ua-parser-js@npm:1.0.37"
+  checksum: 10c0/dac8cf82a55b2e097bd2286954e01454c4cfcf23c9d9b56961ce94bda3cec5a38ca536e6e84c20a4000a9d4b4a4abcbd98ec634ccebe21be36595ea3069126e4
   languageName: node
   linkType: hard
 
