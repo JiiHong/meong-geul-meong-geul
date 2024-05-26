@@ -6,6 +6,7 @@ import ReactQueryProvider from '@/components/ReactQueryProviders';
 import NextAuthContext from '@/context/NextAuthContext';
 import { UserContextProvider } from '@/context/UserContext';
 import { ModalContextProvider } from '@/context/ModalContext';
+import Footer from '@/components/main/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
               </UserContextProvider>
             </NextAuthContext>
           </ReactQueryProvider>
+          <Footer />
         </div>
       </body>
     </html>
