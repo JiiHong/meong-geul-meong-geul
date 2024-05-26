@@ -5,11 +5,12 @@ import Comment from './Comment';
 import { BoardCategory } from '@/types/Post';
 
 type Props = {
+  isAdmin: boolean;
   postId: string;
   category: BoardCategory;
 };
 
-export default function Comments({ postId, category }: Props) {
+export default function Comments({ isAdmin, postId, category }: Props) {
   const {
     commentQuery: { data: comments },
   } = useComments(postId, category);
@@ -18,6 +19,7 @@ export default function Comments({ postId, category }: Props) {
     <ul>
       {comments && comments.length > 0 && (
         <Comment
+          isAdmin={isAdmin}
           postId={postId}
           comments={comments}
           category={category}

@@ -13,26 +13,25 @@ import PostDetailDropdown from './PostDetailDropdown';
 
 type Props = {
   category: BoardCategory;
-  uid: string;
   postId: string;
   session: Session | null;
 };
 
 export default function PostDetailContent({
   category,
-  uid,
   postId,
   session,
 }: Props) {
   const [isActive, setIsActive] = useState(false);
   const {
     postQuery: { data: post },
-  } = usePost(category, uid, postId);
+  } = usePost(category, session?.user.uid ?? '', postId);
 
   if (!post) return <></>;
 
   const {
     id,
+    uid,
     title,
     name,
     content,
@@ -51,7 +50,7 @@ export default function PostDetailContent({
         <div className="flex justify-between items-center">
           <h1 className="mb-4 text-4xl font-semibold">{title}</h1>
           <div className="relative">
-            {session && session.user.uid === uid && (
+            {session && (session.user.uid === uid || session.user.isAdmin) && (
               <>
                 <button onClick={handleClick}>
                   <HiDotsHorizontal className="text-2xl text-gray-700" />

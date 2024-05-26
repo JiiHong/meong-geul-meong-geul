@@ -38,15 +38,16 @@ export default function useComments(postId: string, category: BoardCategory) {
   });
 
   const deleteComment = useMutation({
-    mutationFn: ({ id }: Pick<MutationType, 'id'>) =>
-      removeComment(postId, id, category).then(() =>
-        updateCommentCount(postId, category, -1),
-      ),
-    onSuccess: () => {
+    mutationFn: ({ uid, id }: Pick<MutationType, 'uid' | 'id'>) =>
+      removeComment(postId, id, category)
+        .then(() => updateCommentCount(postId, category, -1))
+        .then(() => uid),
+    onSuccess: (uid) => {
       queryClient.invalidateQueries({ queryKey: ['comment', postId] });
       queryClient.invalidateQueries({ queryKey: ['board', category] });
       queryClient.invalidateQueries({ queryKey: ['myPage', 'commentPosts'] });
       queryClient.invalidateQueries({ queryKey: ['myPage', 'recommendPosts'] });
+      return uid;
     },
   });
 
