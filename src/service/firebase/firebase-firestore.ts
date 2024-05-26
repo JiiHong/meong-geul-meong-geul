@@ -23,6 +23,17 @@ import { Comment } from '@/types/comment';
 
 const db = getFirestore(app);
 
+export async function isAdmin(email: string) {
+  const querySnapshot = await getDocs(collection(db, 'admins'));
+  if (!querySnapshot.empty) {
+    const docs = querySnapshot.docs;
+    const admins = docs.map((doc) => doc.data() as Pick<User, 'email'>);
+    const isAdmin = admins.some((admin) => admin.email === email);
+    return isAdmin;
+  }
+  return false;
+}
+
 export async function fetchUsers(): Promise<User[]> {
   const querySnapshot = await getDocs(collection(db, 'users'));
   if (!querySnapshot.empty) {
@@ -74,7 +85,7 @@ export async function updateUser(
   const ref = doc(db, 'users', uid);
   return updateDoc(ref, {
     [key]: value,
-  }).then(() => value);
+  }).then(() => (typeof value === 'string' ? value : ''));
 }
 
 export async function deleteProfileImageUrl(uid: string) {
