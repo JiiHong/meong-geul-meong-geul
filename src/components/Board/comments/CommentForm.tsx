@@ -73,7 +73,7 @@ export default function CommentForm({
         min={1}
         placeholder="댓글을 입력해주세요."
         onChange={handleChange}
-        className="grow md:px-3 px-4 md:py-1 py-2 sm:text-sm md:text-base text-lg border rounded-l-md outline-none"
+        className="grow w-full md:px-3 px-4 md:py-1 py-2 sm:text-sm md:text-base text-lg border border-r-0 rounded-l-md outline-none"
       />
       <button
         disabled={isLoading}
