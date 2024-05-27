@@ -48,12 +48,14 @@ export default function PostDetailContent({
     <section className="flex flex-col items-center p-8 rounded-3xl bg-white">
       <div className="w-11/12">
         <div className="flex justify-between items-center">
-          <h1 className="mb-4 text-4xl font-semibold">{title}</h1>
+          <h1 className="mb-4 sm:text-2xl md:text-3xl text-4xl font-semibold">
+            {title}
+          </h1>
           <div className="relative">
             {session && (session.user.uid === uid || session.user.isAdmin) && (
               <>
                 <button onClick={handleClick}>
-                  <HiDotsHorizontal className="text-2xl text-gray-700" />
+                  <HiDotsHorizontal className="sm:text-lg md:text-xl text-2xl text-gray-700" />
                 </button>
                 <PostDetailDropdown
                   isActive={isActive}
@@ -68,16 +70,22 @@ export default function PostDetailContent({
         <div className="flex items-center gap-4 pb-3 border-b">
           <UserImage title={name} userImage={userImage} size="medium" />
           <div className="flex flex-col -space-y-2">
-            <span className="text-lg">{name}</span>
+            <span className="sm:text-sm md:text-base text-lg truncate">
+              {name}
+            </span>
             <div className="space-x-4">
-              <span className="text-sm text-gray-400">
+              <span className="sm:text-[0.7rem] md:text-xs text-sm text-gray-400">
                 {formateFullTime(createdAt)}
               </span>
-              <span className="text-sm text-gray-400">조회수 {viewCount}</span>
+              <span className="sm:text-[0.7rem] md:text-xs text-sm text-gray-400">
+                조회수 {viewCount}
+              </span>
             </div>
           </div>
         </div>
-        <pre className="py-6 text-xl whitespace-pre-wrap">{content}</pre>
+        <pre className="py-6 sm:text-base md:text-lg text-xl whitespace-pre-wrap">
+          {content}
+        </pre>
         {contentImage && (
           <Image
             src={contentImage}

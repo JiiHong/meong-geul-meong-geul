@@ -29,9 +29,9 @@ export default function PostDetailDropdown({
 
   return (
     <ul
-      className={`absolute top-1/2 left-1/2 -translate-x-1/2 w-20 py-2 mt-2 border rounded-md shadow-md bg-white ${isActive ? 'flex flex-col items-center gap-2' : 'hidden'}`}
+      className={`absolute top-1/2 left-1/2 -translate-x-1/2 sm:w-14 md:w-16 w-20 py-2 mt-2 border rounded-md shadow-md bg-white ${isActive ? 'flex flex-col items-center gap-2' : 'hidden'}`}
     >
-      <li className="text-sm w-full">
+      <li className="sm:text-[0.7rem] md:text-xs text-sm w-full">
         <button
           onClick={handleClick}
           disabled={deletePost.isPending}
