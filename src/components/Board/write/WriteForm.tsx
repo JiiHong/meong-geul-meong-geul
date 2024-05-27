@@ -41,12 +41,18 @@ export default function WriteForm({ category, session }: Props) {
       { onSuccess: () => router.replace(`/board/${category}`) },
     );
 
+  const setFileNull = () => setFile(null);
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     const { files } = e.target as HTMLInputElement;
-    if (name === 'file') return setFile(files && files[0]);
+
+    if (files && !files[0]) return;
+
+    if (name === 'file' && files) return setFile(files[0]);
+
     setPost({ ...post, [name]: value });
   };
 
@@ -61,6 +67,9 @@ export default function WriteForm({ category, session }: Props) {
       setPost((prev) => ({ ...prev, content: '' }));
       return alert('내용을 입력해주세요.');
     }
+
+    if (category === 'info' && file === null)
+      return alert('정보게시판 글은 사진이 필수입니다!');
 
     setIsLoading((prev) => !prev);
 
@@ -115,7 +124,11 @@ export default function WriteForm({ category, session }: Props) {
         onChange={handleChange}
         className="px-4 py-2 text-lg border outline-none rounded-lg md:px-2 md:py-1 md:text-base"
       />
-      <CustomFileInput onChange={handleChange} file={file} />
+      <CustomFileInput
+        onChange={handleChange}
+        setFileNull={setFileNull}
+        file={file}
+      />
       <WriteFormButton disabled={isLoading} />
     </form>
   );
