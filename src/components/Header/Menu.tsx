@@ -25,7 +25,7 @@ export default function Menu({ session, onClick, className }: Props) {
         {navbarList.map(({ title, path }) => (
           <li
             key={title}
-            className={`text-lg font-bold transition-all hover:-translate-y-1 hover:text-gray-700 ${className.li} ${path === pathname ? 'text-gray-700' : 'text-gray-400'}`}
+            className={`text-lg font-bold transition-all hover:-translate-y-1 hover:text-amber-500 ${className.li} ${path === pathname ? 'text-amber-500' : 'text-gray-700'}`}
           >
             <Link href={path} className="px-4 py-3" onClick={onClick}>
               {title}
