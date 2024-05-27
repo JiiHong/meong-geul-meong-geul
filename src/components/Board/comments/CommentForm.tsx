@@ -66,18 +66,18 @@ export default function CommentForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex">
+    <form onSubmit={handleSubmit} className="flex justify-center">
       <input
         type="text"
         value={content}
         min={1}
         placeholder="댓글을 입력해주세요."
         onChange={handleChange}
-        className="px-4 py-2 grow border rounded-l-md outline-none"
+        className="grow md:px-3 px-4 md:py-1 py-2 sm:text-sm md:text-base text-lg border rounded-l-md outline-none"
       />
       <button
         disabled={isLoading}
-        className="px-4 py-2 text-gray-50 rounded-r-md bg-gray-600 hover:brightness-110"
+        className="sm:px-2 px-4 sm:py-1 py-2 sm:text-xs md:text-sm text-base text-gray-50 whitespace-pre rounded-r-md bg-gray-600 hover:brightness-110"
       >
         등록
       </button>
