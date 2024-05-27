@@ -17,7 +17,9 @@ export default function PopularPosts({ category }: Props) {
 
   return (
     <section className="mt-4">
-      <h2 className="px-2 text-xl font-bold">{translateTitle(category)}</h2>
+      <h2 className="px-2 sm:text-base md:text-lg text-xl font-bold">
+        {translateTitle(category)}
+      </h2>
       <ul className="flex gap-8 px-2 pb-4 mt-2 overflow-x-auto">
         {popularPosts.map((post) => (
           <PopularPostCard key={post.id} post={post} category={category} />
