@@ -1,10 +1,13 @@
 'use client';
 
+import { Session } from 'next-auth';
 import { IoMenu } from 'react-icons/io5';
 import { useState } from 'react';
 import MobileAside from './MobileAside';
 
-export default function MobileMenu() {
+type Props = { session: Session | null };
+
+export default function MobileMenu({ session }: Props) {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   const handleClick = () => setIsOpenMenu((prev) => !prev);
@@ -17,7 +20,11 @@ export default function MobileMenu() {
       >
         <IoMenu />
       </button>
-      <MobileAside isOpenMenu={isOpenMenu} onClick={handleClick} />
+      <MobileAside
+        session={session}
+        isOpenMenu={isOpenMenu}
+        onClick={handleClick}
+      />
     </div>
   );
 }

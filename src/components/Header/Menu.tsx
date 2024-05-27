@@ -1,15 +1,19 @@
 'use client';
 
+import { Session } from 'next-auth';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navbarList } from './Navbar';
+import UserProfileImage from './UserProfileImage';
+import LoginButton from './LoginButton';
 
 type Props = {
+  session: Session | null;
   onClick?: () => void;
   className: { ul: string; li?: string };
 };
 
-export default function Menu({ onClick, className }: Props) {
+export default function Menu({ session, onClick, className }: Props) {
   const pathname = usePathname();
 
   return (
@@ -24,6 +28,17 @@ export default function Menu({ onClick, className }: Props) {
           </Link>
         </li>
       ))}
+      <li className="md:self-center">
+        {session ? (
+          <UserProfileImage
+            session={session}
+            name={session.user.name}
+            image={session.user.profileImage}
+          />
+        ) : (
+          <LoginButton />
+        )}
+      </li>
     </ul>
   );
 }

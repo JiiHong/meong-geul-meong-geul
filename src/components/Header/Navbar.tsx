@@ -2,8 +2,6 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/next-auth/options';
 import DesktopMenu from './DesktopMenu';
 import MobileMenu from './MobileMenu';
-import LoginButton from './LoginButton';
-import UserProfileImage from './UserProfileImage';
 
 type NavbarList = {
   title: string;
@@ -21,17 +19,8 @@ export default async function Navbar() {
 
   return (
     <nav className="flex gap-4">
-      <DesktopMenu />
-      <MobileMenu />
-      {session ? (
-        <UserProfileImage
-          session={session}
-          name={session.user.name}
-          image={session.user.profileImage}
-        />
-      ) : (
-        <LoginButton />
-      )}
+      <DesktopMenu session={session} />
+      <MobileMenu session={session} />
     </nav>
   );
 }
