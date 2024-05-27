@@ -1,9 +1,14 @@
 import dayjs, { extend, locale } from 'dayjs';
 import relaviteTime from 'dayjs/plugin/relativeTime';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import 'dayjs/locale/ko';
 
-locale('ko');
+extend(utc);
+extend(timezone);
 extend(relaviteTime);
+dayjs.tz.setDefault('Asia/Seoul');
+locale('ko');
 
 export function formateAgo(time: string) {
   return dayjs(time).fromNow();
@@ -14,5 +19,5 @@ export function formateFullTime(time: string) {
 }
 
 export function createTime() {
-  return dayjs().format();
+  return dayjs().tz().format();
 }
