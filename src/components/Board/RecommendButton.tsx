@@ -49,8 +49,10 @@ export default function RecommendButton({
       onClick={handleClick}
       className="px-6 py-3 border border-gray-400 rounded-md transition-all hover:bg-gray-50"
     >
-      <IconThumbsup className="text-2xl text-gray-700" />
-      <span className="text-sky-800">{recommendCount}</span>
+      <IconThumbsup className="sm:text-lg md:text-xl text-2xl text-gray-700" />
+      <span className="sm:text-xs md:text-sm text-sky-800">
+        {recommendCount}
+      </span>
     </button>
   );
 }

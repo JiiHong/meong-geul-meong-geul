@@ -16,11 +16,13 @@ export default function PopularPostCard({ post, category }: Props) {
       >
         <div className="flex items-center gap-1 pb-1">
           <UserImage userImage={userImage} title={name} />
-          <span className="font-bold">{name}</span>
+          <span className="sm:text-xs md:text-sm font-bold">{name}</span>
         </div>
-        <p className="font-semibold truncate">{title}</p>
-        <p className="grow text-xs py-1 truncate">{content}</p>
-        <div className="flex items-center gap-2 text-xs text-gray-400">
+        <p className="sm:text-xs md:text-sm font-semibold truncate">{title}</p>
+        <p className="grow sm:text-3xs md:text-2xs text-xs py-1 truncate">
+          {content}
+        </p>
+        <div className="flex items-center gap-2 sm:text-3xs md:text-2xs text-xs text-gray-400">
           <span>추천 {recommendCount}</span>
           <span>댓글 {commentCount}</span>
         </div>

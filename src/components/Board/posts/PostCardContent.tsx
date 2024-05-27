@@ -10,7 +10,9 @@ export default function PostCardContent({
 }: Props) {
   return (
     <div className="flex flex-col gap-1.5 h-full">
-      <p className="px-2 pt-3 text-sm font-semibold truncate">{title}</p>
+      <p className="px-2 pt-3 md:text-xs text-sm font-semibold truncate">
+        {title}
+      </p>
       <div className="relative w-full h-full pb-4 max-h-32 border-b">
         {contentImage ? (
           <Image
@@ -21,7 +23,7 @@ export default function PostCardContent({
             className="object-contain"
           />
         ) : (
-          <p className="px-2 h-full text-xs break-all line-clamp-[7]">
+          <p className="px-2 h-full sm:text-3xs md:text-2xs text-xs break-all line-clamp-[7]">
             {content}
           </p>
         )}

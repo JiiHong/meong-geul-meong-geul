@@ -14,7 +14,7 @@ export default function PostCardHeader({
     <div className="flex justify-between items-center px-2">
       <div className="flex items-center gap-1 shrink-0">
         <UserImage title={title} userImage={userImage} />
-        <span className="font-semibold">{name}</span>
+        <span className="md:text-sm font-semibold">{name}</span>
       </div>
       <span className="text-xs text-gray-300">{formateAgo(createdAt)}</span>
     </div>

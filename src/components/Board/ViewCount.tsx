@@ -18,8 +18,10 @@ export default function ViewCount({ postId, category }: Props) {
     <div className="flex items-center gap-0.5 pb-4 border-b">
       {comments && (
         <>
-          <IconComment className="text-lg" />
-          <span>{comments.length}</span>
+          <IconComment className="sm:text-base md:text-lg text-2xl" />
+          <span className="sm:text-sm md:text-base text-lg">
+            {comments.length}
+          </span>
         </>
       )}
     </div>
