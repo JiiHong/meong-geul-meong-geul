@@ -18,7 +18,7 @@ export default function MyPageNavbar() {
       {lists.map(({ title, path }, index) => (
         <li
           key={index}
-          className={`px-3 py-2 font-semibold hover:text-amber-500 ${path === splitedPath ? 'text-amber-500' : 'text-gray-600'}`}
+          className={`px-3 py-2 font-semibold hover:text-amber-500 ${path === splitedPath ? 'text-amber-500' : 'text-gray-700'}`}
         >
           <Link href={path} className="block">
             {title}
