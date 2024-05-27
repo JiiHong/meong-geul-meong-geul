@@ -24,6 +24,7 @@ type Props = {
 export default function WriteForm({ category, session }: Props) {
   const [post, setPost] = useState<WriteFormState>(DEFAULT_DATA);
   const [file, setFile] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -61,6 +62,8 @@ export default function WriteForm({ category, session }: Props) {
       return alert('내용을 입력해주세요.');
     }
 
+    setIsLoading((prev) => !prev);
+
     const id = uuid();
     const { uid, name, profileImage } = session.user;
 
@@ -81,9 +84,11 @@ export default function WriteForm({ category, session }: Props) {
       return uploadBoardImage(file, category) //
         .then((contentImage) =>
           uploadPostMutate(uid, id, newPost, contentImage),
-        );
+        )
+        .then(() => setIsLoading((prev) => !prev));
     }
-    return uploadPostMutate(uid, id, newPost);
+    uploadPostMutate(uid, id, newPost);
+    setIsLoading((prev) => !prev);
   };
 
   return (
@@ -111,7 +116,7 @@ export default function WriteForm({ category, session }: Props) {
         className="px-4 py-2 text-lg border outline-none rounded-lg md:px-2 md:py-1 md:text-base"
       />
       <CustomFileInput onChange={handleChange} file={file} />
-      <WriteFormButton disabled={uploadPost.isPending} />
+      <WriteFormButton disabled={isLoading} />
     </form>
   );
 }
