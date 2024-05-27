@@ -77,7 +77,7 @@ export default function PostDetailContent({
             </div>
           </div>
         </div>
-        <p className="py-6 text-xl break-words">{content}</p>
+        <pre className="py-6 text-xl whitespace-pre-wrap">{content}</pre>
         {contentImage && (
           <Image
             src={contentImage}
