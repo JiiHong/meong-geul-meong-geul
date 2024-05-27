@@ -25,6 +25,7 @@ export default function WriteForm({ category, session }: Props) {
   const [post, setPost] = useState<WriteFormState>(DEFAULT_DATA);
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  console.log(file);
 
   const router = useRouter();
 
@@ -46,7 +47,10 @@ export default function WriteForm({ category, session }: Props) {
   ) => {
     const { name, value } = e.target;
     const { files } = e.target as HTMLInputElement;
-    if (name === 'file') return setFile(files && files[0]);
+
+    if (name === 'file' && files && !files[0]) return;
+    if (name === 'file' && files) return setFile(files[0]);
+
     setPost({ ...post, [name]: value });
   };
 
@@ -61,6 +65,9 @@ export default function WriteForm({ category, session }: Props) {
       setPost((prev) => ({ ...prev, content: '' }));
       return alert('내용을 입력해주세요.');
     }
+
+    if (category === 'info' && file === null)
+      return alert('정보게시판 글은 사진이 필수입니다!');
 
     setIsLoading((prev) => !prev);
 
