@@ -29,6 +29,10 @@ const config: Config = {
           900: '#050505',
         },
       },
+      fontSize: {
+        '2xs': '0.7rem',
+        '3xs': '0.65rem',
+      },
       borderRadius: {
         '4xl': '2rem',
       },

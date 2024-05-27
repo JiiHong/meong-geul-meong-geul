@@ -23,7 +23,7 @@ export default function PostCardContent({
             className="object-contain"
           />
         ) : (
-          <p className="px-2 h-full md:text-[0.65rem] text-xs break-all line-clamp-[7]">
+          <p className="px-2 h-full sm:text-3xs md:text-2xs text-xs break-all line-clamp-[7]">
             {content}
           </p>
         )}

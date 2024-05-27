@@ -19,10 +19,10 @@ export default function PopularPostCard({ post, category }: Props) {
           <span className="sm:text-xs md:text-sm font-bold">{name}</span>
         </div>
         <p className="sm:text-xs md:text-sm font-semibold truncate">{title}</p>
-        <p className="grow sm:text-[0.6rem] md:text-[0.65rem] text-xs py-1 truncate">
+        <p className="grow sm:text-3xs md:text-2xs text-xs py-1 truncate">
           {content}
         </p>
-        <div className="flex items-center gap-2 sm:text-[0.6rem] md:text-[0.65rem] text-xs text-gray-400">
+        <div className="flex items-center gap-2 sm:text-3xs md:text-2xs text-xs text-gray-400">
           <span>추천 {recommendCount}</span>
           <span>댓글 {commentCount}</span>
         </div>

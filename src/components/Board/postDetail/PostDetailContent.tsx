@@ -74,10 +74,10 @@ export default function PostDetailContent({
               {name}
             </span>
             <div className="space-x-4">
-              <span className="sm:text-[0.7rem] md:text-xs text-sm text-gray-400">
+              <span className="sm:text-2xs md:text-xs text-sm text-gray-400">
                 {formateFullTime(createdAt)}
               </span>
-              <span className="sm:text-[0.7rem] md:text-xs text-sm text-gray-400">
+              <span className="sm:text-2xs md:text-xs text-sm text-gray-400">
                 조회수 {viewCount}
               </span>
             </div>
