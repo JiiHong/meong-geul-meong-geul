@@ -32,6 +32,7 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params: { category } }: Props): Metadata {
   return {
-    title: `${category} 글쓰기`,
+    title: `${category} 글 쓰기`,
+    description: `${category} 글 쓰기 페이지`,
   };
 }
