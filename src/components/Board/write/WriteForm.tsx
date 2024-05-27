@@ -25,7 +25,6 @@ export default function WriteForm({ category, session }: Props) {
   const [post, setPost] = useState<WriteFormState>(DEFAULT_DATA);
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(file);
 
   const router = useRouter();
 
@@ -42,13 +41,16 @@ export default function WriteForm({ category, session }: Props) {
       { onSuccess: () => router.replace(`/board/${category}`) },
     );
 
+  const setFileNull = () => setFile(null);
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     const { files } = e.target as HTMLInputElement;
 
-    if (name === 'file' && files && !files[0]) return;
+    if (files && !files[0]) return;
+
     if (name === 'file' && files) return setFile(files[0]);
 
     setPost({ ...post, [name]: value });
@@ -122,7 +124,11 @@ export default function WriteForm({ category, session }: Props) {
         onChange={handleChange}
         className="px-4 py-2 text-lg border outline-none rounded-lg md:px-2 md:py-1 md:text-base"
       />
-      <CustomFileInput onChange={handleChange} file={file} />
+      <CustomFileInput
+        onChange={handleChange}
+        setFileNull={setFileNull}
+        file={file}
+      />
       <WriteFormButton disabled={isLoading} />
     </form>
   );

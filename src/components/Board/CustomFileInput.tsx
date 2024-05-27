@@ -3,12 +3,17 @@ import { MdOutlineAddPhotoAlternate } from 'react-icons/md';
 
 type Props = {
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  setFileNull: () => void;
   file: File | null;
 };
 
-export default function CustomFileInput({ onChange, file }: Props) {
+export default function CustomFileInput({
+  onChange,
+  setFileNull,
+  file,
+}: Props) {
   return (
-    <div className="flex items-center gap-2 border rounded-lg overflow-hidden">
+    <div className="flex items-center border rounded-lg overflow-hidden">
       <label
         htmlFor="file"
         className="px-3 py-1 text-2xl text-white  bg-gray-600 cursor-pointer"
@@ -23,7 +28,18 @@ export default function CustomFileInput({ onChange, file }: Props) {
         className="hidden"
         onChange={onChange}
       />
-      <p className="text-sm text-gray-700">{file && file.name}</p>
+      <div className="flex justify-between items-center w-full px-2">
+        <p className="text-sm text-gray-700 truncate">{file && file.name}</p>
+        {file && (
+          <button
+            type="button"
+            className="text-lg text-red-700"
+            onClick={setFileNull}
+          >
+            x
+          </button>
+        )}
+      </div>
     </div>
   );
 }
