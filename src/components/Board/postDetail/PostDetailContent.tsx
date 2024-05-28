@@ -83,7 +83,7 @@ export default function PostDetailContent({
             </div>
           </div>
         </div>
-        <pre className="py-6 sm:text-base md:text-lg text-xl whitespace-pre-wrap">
+        <pre className="py-6 sm:text-base md:text-lg text-xl font-sans whitespace-pre-wrap">
           {content}
         </pre>
         {contentImage && (
