@@ -11,13 +11,13 @@ dayjs.tz.setDefault('Asia/Seoul');
 locale('ko');
 
 export function formateAgo(time: string) {
-  return dayjs(time).fromNow();
+  return dayjs(time).tz().fromNow();
 }
 
 export function formateFullTime(time: string) {
-  return dayjs(time).format('YYYY-MM-DD HH:mm');
+  return dayjs(time).tz().format('YYYY-MM-DD HH:mm');
 }
 
 export function createTime() {
-  return dayjs().tz().format();
+  return dayjs().format();
 }
