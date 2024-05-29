@@ -20,7 +20,7 @@ export default async function BoardCard({ category, title, calssName }: Props) {
 
   return (
     <article
-      className={`grow basis-1 p-4 space-y-3 rounded-xl shadow-base transition-all hover:scale-105 ${calssName}`}
+      className={`flex-1 min-w-0 p-4 space-y-3 rounded-xl shadow-base transition-all ${calssName}`}
     >
       <div className="flex justify-between items-center">
         <span className="md:text-sm text-md font-semibold">{title}</span>
