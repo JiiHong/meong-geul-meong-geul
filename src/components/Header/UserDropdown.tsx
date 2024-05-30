@@ -15,7 +15,7 @@ export default function UserDropdown({ isActive, onClick }: Props) {
     ${isActive ? 'flex flex-col items-center gap-4 ' : 'hidden'}`}
     >
       <li className="hover:bg-gray-400">
-        <Link href="/mypage/info" onClick={onClick}>
+        <Link href="/mypage/profile" onClick={onClick}>
           마이페이지
         </Link>
       </li>

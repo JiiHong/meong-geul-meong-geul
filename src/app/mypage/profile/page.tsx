@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: '프로필 사진, 닉네임',
 };
 
-export default async function InfoPage() {
+export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
 
   if (!session) redirect('/');
