@@ -40,7 +40,7 @@ export default function CommentForm({
     }
     setIsLoading((prev) => !prev);
     const id = uuid();
-    const { name, uid } = user;
+    const { name, uid, profileImage } = user;
     const comment: Comment = {
       id,
       replyId: null,
@@ -49,6 +49,7 @@ export default function CommentForm({
       name: name ?? '',
       uid,
       createdAt: createTime(),
+      userImage: profileImage,
     };
     const newComment = replyId
       ? { ...comment, replyId, level: level! + 1 }
