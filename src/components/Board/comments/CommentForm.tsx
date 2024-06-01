@@ -43,11 +43,13 @@ export default function CommentForm({
     const { name, uid, profileImage } = user;
     const comment: Comment = {
       id,
+      postId,
       replyId: null,
       level: 0,
       content,
       name: name ?? '',
       uid,
+      category,
       createdAt: createTime(),
       userImage: profileImage,
     };
