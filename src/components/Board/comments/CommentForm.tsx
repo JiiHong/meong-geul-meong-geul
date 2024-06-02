@@ -52,8 +52,9 @@ export default function CommentForm({
       uid,
       category,
       createdAt: createTime(),
-      userImage: profileImage,
     };
+    profileImage && (comment.userImage = profileImage);
+
     const newComment = replyId
       ? { ...comment, replyId, level: level! + 1 }
       : comment;
