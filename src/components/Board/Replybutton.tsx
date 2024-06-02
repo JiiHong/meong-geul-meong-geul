@@ -4,15 +4,23 @@ import { useState } from 'react';
 import IconReply from '../ui/icons/IconReply';
 import { BoardCategory } from '@/types/Post';
 import CommentForm from './comments/CommentForm';
+import { Session } from 'next-auth';
 
 type Props = {
+  session: Session | null;
   postId: string;
   id: string;
   category: BoardCategory;
   level: number;
 };
 
-export default function Replybutton({ postId, id, category, level }: Props) {
+export default function Replybutton({
+  session,
+  postId,
+  id,
+  category,
+  level,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => setIsOpen((prev) => !prev);
@@ -27,6 +35,7 @@ export default function Replybutton({ postId, id, category, level }: Props) {
       </button>
       {isOpen && (
         <CommentForm
+          session={session}
           postId={postId}
           replyId={id}
           level={level}
