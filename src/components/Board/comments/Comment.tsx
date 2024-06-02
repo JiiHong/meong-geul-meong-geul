@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { Session } from 'next-auth';
 import { BoardCategory } from '@/types/Post';
 import { Comment as CommentType } from '@/types/comment';
 import { useUserContext } from '@/context/UserContext';
@@ -20,6 +21,7 @@ const PADDING_BY_LEVEL: { [key: number]: string } = {
 };
 
 type Props = {
+  session: Session | null;
   isAdmin: boolean;
   postId: string;
   comments: CommentType[];
@@ -28,6 +30,7 @@ type Props = {
 };
 
 export default function Comment({
+  session,
   isAdmin,
   postId,
   replyId,
@@ -88,6 +91,7 @@ export default function Comment({
               <p className="text-sm">{content}</p>
               {level < 4 && (
                 <Replybutton
+                  session={session}
                   postId={postId}
                   id={id}
                   category={category}
@@ -96,6 +100,7 @@ export default function Comment({
               )}
             </li>
             <Comment
+              session={session}
               isAdmin={isAdmin}
               postId={postId}
               replyId={id}

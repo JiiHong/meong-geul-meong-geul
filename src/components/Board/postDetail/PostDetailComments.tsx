@@ -31,6 +31,7 @@ export default async function PostDetailComments({ post, category }: Props) {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ViewCount postId={id} category={category} />
         <Comments
+          session={session}
           postId={id}
           category={category}
           isAdmin={session?.user.isAdmin ?? false}
