@@ -31,11 +31,7 @@ export function UserContextProvider({ children }: Props) {
   const { data } = useSession();
   const [user, setUser] = useState<User>(null);
 
-  useEffect(() => {
-    if (data) {
-      setUser(data.user);
-    }
-  }, [data]);
+  useEffect(() => setUser(data ? data.user : null), [data]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

@@ -35,7 +35,7 @@ export default async function PostDetailComments({ post, category }: Props) {
           category={category}
           isAdmin={session?.user.isAdmin ?? false}
         />
-        <CommentForm postId={id} category={category} />
+        <CommentForm session={session} postId={id} category={category} />
       </HydrationBoundary>
     </section>
   );

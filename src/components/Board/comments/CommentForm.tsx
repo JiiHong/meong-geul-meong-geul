@@ -2,14 +2,15 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import { Session } from 'next-auth';
 import { createTime } from '@/utils/day';
-import { useUserContext } from '@/context/UserContext';
 import { useModalContext } from '@/context/ModalContext';
 import { BoardCategory } from '@/types/Post';
 import { Comment } from '@/types/comment';
 import useComments from '@/hooks/useComments';
 
 type Props = {
+  session: Session | null;
   postId: string;
   category: BoardCategory;
   replyId?: string;
@@ -17,12 +18,12 @@ type Props = {
 };
 
 export default function CommentForm({
+  session,
   postId,
   category,
   replyId,
   level,
 }: Props) {
-  const { user } = useUserContext();
   const { toggleLoginOpen } = useModalContext();
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -33,14 +34,14 @@ export default function CommentForm({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!user) return toggleLoginOpen();
+    if (!session) return toggleLoginOpen();
     if (content.trim().length < 1) {
       setContent('');
       return alert('내용을 입력해주세요.');
     }
     setIsLoading((prev) => !prev);
     const id = uuid();
-    const { name, uid, profileImage } = user;
+    const { name, uid, profileImage } = session.user;
     const comment: Comment = {
       id,
       postId,
