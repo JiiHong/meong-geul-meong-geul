@@ -7,6 +7,7 @@ import {
   fetchUserFromName,
   updateAllCategoryPost,
   updateUser,
+  updateUserComments,
 } from '@/service/firebase/firebase-firestore';
 import Loader from '@/components/ui/Loader';
 import { validateNickname } from '@/utils/validate';
@@ -40,6 +41,7 @@ export default function NicknameForm({ user }: Props) {
       updateUser(uid, 'name', text),
       updateAllCategoryPost(uid, 'name', 'update', text),
     ]).catch(console.error);
+    await updateUserComments(uid, 'update', 'name', text);
     setIsLoading((prev) => !prev);
     window.alert('닉네임이 변경되었습니다. 🙌');
     router.refresh();
