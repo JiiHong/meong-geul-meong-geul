@@ -87,13 +87,15 @@ export default function PostDetailContent({
           {content}
         </pre>
         {contentImage && (
-          <Image
-            src={contentImage}
-            alt={title}
-            width={450}
-            height={450}
-            priority
-          />
+          <div className="relative h-[30rem]">
+            <Image
+              src={contentImage}
+              alt={title}
+              fill
+              priority
+              className="object-contain"
+            />
+          </div>
         )}
         <div className="flex flex-col items-center mt-10 text-center">
           <RecommendButton
