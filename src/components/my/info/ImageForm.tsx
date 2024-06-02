@@ -9,6 +9,7 @@ import {
   fetchPostsFromUid,
   updateUser,
   updateAllCategoryPost,
+  updateUserComments,
 } from '@/service/firebase/firebase-firestore';
 import UserImage from '@/components/ui/UserImage';
 import Loader from '@/components/ui/Loader';
@@ -19,37 +20,37 @@ export default function ImageForm({ user }: Props) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
 
     if (files && files[0]) {
       setIsLoading((prev) => !prev);
-      uploadProfileImage(files[0], user.email)
-        .then((url) =>
-          updateUser(user.uid, 'profileImage', url) //
-            .then((url) =>
-              fetchPostsFromUid('free', user.uid) //
-                .then(() =>
-                  updateAllCategoryPost(user.uid, 'userImage', 'update', url),
-                ),
-            ),
-        )
-        .then(() => {
-          setIsLoading((prev) => !prev);
-          window.alert('이미지가 변경되었습니다. 🙌');
-          router.refresh();
-        });
+      const url = await uploadProfileImage(files[0], user.email);
+
+      await Promise.all([
+        updateUser(user.uid, 'profileImage', url),
+        fetchPostsFromUid('free', user.uid),
+        updateAllCategoryPost(user.uid, 'userImage', 'update', url),
+        updateUserComments(user.uid, 'update', 'userImage', url),
+      ]);
+
+      setIsLoading((prev) => !prev);
+      window.alert('이미지가 변경되었습니다. 🙌');
+
+      router.refresh();
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    deleteProfileImageUrl(user.uid)
-      .then(router.refresh) //
-      .then(() => {
-        fetchPostsFromUid('free', user.uid) //
-          .then(() => updateAllCategoryPost(user.uid, 'userImage', 'delete'));
-      });
+
+    await Promise.all([
+      deleteProfileImageUrl(user.uid),
+      updateAllCategoryPost(user.uid, 'userImage', 'delete'),
+      updateUserComments(user.uid, 'delete', 'userImage'),
+    ]);
+
+    router.refresh();
   };
 
   return (

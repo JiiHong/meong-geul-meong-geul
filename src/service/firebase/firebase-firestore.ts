@@ -337,19 +337,21 @@ export async function updateComment(
   category: BoardCategory,
   postId: string,
   commentId: string,
+  method: 'update' | 'delete',
   key: keyof Comment,
-  value: string,
+  value?: string,
 ) {
   const ref = doc(db, `${category}Boards`, postId, 'comments', commentId);
   await updateDoc(ref, {
-    [key]: value,
+    [key]: method === 'update' ? value : deleteField(),
   });
 }
 
 export async function updateUserComments(
   uid: string,
+  method: 'update' | 'delete',
   key: keyof Comment,
-  value: string,
+  value?: string,
 ) {
   const user = await fetchUserFromUid(uid);
 
@@ -369,7 +371,7 @@ export async function updateUserComments(
 
     comments.map(
       async ({ category, id, postId }) =>
-        await updateComment(category, postId, id, key, value),
+        await updateComment(category, postId, id, method, key, value),
     );
   }
 }

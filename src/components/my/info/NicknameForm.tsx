@@ -41,7 +41,7 @@ export default function NicknameForm({ user }: Props) {
       updateUser(uid, 'name', text),
       updateAllCategoryPost(uid, 'name', 'update', text),
     ]).catch(console.error);
-    await updateUserComments(uid, 'name', text);
+    await updateUserComments(uid, 'update', 'name', text);
     setIsLoading((prev) => !prev);
     window.alert('닉네임이 변경되었습니다. 🙌');
     router.refresh();
