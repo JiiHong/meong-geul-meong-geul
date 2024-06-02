@@ -333,6 +333,47 @@ export async function uploadComment(
   ).then(() => uploadCommentPostId(uid, postId));
 }
 
+export async function updateComment(
+  category: BoardCategory,
+  postId: string,
+  commentId: string,
+  key: keyof Comment,
+  value: string,
+) {
+  const ref = doc(db, `${category}Boards`, postId, 'comments', commentId);
+  await updateDoc(ref, {
+    [key]: value,
+  });
+}
+
+export async function updateUserComments(
+  uid: string,
+  key: keyof Comment,
+  value: string,
+) {
+  const user = await fetchUserFromUid(uid);
+
+  if (user) {
+    const commentPostsId = user.commentPosts;
+
+    const fetchPromises = commentPostsId.map(async (postId) => {
+      const result = await Promise.all([
+        fetchComment(uid, postId, 'free'),
+        fetchComment(uid, postId, 'info'),
+        fetchComment(uid, postId, 'question'),
+      ]);
+      return result.flat();
+    });
+
+    const comments = (await Promise.all(fetchPromises)).flat();
+
+    comments.map(
+      async ({ category, id, postId }) =>
+        await updateComment(category, postId, id, key, value),
+    );
+  }
+}
+
 export async function uploadCommentPostId(uid: string, postId: string) {
   const ref = doc(db, 'users', uid);
   return updateDoc(ref, { commentPosts: arrayUnion(postId) });
@@ -355,6 +396,27 @@ export async function fetchComments(postId: string, category: BoardCategory) {
     collection(db, `${category}Boards`, postId, 'comments'),
     orderBy('createdAt', 'asc'),
   );
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const docs = querySnapshot.docs;
+    const comments = docs.map((doc) => doc.data() as Comment);
+
+    return comments;
+  }
+  return [];
+}
+
+async function fetchComment(
+  uid: string,
+  postId: string,
+  category: BoardCategory,
+) {
+  const q = query(
+    collection(db, `${category}Boards`, postId, 'comments'),
+    where('uid', '==', uid),
+  );
+
   const querySnapshot = await getDocs(q);
 
   if (!querySnapshot.empty) {
