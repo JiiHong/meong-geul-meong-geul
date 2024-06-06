@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/next-auth/options';
 import DesktopMenu from './desktop/DesktopMenu';
-import MobileMenu from './MobileMenu';
+import MobileMenu from './mobile/MobileMenu';
 
 type NavbarList = {
   title: string;
