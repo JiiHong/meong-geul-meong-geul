@@ -1,5 +1,5 @@
 import { Session } from 'next-auth';
-import Menu from './Menu';
+import Menu from '../Menu';
 
 type Props = { session: Session | null };
 

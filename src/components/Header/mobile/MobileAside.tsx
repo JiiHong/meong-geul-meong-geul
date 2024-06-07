@@ -1,6 +1,6 @@
 import { Session } from 'next-auth';
-import Menu from './Menu';
-import CloseButton from './CloseButton';
+import Menu from '../Menu';
+import CloseButton from '../CloseButton';
 
 type Props = {
   session: Session | null;
