@@ -1,31 +1,40 @@
 'use client';
 
-import { Session } from 'next-auth';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { UserSession } from '@/types/user';
 import { useModalContext } from '@/context/ModalContext';
-import { navbarList } from './Navbar';
 import UserProfileImage from './UserProfileImage';
 import LoginButton from './LoginButton';
 import LoginModal from '../AuthModal/LoingModal';
 
 type Props = {
-  session: Session | null;
+  user: UserSession | null;
   onClick?: () => void;
-  className: { ul: string; li?: string };
 };
 
-export default function Menu({ session, onClick, className }: Props) {
+type NavbarList = {
+  title: string;
+  path: string;
+};
+
+const navbarList: NavbarList[] = [
+  { title: '정보게시판', path: '/board/info' },
+  { title: '질문게시판', path: '/board/question' },
+  { title: '자유게시판', path: '/board/free' },
+];
+
+export default function Menu({ user, onClick }: Props) {
   const pathname = usePathname();
   const { loginOpen, toggleLoginOpen } = useModalContext();
 
   return (
     <>
-      <ul className={className.ul}>
+      <ul className="flex md:flex-col md:items-stretch items-center md:gap-0 gap-4 md:p-8 md:space-y-6">
         {navbarList.map(({ title, path }) => (
           <li
             key={title}
-            className={`text-lg font-bold hover:text-amber-500 ${className.li} ${pathname.includes(path.split('/')[2]) ? 'text-amber-500' : 'text-gray-700'}`}
+            className={`md:pb-1 text-lg font-bold md:border-b md:border-gray-200  hover:text-amber-500 ${pathname.includes(path.split('/')[2]) ? 'text-amber-500' : 'text-gray-700'}`}
           >
             <Link href={path} className="px-4 py-3" onClick={onClick}>
               {title}
@@ -33,11 +42,11 @@ export default function Menu({ session, onClick, className }: Props) {
           </li>
         ))}
         <li className="md:self-center">
-          {session ? (
+          {user ? (
             <UserProfileImage
-              session={session}
-              name={session.user.name}
-              image={session.user.profileImage}
+              user={user}
+              name={user.name}
+              image={user.profileImage}
             />
           ) : (
             <LoginButton />

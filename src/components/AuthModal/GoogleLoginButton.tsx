@@ -4,9 +4,7 @@ import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 
 export default function GoogleLoginButton() {
-  const handleClick = () => {
-    signIn('google');
-  };
+  const handleClick = () => signIn('google');
 
   return (
     <button
