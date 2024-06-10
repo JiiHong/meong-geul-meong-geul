@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Session } from 'next-auth';
+import { UserSession } from '@/types/user';
 import UserDropdown from './UserDropdown';
 import UserImage from '../ui/UserImage';
 import SignupModal from '../AuthModal/SignupModal';
 
-type Props = { session: Session; name?: string; image?: string };
+type Props = { user: UserSession; name?: string; image?: string };
 
-export default function UserLoginImage({ session, name, image }: Props) {
+export default function UserLoginImage({ user, name, image }: Props) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => setIsActive((active) => !active);
@@ -22,7 +22,7 @@ export default function UserLoginImage({ session, name, image }: Props) {
         <UserImage title={name ?? 'user'} userImage={image} size="medium" />
       </button>
       {isActive && <UserDropdown isActive={isActive} onClick={handleClick} />}
-      {session && !session.user.name && <SignupModal uid={session.user.uid} />}
+      {user && !user.name && <SignupModal uid={user.uid} />}
     </div>
   );
 }
