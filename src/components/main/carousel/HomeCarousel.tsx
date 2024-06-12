@@ -44,7 +44,12 @@ export default function HomeCarousel() {
     <MultiCarousel deviceType={deviceType}>
       {banners.map(({ path, image, alt, priority }) => (
         <a key={path} href={path} target="_blank">
-          <Image src={image} alt={alt} priority={priority}></Image>
+          <Image
+            src={image}
+            alt={alt}
+            sizes="100vw"
+            priority={priority}
+          ></Image>
         </a>
       ))}
     </MultiCarousel>
