@@ -26,8 +26,13 @@
 - **`SEO 최적화`** 를 통해 더 많은 사용자들에게 사이트를 노출하여 정보 전달
 - Image 컴포넌트의 webp 변환, priority 등의 기능을 활용하여 **`이미지 최적화`**
 
+# 📈 성능 최적화
+- [Header 리팩토링](https://velog.io/@jiihong/Next.js-%EB%A9%8D%EA%B8%80%EB%A9%8D%EA%B8%80-Header-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81)
+- [메인 배너 Image 최적화](https://velog.io/@jiihong/Next.js-%EB%A9%8D%EA%B8%80%EB%A9%8D%EA%B8%80-%EB%B0%B0%EB%84%88-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B5%9C%EC%A0%81%ED%99%94-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81)
+  
 # 🖥️ 화면 구성
 ![화면 구성](https://github.com/JiiHong/meong-geul-meong-geul/assets/102526510/d2853aa4-16ef-4384-878e-5126009a5caf)
+
 
 # ✨ 서비스 소개
 ### ✏️ 게시판
