@@ -7,7 +7,6 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
   images: {
     remotePatterns: [
       {
@@ -15,6 +14,7 @@ const nextConfig = {
         hostname: 'firebasestorage.googleapis.com',
       },
     ],
+    deviceSizes: [639, 767, 828, 1023],
   },
 };
 
