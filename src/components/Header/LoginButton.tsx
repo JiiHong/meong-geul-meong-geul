@@ -1,10 +1,9 @@
 'use client';
 
 import { useModalContext } from '@/context/ModalContext';
-import LoginModal from '../AuthModal/LoingModal';
 
 export default function LoginButton() {
-  const { loginOpen, toggleLoginOpen } = useModalContext();
+  const { toggleLoginOpen } = useModalContext();
 
   return (
     <>
@@ -14,7 +13,6 @@ export default function LoginButton() {
       >
         로그인
       </button>
-      {loginOpen && <LoginModal onClick={toggleLoginOpen} />}
     </>
   );
 }

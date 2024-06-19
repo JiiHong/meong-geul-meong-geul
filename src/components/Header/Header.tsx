@@ -3,8 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { authOptions } from '@/next-auth/options';
 import logo from '../../../public/logo.png';
-import Menu from './Menu';
-import MobileMenu from './mobile/MobileMenu';
+import Navbar from './Navbar';
 
 export default async function Header() {
   const session = await getServerSession(authOptions);
@@ -22,12 +21,7 @@ export default async function Header() {
           className="sm:w-24 md:w-28"
         ></Image>
       </Link>
-      <nav className="md:hidden flex gap-4">
-        <Menu user={user} />
-      </nav>
-      <div className="hidden md:flex">
-        <MobileMenu user={user} />
-      </div>
+      <Navbar user={user} />
     </header>
   );
 }
