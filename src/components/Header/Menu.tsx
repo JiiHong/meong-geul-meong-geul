@@ -3,10 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UserSession } from '@/types/user';
-import { useModalContext } from '@/context/ModalContext';
 import UserProfileImage from './UserProfileImage';
 import LoginButton from './LoginButton';
-import LoginModal from '../AuthModal/LoingModal';
 
 type Props = {
   user: UserSession | null;
@@ -26,7 +24,6 @@ const navbarList: NavbarList[] = [
 
 export default function Menu({ user, onClick }: Props) {
   const pathname = usePathname();
-  const { loginOpen, toggleLoginOpen } = useModalContext();
 
   return (
     <>
@@ -53,7 +50,6 @@ export default function Menu({ user, onClick }: Props) {
           )}
         </li>
       </ul>
-      {loginOpen && <LoginModal onClick={toggleLoginOpen} />}
     </>
   );
 }
