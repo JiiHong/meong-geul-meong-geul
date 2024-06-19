@@ -43,6 +43,7 @@ export default function RootLayout({
           </ReactQueryProvider>
           <Footer />
         </div>
+        <div id="modal"></div>
       </body>
     </html>
   );
