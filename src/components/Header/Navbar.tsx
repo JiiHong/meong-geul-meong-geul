@@ -1,9 +1,9 @@
 'use client';
 
 import { UserSession } from '@/types/user';
+import { useModalContext } from '@/context/ModalContext';
 import Menu from './Menu';
 import MobileMenu from './mobile/MobileMenu';
-import { useModalContext } from '@/context/ModalContext';
 import LoginModal from '../AuthModal/LoingModal';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function Navbar({ user }: Props) {
-  const { loginOpen, toggleLoginOpen } = useModalContext();
+  const { loginOpen } = useModalContext();
 
   return (
     <>
@@ -21,7 +21,7 @@ export default function Navbar({ user }: Props) {
       <div className="hidden md:flex">
         <MobileMenu user={user} />
       </div>
-      {loginOpen && <LoginModal onClick={toggleLoginOpen} />}
+      {loginOpen && <LoginModal />}
     </>
   );
 }
