@@ -40,11 +40,7 @@ export default function Menu({ user, onClick }: Props) {
         ))}
         <li className="md:self-center">
           {user ? (
-            <UserProfileImage
-              user={user}
-              name={user.name}
-              image={user.profileImage}
-            />
+            <UserProfileImage name={user.name} image={user.profileImage} />
           ) : (
             <LoginButton />
           )}

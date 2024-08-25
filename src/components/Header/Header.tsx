@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { authOptions } from '@/next-auth/options';
 import logo from '../../../public/logo.png';
 import Navbar from './Navbar';
+import SignupModal from '@/components/AuthModal/SignupModal';
 
 export default async function Header() {
   const session = await getServerSession(authOptions);
@@ -22,6 +23,7 @@ export default async function Header() {
         ></Image>
       </Link>
       <Navbar user={user} />
+      {user && !user.name && <SignupModal uid={user.uid} />}
     </header>
   );
 }

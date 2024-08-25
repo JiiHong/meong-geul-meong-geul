@@ -5,6 +5,7 @@ import { useModalContext } from '@/context/ModalContext';
 import Menu from './Menu';
 import MobileMenu from './mobile/MobileMenu';
 import LoginModal from '../AuthModal/LoingModal';
+import SignupModal from '@/components/AuthModal/SignupModal';
 
 type Props = {
   user: UserSession | null;
