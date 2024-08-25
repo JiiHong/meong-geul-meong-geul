@@ -1,16 +1,16 @@
-import { useModalContext } from '@/context/ModalContext';
+import { useUserContext } from '@/context/UserContext';
 import CloseButton from '@/components/Header/CloseButton';
 
 type Props = {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick: () => void;
 };
 
 export default function Modal({ children, onClick }: Props) {
-  const { toggleLoginOpen } = useModalContext();
+  const { user } = useUserContext();
 
   const handleCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.currentTarget === e.target) toggleLoginOpen();
+    if (e.currentTarget === e.target && !user) onClick();
   };
 
   return (
@@ -19,7 +19,7 @@ export default function Modal({ children, onClick }: Props) {
       onClick={handleCloseModal}
     >
       <div className="flex flex-col items-center w-3/5 min-w-72 max-w-xl h-3/5 rounded-2xl bg-white">
-        <CloseButton onClick={onClick || toggleLoginOpen} />
+        <CloseButton onClick={onClick} />
         <p className="text-3xl font-bold tracking-widest">멍글멍글</p>
         {children}
       </div>
